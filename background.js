@@ -357,13 +357,16 @@ async function importMatureWords(deckName) {
   const cards=await ankiCall('findCards',{query:'deck:"'+deck.replace(/["\\]/g,'')+'" prop:ivl>=21'});
   const ids=(Array.isArray(cards)?cards:[]).slice(0,1500);
   const words=new Set();
-  for(let i=0;i<ids.length;i+=80) {
-    const details=await ankiCall('cardsInfo',{cards:ids.slice(i,i+80)});
-    for(const card of details || []) {
-      const html=String(card?.fields?.Front?.value || '');
-      // The first <div> is the word on cards created by Kotoba. Ignore other note templates.
-      const match=html.match(/^<div[^>]*>([^<>]{1,70})<\/div>/);
-      if(match && /[\u3040-\u30ff\u3400-\u9fff]/u.test(match[1])) words.add(match[1].replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>'));
+  for(let i=0;i<ids.length;i+=60) {
+    const batch=ids.slice(i,i+60);
+    const details=await ankiCall('cardsInfo',{cards:batch});
+    const reviews=await ankiCall('getReviewsOfCards',{cards:batch.map(String)});
+    if(!reviews||typeof reviews!=='object'||Array.isArray(reviews))throw Error('AnkiConnect review log unavailable.');
+    for(const card of details||[]) {
+      const id=String(card.cardId??card.cardID??card.id??'');
+      if(!ankiHasGoodOrEasy(reviews[id]))continue;
+      const word=vocabularyFromCard(card);
+      if(word)words.add(word);
     }
   }
   const stored=await chrome.storage.local.get({knownWords:[]});
@@ -372,8 +375,11 @@ async function importMatureWords(deckName) {
   return {added:words.size,scanned:ids.length,truncated:(cards?.length || 0)>ids.length,knownTotal:all.length};
 }
 
-// Anki-wide vocabulary: scan recognized Japanese cards, including unreviewed/new cards.
-// This feature is opt-in. We store only recognized word surfaces and summary data.
+// V2.3: Import *studied* Japanese words only. A card being in Anki is not enough.
+// AnkiConnect getReviewsOfCards gives the actual answer button:
+// 1 = Again, 2 = Hard, 3 = Good, 4 = Easy. Only Good/Easy qualify.
+// Green = qualified 21+ day interval; otherwise purple Tracked.
+// This sync is transactional: failed reviews leave the previous data untouched.
 let ankiCollectionSyncActive=false;
 const VOCAB_LIMIT=6000;
 function cleanAnkiWord(markup){
@@ -387,7 +393,6 @@ function cleanAnkiWord(markup){
     .replace(/&quot;/gi,'"').replace(/&#39;/gi,"'")
     .replace(/\[(?:sound:[^\]]+)\]/gi,'').trim();
   text=text.split(/\r?\n/)[0].trim();
-  // Take vocabulary surface only; remove inline textbook readings (箸(はし)).
   text=text.replace(/([一-龯々〆ヶ]+)[（(][ぁ-んァ-ヶー]{1,24}[)）]/gu,'$1');
   text=text.replace(/\s*\[[ぁ-んァ-ヶー]+\]/gu,'');
   if(text.length>38 || !/[\u3040-\u30ff\u3400-\u9fff]/u.test(text))return '';
@@ -411,6 +416,10 @@ function vocabularyFromCard(card){
   }
   return '';
 }
+// Kept pure to test the exact Anki review-button rule without an Anki connection.
+function ankiHasGoodOrEasy(reviews){
+  return Array.isArray(reviews)&&reviews.some(row=>Number(row?.ease)===3||Number(row?.ease)===4);
+}
 async function syncAnkiCollectionVocab({force=false}={}){
   if(ankiCollectionSyncActive)throw Error('Anki vocabulary sync is already running.');
   const config=await chrome.storage.local.get({ankiVocabularySyncEnabled:false,ankiVocabularySyncDecks:[],ankiVocabularyLastSync:0});
@@ -420,34 +429,40 @@ async function syncAnkiCollectionVocab({force=false}={}){
   try{
     await ensureAnkiPermission();
     const wanted=new Set(Array.isArray(config.ankiVocabularySyncDecks)?config.ankiVocabularySyncDecks:[]);
-    // Query selected decks at AnkiConnect so Japanese cards aren't accidentally
-    // pushed out by thousands of unrelated cards before the 6k safety cap.
-    const queries=wanted.size?[...wanted].map(deck=>'deck:"'+deck.replace(/["\\]/g,'')+'"'):[''];
-    const all=[];
-    const seen=new Set();
+    // Anki's own reviewed-card filter avoids scanning thousands of new cards.
+    const queries=wanted.size?[...wanted].map(deck=>'deck:"'+deck.replace(/["\\]/g,'')+'" prop:reps>0'):['prop:reps>0'];
+    const all=[];const seen=new Set();
     for(const query of queries){
       const found=await ankiCall('findCards',{query});
       if(!Array.isArray(found))throw Error('Anki did not return cards.');
-      for(const id of found){if(seen.has(id))continue;seen.add(id);all.push(id);}
+      for(const id of found){if(seen.has(String(id)))continue;seen.add(String(id));all.push(id);}
     }
-    const ids=all.slice(0,VOCAB_LIMIT);
-    const known=new Set(),learning=new Set();let recognized=0,inspected=0,reviewed=0;
-    for(let start=0;start<ids.length;start+=100){
-      const cards=await ankiCall('cardsInfo',{cards:ids.slice(start,start+100)});
-      for(const card of cards||[]){
+    const ids=all.slice(0,VOCAB_LIMIT),known=new Set(),learning=new Set();
+    let inspected=0,recognized=0,qualified=0;
+    for(let start=0;start<ids.length;start+=60){
+      const batch=ids.slice(start,start+60);
+      const cards=await ankiCall('cardsInfo',{cards:batch});
+      // Only cards with an actual Good/Easy press enter the word collection.
+      const history=await ankiCall('getReviewsOfCards',{cards:batch.map(String)});
+      if(!Array.isArray(cards)||!history||typeof history!=='object'||Array.isArray(history))
+        throw Error('AnkiConnect did not return card review history. Update AnkiConnect and retry.');
+      for(const card of cards){
         inspected++;
-        if(Number(card.reps||0)>0)reviewed++;
         if(wanted.size && !wanted.has(String(card.deckName||'')))continue;
         const word=vocabularyFromCard(card);if(!word)continue;
         recognized++;
-        const interval=Number(card.ivl||0);
+        const cardId=String(card.cardId??card.cardID??card.id??'');
+        // getReviewsOfCards returns ID -> reviews; an absent entry does not qualify.
+        if(!ankiHasGoodOrEasy(history[cardId]))continue;
+        qualified++;
+        const interval=Number(card.interval??card.ivl??0);
         if(interval>=21){known.add(word);learning.delete(word);}
         else if(!known.has(word))learning.add(word);
       }
     }
-    const report={lastSync:Date.now(),scanned:inspected,reviewed,collectionCards:all.length,recognized,
-      known:known.size,learning:learning.size,truncated:all.length>ids.length,
-      decks:wanted.size?Array.from(wanted):'all',source:'Anki collection cards (reviewed and new)'};
+    const report={ruleVersion:2,lastSync:Date.now(),scanned:inspected,reviewed:inspected,collectionCards:all.length,
+      recognized,qualified,known:known.size,learning:learning.size,truncated:all.length>ids.length,
+      decks:wanted.size?Array.from(wanted):'all',source:'Good/Easy Anki review history; new and Again/Hard-only cards excluded'};
     await chrome.storage.local.set({ankiVocabularyKnown:[...known],ankiVocabularyLearning:[...learning],
       ankiVocabularyLastSync:report.lastSync,ankiVocabularySyncReport:report});
     return report;
@@ -471,7 +486,7 @@ async function ankiCall(action, params = {}) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
-      signal: AbortSignal.timeout(8000)
+      signal: AbortSignal.timeout(action==='getReviewsOfCards'?20000:8000)
     });
   } catch {
     throw new Error('Cannot reach AnkiConnect. Open Anki on this computer and install/enable the AnkiConnect add-on (code 2055492159).');
@@ -562,20 +577,9 @@ async function addCard(card, requestedDeck) {
   });
   if(typeof chrome.storage.local.set==='function'){
     try {await kmStoreActivity({kind:'card',word:card.word,deck});} catch(e){console.warn('Kotoba activity logging failed',e);}
-    // As soon as Anki confirms a save, the word is tracked locally. A full
-    // collection sync is still needed for other Anki cards and mature reviews.
-    try {
-      const word=cleanAnkiWord(card.word);
-      if(word){
-        const cfg=await chrome.storage.local.get({ankiVocabularyKnown:[],ankiVocabularyLearning:[]});
-        const known=new Set(cfg.ankiVocabularyKnown||[]);
-        const tracked=new Set(cfg.ankiVocabularyLearning||[]);
-        if(!known.has(word) && !tracked.has(word)){
-          tracked.add(word);
-          await chrome.storage.local.set({ankiVocabularyLearning:[...tracked]});
-        }
-      }
-    }catch(e){console.warn('Kotoba vocabulary tracking failed',e);}
+    // Saving an Anki card is not a review. Wait for Good/Easy in Anki sync;
+    // otherwise merely creating a card would incorrectly mark it Familiar.
+
   }
   return { noteId, deck };
 }

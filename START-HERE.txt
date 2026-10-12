@@ -1,13 +1,7 @@
-Kotoba Miner v2.2 — Read this first
+Kotoba Miner v2.3
 
-Update your existing Opera extension:
-1. Back up your existing Kotoba folder.
-2. Unzip this archive. Open its single Kotoba-Miner-v2.2 folder.
-3. Copy all files *inside* it into your existing loaded extension folder (replace old files).
-4. Open opera://extensions and click Reload on Kotoba.
-5. Refresh your video tabs.
-6. On YouTube or Netflix, click the Opera toolbar Kotoba extension icon and Enable the site. On other video websites, approve the site-specific permission when asked.
+Copy the contents of this folder into your EXISTING Opera extension folder, reload at opera://extensions, then refresh pages.
 
-New video sites start DISABLED. The floating 語 button is visible only on sites you enable. Existing explicit approvals are preserved.
+IMPORTANT: Open Anki Desktop and press Sync my Anki vocabulary now to replace v2.2's old all-cards import with the corrected Good/Easy history-based import.
 
-Themes and comprehension tracker now live in the 語 floating menu.
+Studio and Dashboard now show Known (green only) and Familiar (Known + Tracked).

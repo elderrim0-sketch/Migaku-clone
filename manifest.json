@@ -2,8 +2,8 @@
   "manifest_version": 3,
   "name": "Kotoba Miner",
   "short_name": "Kotoba",
-  "version": "2.2.0",
-  "description": "Kotoba 2.2: per-site opt-in, readable floating menus, illustrated-glass dictionary, streamlined cards, and six one-tap themes.",
+  "version": "2.3.0",
+  "description": "Kotoba v2.3: accurate Good/Easy Anki review sync and Known vs Familiar vocabulary totals.",
   "permissions": [
     "storage",
     "tts",

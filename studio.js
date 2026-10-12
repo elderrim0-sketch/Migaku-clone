@@ -24,17 +24,18 @@
    const counts=Object.fromEntries(L.STATES.map(s=>[s,state.vocab.filter(w=>w.status===s).length]));
    $('nav-word-count').textContent=state.vocab.length.toLocaleString();
    $('home-known').textContent=(counts.known||0).toLocaleString();
-   $('home-track').textContent=((counts.track||0)+(counts.learning||0)).toLocaleString();
+   $('home-track').textContent=((counts.known||0)+(counts.track||0)).toLocaleString();
    $('home-cards').textContent=Number(config.kotobaActivity?.totals?.cards||0).toLocaleString();
    $('home-streak').textContent=globalThis.KotobaActivity?.streak(config.kotobaActivity)||0;
-   for(const s of ['known','track','learning','unknown'])$('count-'+s).textContent=counts[s]||0;
+   for(const s of ['known','track','learning'])$('count-'+s).textContent=(counts[s]||0).toLocaleString();
+   $('count-familiar').textContent=((counts.known||0)+(counts.track||0)).toLocaleString();
    const holder=$('home-recent');holder.replaceChildren();const latest=(config.kotobaActivity?.recent||[]).filter(e=>e.kind==='card'&&e.word).slice(0,8);
    if(!latest.length){holder.textContent='Your mined words will appear here after successful Anki saves.';return;}
    for(const item of latest)holder.append(element('span',item.word,'recent-chip'));
  }
  function renderWords(){
    const query=$('word-search').value.trim().toLowerCase(), filter=$('word-filter').value;
-   let words=state.vocab.filter(x=>(filter==='all'||x.status===filter)&&(!query||x.word.toLowerCase().includes(query)));
+   let words=state.vocab.filter(x=>(filter==='all'||(filter==='familiar'?['known','track'].includes(x.status):x.status===filter))&&(!query||x.word.toLowerCase().includes(query)));
    if($('word-sort').value==='status')words=words.sort((a,b)=>a.status.localeCompare(b.status)||a.word.localeCompare(b.word,'ja'));else words=words.sort((a,b)=>a.word.localeCompare(b.word,'ja'));
    const list=$('word-list');list.replaceChildren();for(const item of words.slice(0,state.pageSize)){
      const row=element('div','','word-row');row.append(element('strong',item.word,'jp-word'),element('span',item.source,'source-pill'));
@@ -66,7 +67,7 @@
  };
  function download(name,text,type){const blob=new Blob([text],{type});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2500);}
  function csvCell(s){return '"'+String(s||'').replaceAll('"','""')+'"';}
- $('word-export').onclick=()=>{const rows=[['word','status','source'],...state.vocab.map(w=>[w.word,w.status,w.source])];download('kotoba-vocabulary.csv','\ufeff'+rows.map(r=>r.map(csvCell).join(',')).join('\r\n'),'text/csv;charset=utf-8');};
+ $('word-export').onclick=()=>{const rows=[['word','status','familiar','source'],...state.vocab.map(w=>[w.word,w.status,['known','track'].includes(w.status)?'yes':'no',w.source])];download('kotoba-vocabulary.csv','\ufeff'+rows.map(r=>r.map(csvCell).join(',')).join('\r\n'),'text/csv;charset=utf-8');};
  // Reader: only plain text enters the DOM. Imported HTML is converted to text, never inserted as markup.
  const READER_PAGE=1900;
  function renderLibrary(){const root=$('book-list');root.replaceChildren();$('book-count').textContent=state.books.length;

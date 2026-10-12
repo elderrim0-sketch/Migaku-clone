@@ -8,3 +8,7 @@ body[data-theme='sunset-pop'] .topbar{border-top:5px solid transparent;border-im
 @media(max-width:960px){.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.middle-grid,.bottom-grid{grid-template-columns:1fr}.hero{grid-template-columns:1fr 320px}}
 @media(max-width:690px){.app{padding:13px 14px 26px}.topbar{flex-wrap:wrap;padding-bottom:13px}.actions{justify-content:space-between;width:100%}.local-label{display:none}.hero{grid-template-columns:1fr;gap:10px}.hero-copy{padding:15px 2px}.hero-copy h1{font-size:46px}.streak-card{max-width:100%}.metrics{gap:10px}.metric{flex-direction:column;padding:14px}.metric strong{font-size:26px}.middle-grid .panel,.bottom-grid .panel{padding:19px}.status-line,footer{flex-direction:column}.status-line span{max-width:100%}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;scroll-behavior:auto!important}}
+
+/* Five compact metrics in v2.3; scale gracefully on smaller screens. */
+@media(min-width:1201px){.metrics{grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}.metric{padding:18px 14px;gap:10px}.metric-icon{width:36px;height:36px;flex-basis:36px}}
+@media(min-width:961px) and (max-width:1200px){.metrics{grid-template-columns:repeat(3,minmax(0,1fr))}}

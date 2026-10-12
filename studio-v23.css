@@ -1,0 +1,4 @@
+/* Familiar = green Known + purple Tracked; manual Learning is not included. */
+.familiar-stat .status-dot.familiar{background:linear-gradient(140deg,#2cc59a 47%,#a879fb 53%);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 15%,transparent)}
+.word-summary .mini-stat small{font-size:10px;line-height:1.35}
+@media (max-width:1050px){.word-summary{grid-template-columns:repeat(2,minmax(0,1fr))}}

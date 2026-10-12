@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Kotoba Miner 2.2</title>
+  <title>Kotoba Miner 2.3</title>
   <link rel="stylesheet" href="popup.css"/>
   <link rel="stylesheet" href="popup-reader.css"/>
   <link rel="stylesheet" href="popup-themes.css"/><link rel="stylesheet" href="popup-v21.css"/>
@@ -20,7 +20,7 @@
 <body>
   <header>
     <div class="logo">語</div>
-    <div><h1>Kotoba Miner</h1><p>Japanese immersion toolkit <span>v2.2</span></p></div>
+    <div><h1>Kotoba Miner</h1><p>Japanese immersion toolkit <span>v2.3</span></p></div>
   </header>
   <main>
     <section class="km-v22-site-panel" aria-label="Activation for the current website">
@@ -28,7 +28,7 @@
       <div class="km-v22-site-detail"><strong id="km-v22-site-title">Checking current site…</strong><small id="km-v22-site-hint">Off on new sites by default</small></div>
       <button id="km-v22-site-enable" class="km-v22-site-button" type="button" disabled>Enable</button>
     </section>
-    <button id="km-open-studio2" class="km-studio-launch" type="button"><span class="km-v2-logo" data-km-icon="library"></span><span><strong>Open Kotoba Studio 2.2</strong><small>Word Browser · Reader · Listening modes · Backups</small></span><span aria-hidden="true">↗</span></button>
+    <button id="km-open-studio2" class="km-studio-launch" type="button"><span class="km-v2-logo" data-km-icon="library"></span><span><strong>Open Kotoba Studio 2.3</strong><small>Word Browser · Reader · Listening modes · Backups</small></span><span aria-hidden="true">↗</span></button>
     <button id="km-open-dashboard" type="button" class="km-dashboard-cta"><span class="km-dashboard-mark" data-km-icon="chart"></span><span><strong>My Study Dashboard</strong><small>Streaks · cards mined · Anki reviews · daily goals</small></span><span class="km-dashboard-arrow">↗</span></button>
     <div class="banner"><div class="dot"></div><div><strong>Learn from what you watch</strong><p>Tap words to mine them. Drag the little 語 button to move it anywhere.</p></div></div>
     <section class="km-universal-section" aria-label="Universal Video Reader settings">
@@ -155,14 +155,14 @@
       <p class="help">Create a deck here if you don't see the one you want. Card note type: <b>Basic</b>.</p>
       <section class="km-anki-vocabulary">
         <div class="section-title"><h2>✦ Anki → Kotoba vocabulary</h2><span class="section-kicker">i+1 intelligence</span></div>
-        <p class="help">Learn in Anki, then see your knowledge reflected in Kotoba. Syncs Japanese vocabulary cards from your Anki collection, including cards not reviewed yet.</p>
-        <div class="field enable-row"><label for="km-anki-sync-enabled">Automatically update my Japanese vocabulary every 15 minutes <small>Works while Anki Desktop and Kotoba's extension are running</small></label><input id="km-anki-sync-enabled" type="checkbox"/></div>
+        <p class="help">Learn in Anki, then see your knowledge reflected in Kotoba. Only Japanese vocabulary you have actually answered Good or Easy in Anki enters Kotoba. New or Again/Hard-only cards are excluded.</p>
+        <div class="field enable-row"><label for="km-anki-sync-enabled">Automatically sync my Good/Easy Japanese reviews every 15 minutes <small>Works while Anki Desktop and Kotoba's extension are running</small></label><input id="km-anki-sync-enabled" type="checkbox"/></div>
         <label for="km-anki-sync-decks">Decks to include</label>
         <select id="km-anki-sync-decks" multiple size="5" aria-label="Anki decks to analyse"><option value="">Connect Anki to load decks</option></select>
-        <p class="help">Leave everything unselected to scan Japanese vocabulary across your Anki collection. Ctrl-click to select several decks. Only recognised Japanese word fields count.</p>
+        <p class="help">Leave everything unselected to scan Japanese vocabulary across your Anki collection. Ctrl-click to select several decks. Only recognised Japanese words with Good/Easy answers count.</p>
         <button id="km-sync-collection" type="button">↻ Sync my Anki vocabulary now</button>
         <div id="km-anki-sync-status" class="status small" role="status" aria-live="polite">Not synced yet</div>
-        <p class="help">21+ day review interval = known; all other recognised Anki words (including new cards) = tracked. Unreviewed cards do not count as known. Up to 6,000 cards are checked per sync. This is an estimate, not proof of comprehension.</p>
+        <p class="help">Good/Easy review required. Cards with a current 21+ day interval = green Known; other Good/Easy-reviewed cards = purple Tracked. Unreviewed and Again/Hard-only cards are excluded. Up to 6,000 reviewed cards are checked per sync.</p>
       </section>
       <details>
         <summary>Advanced: AnkiConnect API key</summary>

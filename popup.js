@@ -92,7 +92,8 @@ function showAnkiSyncStatus(report){
   const el=$('#km-anki-sync-status');
   if(!report?.lastSync){el.textContent='Not synced yet. Open Anki and click Sync now.';return;}
   const date=new Date(report.lastSync);
-  el.textContent=`✓ ${report.known} mature words · ${report.learning} tracked · ${report.recognized} Japanese cards checked · ${date.toLocaleString()}${report.truncated?' · first 6,000 cards only':''}`;
+  if(report.ruleVersion!==2){el.textContent='Previous sync used the old all-cards rule. Click Sync my Anki vocabulary now to recalculate from Good/Easy reviews.';return;}
+  el.textContent=`✓ ${report.known} mature Known · ${report.learning} Tracked · ${(report.qualified??0)} cards answered Good/Easy · ${(report.recognized??0)} Japanese cards examined · ${date.toLocaleString()}${report.truncated?' · first 6,000 reviewed cards only':''}`;
 }
 $('#km-furigana-mode').addEventListener('change',()=>saveSettings('kotobaFuriganaMode',$('#km-furigana-mode').value));
 $('#km-sentence-autopause').addEventListener('change',()=>saveSettings('kotobaSentenceAutoPause',$('#km-sentence-autopause').checked));

@@ -90,18 +90,30 @@
       status.textContent='Anki offline or unsupported action: '+(err.message||String(err))+'.'+previous;
     }finally{syncing=false;button.disabled=false;button.textContent='↻ Refresh Anki';}
   }
+  function renderVocabularyCounts(cfg){
+    const statuses=cfg.wordStatuses||{};
+    const all=new Set([...(cfg.knownWords||[]),...(cfg.ankiVocabularyKnown||[]),...(cfg.ankiVocabularyLearning||[]),...Object.keys(statuses)]);
+    let known=0,familiar=0;
+    const greens=new Set([...(cfg.knownWords||[]),...(cfg.ankiVocabularyKnown||[])]),purples=new Set(cfg.ankiVocabularyLearning||[]);
+    for(const word of all){
+      if(!/[\u3040-\u30ff\u3400-\u9fff]/u.test(word))continue;
+      const state=statuses[word]|| (greens.has(word)?'known':purples.has(word)?'track':'unknown');
+      if(state==='known')known++;
+      if(state==='known'||state==='track')familiar++;
+    }
+    $('#known-count').textContent=nfmt(known);
+    $('#familiar-count').textContent=nfmt(familiar);
+    $('#known-detail').textContent='Green Known · includes mature reviewed Anki words';
+    $('#familiar-detail').textContent='Green + purple Tracked · '+(cfg.ankiVocabularySyncReport?.lastSync?'Anki synced '+new Date(cfg.ankiVocabularySyncReport.lastSync).toLocaleDateString():'sync Anki to include studied words');
+  }
   async function restore(){
-    const cfg=await chrome.storage.local.get({kotobaActivity:null,kotobaTheme:'midnight-neon',kotobaAnkiDashboard:null,kotobaDashboardGoals:{cards:5,minutes:20},ankiVocabularyKnown:[],ankiVocabularyLearning:[],ankiVocabularySyncReport:null});
+    const cfg=await chrome.storage.local.get({kotobaActivity:null,kotobaTheme:'midnight-neon',kotobaAnkiDashboard:null,kotobaDashboardGoals:{cards:5,minutes:20},knownWords:[],wordStatuses:{},ankiVocabularyKnown:[],ankiVocabularyLearning:[],ankiVocabularySyncReport:null});
     const themes=new Set(['midnight-neon','cotton-candy','matcha-cream','sunset-pop','black-gold','study-classic']);
     document.body.dataset.theme=themes.has(cfg.kotobaTheme)?cfg.kotobaTheme:'midnight-neon';
     activity=cfg.kotobaActivity||empty();anki=cfg.kotobaAnkiDashboard||null;
     goals={cards:Number(cfg.kotobaDashboardGoals?.cards)||5,minutes:Number(cfg.kotobaDashboardGoals?.minutes)||20};
     goals.cards=Math.max(1,Math.min(100,goals.cards));goals.minutes=Math.max(1,Math.min(240,goals.minutes));
-    const known=Array.isArray(cfg.ankiVocabularyKnown)?cfg.ankiVocabularyKnown.length:0;
-    $('#known-count').textContent=cfg.ankiVocabularySyncReport?.lastSync?nfmt(known):'—';
-    $('#known-detail').textContent=cfg.ankiVocabularySyncReport?.lastSync?
-      `${nfmt((cfg.ankiVocabularyLearning||[]).length)} tracked · synced ${new Date(cfg.ankiVocabularySyncReport.lastSync).toLocaleDateString()}`:
-      'Enable vocabulary sync in settings';
+    renderVocabularyCounts(cfg);
     render();await loadAnki();
   }
   $('#refresh-anki').addEventListener('click',()=>loadAnki(true));
@@ -126,11 +138,11 @@
     if(changes.kotobaActivity){activity=changes.kotobaActivity.newValue||empty();render();}
     if(changes.kotobaAnkiDashboard){anki=changes.kotobaAnkiDashboard.newValue||null;renderAnki();}
     if(changes.kotobaTheme)document.body.dataset.theme=changes.kotobaTheme.newValue;
-    if(changes.ankiVocabularyKnown||changes.ankiVocabularyLearning||changes.ankiVocabularySyncReport){
-      const cfg=await chrome.storage.local.get({ankiVocabularyKnown:[],ankiVocabularyLearning:[],ankiVocabularySyncReport:null});
-      $('#known-count').textContent=cfg.ankiVocabularySyncReport?.lastSync?nfmt(cfg.ankiVocabularyKnown.length):'—';
-      $('#known-detail').textContent=cfg.ankiVocabularySyncReport?.lastSync?`${nfmt(cfg.ankiVocabularyLearning.length)} tracked · synced ${new Date(cfg.ankiVocabularySyncReport.lastSync).toLocaleDateString()}`:'Enable vocabulary sync in settings';
+    if(changes.knownWords||changes.wordStatuses||changes.ankiVocabularyKnown||changes.ankiVocabularyLearning||changes.ankiVocabularySyncReport){
+      const cfg=await chrome.storage.local.get({knownWords:[],wordStatuses:{},ankiVocabularyKnown:[],ankiVocabularyLearning:[],ankiVocabularySyncReport:null});
+      renderVocabularyCounts(cfg);
     }
+
   });
   restore().catch(error=>{$('#anki-status').textContent='Dashboard setup failed: '+(error?.message||error);});
 })();

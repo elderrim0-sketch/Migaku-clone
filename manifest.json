@@ -2,8 +2,8 @@
   "manifest_version": 3,
   "name": "Kotoba Miner",
   "short_name": "Kotoba",
-  "version": "1.12.8",
-  "description": "Kotoba v1.12.8: Alt+T cycles Japanese, dual-language, and English subtitles; quiet hover translation.",
+  "version": "2.2.0",
+  "description": "Kotoba 2.2: per-site opt-in, readable floating menus, illustrated-glass dictionary, streamlined cards, and six one-tap themes.",
   "permissions": [
     "storage",
     "tts",
@@ -57,6 +57,7 @@
         "universal-subtitles.js",
         "lookup-hover.js",
         "subtitle-modes.js",
+        "ui-icons.js",
         "content.js"
       ],
       "css": [
@@ -79,7 +80,10 @@
         "gloss-stability.css",
         "ui-alignment-v1123.css",
         "vocabulary-v1125.css",
-        "subtitle-language-v1128.css"
+        "subtitle-language-v1128.css",
+        "studio-video.css",
+        "design-v21.css",
+        "design-v22.css"
       ],
       "run_at": "document_idle"
     },
@@ -95,7 +99,8 @@
         "reader.js"
       ],
       "css": [
-        "reader.css"
+        "reader.css",
+        "reader-theme-v21.css"
       ],
       "run_at": "document_idle"
     }

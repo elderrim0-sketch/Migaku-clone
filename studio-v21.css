@@ -1,0 +1,24 @@
+/* Kotoba Studio 2.1: cohesive original icons + Immersion Classic palette */
+.km-line-svg{display:inline-block;flex:none;width:19px;height:19px;stroke:currentColor;fill:none;vertical-align:middle}
+.nav-glyph{display:inline-flex!important;align-items:center;justify-content:center;width:21px;height:21px;font-size:0!important}
+.nav-glyph .km-line-svg{width:20px;height:20px}
+.mode-icon{display:inline-flex;align-items:center;justify-content:center}
+.mode-icon .km-line-svg{height:30px;width:30px}
+.backup-icon{display:inline-flex;align-items:center;justify-content:center}
+.backup-icon .km-line-svg{width:36px;height:36px}
+.nav-item{display:flex;align-items:center;gap:11px}
+body[data-theme="study-classic"]{--bg:#f5f7fb;--panel:#fff;--panel2:#eef1f8;--raised:#f5f7fb;--line:#e2e7f0;--text:#242c44;--muted:#6c7589;--accent:#596bd6;--accent2:#90a1e9;--negative:#ea5162;--positive:#29a687;--shadow:#2435521a;--grad:linear-gradient(120deg,#f9fbff,#e9edff)}
+body[data-theme="study-classic"] .side-nav{background:#fff!important;border-right:1px solid #e3e7ef!important}
+body[data-theme="study-classic"] .panel{border-color:#e2e7f0!important;box-shadow:0 8px 28px #222f5410!important;border-radius:15px!important}
+body[data-theme="study-classic"] .hero{background:linear-gradient(130deg,#fff,#edf0ff)!important}
+body[data-theme="study-classic"] .primary{background:#596bd6!important;color:#fff!important;border-color:#596bd6!important}
+body[data-theme="study-classic"] .mode-card.active{border-color:#596bd6!important;background:#f0f2ff!important}
+body[data-theme="study-classic"] .reader-text .rw:hover{background:#e6eafa!important}
+body[data-theme="study-classic"] .nav-item.active{background:#ecefff!important;color:#4b5dbc!important}
+
+.stat-glyph{display:inline-flex;align-items:center;justify-content:center;width:25px;height:25px;font-size:0!important}
+.stat-glyph .km-line-svg{width:23px;height:23px}
+.nav-extra [data-km-icon],.action-cards [data-km-icon]{display:inline-flex;align-items:center;justify-content:center}
+.nav-extra .km-line-svg,.action-cards .km-line-svg{width:16px;height:16px}
+.action-cards strong{display:flex;align-items:center;gap:8px}
+body[data-theme="study-classic"] .hero-kanji{filter:none;transform:rotate(-8deg)}

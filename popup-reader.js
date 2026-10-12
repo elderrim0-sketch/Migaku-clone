@@ -53,8 +53,8 @@
           const granted=await chrome.permissions.request({origins:[origin]});
           if(!granted)throw Error('Permission not granted.');
           const exists=await chrome.scripting.getRegisteredContentScripts({ids:[id]});
-          if(!exists.length)await chrome.scripting.registerContentScripts([{id,matches:[origin],js:['word-parser.js','shortcuts.js','lookup-hover.js','reader.js'],css:['reader.css'],runAt:'document_idle',persistAcrossSessions:true}]);
-          await chrome.scripting.insertCSS({target:{tabId:currentTab.id},files:['reader.css']});
+          if(!exists.length)await chrome.scripting.registerContentScripts([{id,matches:[origin],js:['word-parser.js','shortcuts.js','lookup-hover.js','reader.js'],css:['reader.css','reader-theme-v21.css'],runAt:'document_idle',persistAcrossSessions:true}]);
+          await chrome.scripting.insertCSS({target:{tabId:currentTab.id},files:['reader.css','reader-theme-v21.css']});
           await chrome.scripting.executeScript({target:{tabId:currentTab.id},files:['word-parser.js','shortcuts.js','lookup-hover.js','reader.js']});
         }else{
           try{await chrome.scripting.unregisterContentScripts({ids:[id]});}catch{}

@@ -822,7 +822,7 @@ function kmSafeFrameReport(payload){
     paused:p.paused===true,text:line,cues};
 }
 chrome.runtime.onMessage.addListener((message, sender, respond) => {
-  if (!message || !['LOOKUP', 'ANKI_STATUS', 'ANKI_DECKS', 'ANKI_ADD', 'ANKI_CREATE_DECK', 'YT_CAPTIONS', 'PITCH_BATCH', 'PITCH_RESET', 'PITCH_INSTALL', 'PITCH_STATUS', 'TRANSLATE', 'ANKI_MATURE_WORDS', 'ANKI_COLLECTION_SYNC', 'OPEN_SETTINGS', 'OPEN_DASHBOARD', 'ACTIVITY_TICK', 'ANKI_DASHBOARD', 'VOICEVOX_STATUS', 'WORD_TTS', 'SPEAK_JA', 'CAPTURE_VISIBLE_FRAME','KANJI_DETAILS','WIKI_SUMMARY','TTS_VOICES','OLLAMA_MODELS','AI_ASSIST','KOTOBA_FRAME_REPORT','KOTOBA_FRAME_CONTROL','KOTOBA_COMPLETE_PENDING'].includes(message.type)) return false;
+  if (!message || !['LOOKUP', 'ANKI_STATUS', 'ANKI_DECKS', 'ANKI_ADD', 'ANKI_CREATE_DECK', 'YT_CAPTIONS', 'PITCH_BATCH', 'PITCH_RESET', 'PITCH_INSTALL', 'PITCH_STATUS', 'TRANSLATE', 'ANKI_MATURE_WORDS', 'ANKI_COLLECTION_SYNC', 'OPEN_SETTINGS', 'OPEN_DASHBOARD', 'OPEN_STUDIO', 'ACTIVITY_TICK', 'ANKI_DASHBOARD', 'VOICEVOX_STATUS', 'WORD_TTS', 'SPEAK_JA', 'CAPTURE_VISIBLE_FRAME','KANJI_DETAILS','WIKI_SUMMARY','TTS_VOICES','OLLAMA_MODELS','AI_ASSIST','KOTOBA_FRAME_REPORT','KOTOBA_FRAME_CONTROL','KOTOBA_COMPLETE_PENDING'].includes(message.type)) return false;
   (async () => {
     switch (message.type) {
       case 'KOTOBA_COMPLETE_PENDING': {
@@ -887,6 +887,10 @@ chrome.runtime.onMessage.addListener((message, sender, respond) => {
         return {tracked:true};
       }
       case 'ANKI_DASHBOARD': return kmAnkiDashboard();
+      case 'OPEN_STUDIO': {
+        const tab=await chrome.tabs.create({url:chrome.runtime.getURL('studio.html')});
+        return {opened:true,tabId:tab.id};
+      }
       case 'OPEN_DASHBOARD': {
         const tab=await chrome.tabs.create({url:chrome.runtime.getURL('dashboard.html')});
         return {opened:true,tabId:tab.id};
@@ -948,9 +952,9 @@ async function kmUpgradeHoverContentScripts(){
   const updates=[];
   for(const script of registered){
     if(script.id.startsWith('kotoba-video-') && main){
-      if(!script.js?.includes('subtitle-modes.js'))updates.push({id:script.id,js:main.js,css:main.css});
+      if(!script.js?.includes('ui-icons.js') || !script.css?.includes('design-v21.css'))updates.push({id:script.id,js:main.js,css:main.css});
     }else if(script.id.startsWith('kotoba-reader-')){
-      if(!script.js?.includes('lookup-hover.js'))updates.push({id:script.id,js:['word-parser.js','shortcuts.js','lookup-hover.js','reader.js'],css:['reader.css']});
+      if(!script.js?.includes('lookup-hover.js') || !script.css?.includes('reader-theme-v21.css'))updates.push({id:script.id,js:['word-parser.js','shortcuts.js','lookup-hover.js','reader.js'],css:['reader.css','reader-theme-v21.css']});
     }
   }
   for(const update of updates){

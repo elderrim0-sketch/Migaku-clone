@@ -1,0 +1,10 @@
+/* Kotoba 2.2 toolbar activation card: essential because on-page launcher is hidden when off. */
+body .km-v22-site-panel{display:flex;gap:11px;align-items:center;padding:14px!important;margin-bottom:15px!important;border:1px solid var(--p-stroke,#dfd0ef)!important;background:var(--p-panel,#fff)!important;border-radius:17px!important;box-shadow:0 4px 18px var(--p-glow,#8e75b422)!important}
+body .km-v22-site-icon{display:grid;place-items:center;width:41px;height:41px;flex:none;border-radius:14px;background:var(--p-light,#f3e6fb);color:var(--p-strong,#785dbb)}
+body .km-v22-site-icon .km-line-svg{width:21px;height:21px}
+body .km-v22-site-detail{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+body .km-v22-site-detail strong{font-size:12px!important;color:var(--p-ink,#42394d)!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+body .km-v22-site-detail small{font-size:10px!important;color:var(--p-sub,#776c82)!important;line-height:1.35}
+body .km-v22-site-button{padding:10px 13px;border:0;border-radius:99px;color:#fff;font-weight:800;font-size:11px;white-space:nowrap;background:var(--p-accent,#8f6fc7);box-shadow:0 4px 10px var(--p-glow,#8e75b422)}
+body .km-v22-site-button[aria-pressed="true"]{background:var(--p-light,#e5d9f0);color:var(--p-strong,#6345a3);border:1px solid var(--p-stroke,#dfd0ef)}
+body .km-v22-site-button:disabled{opacity:.55;cursor:default}

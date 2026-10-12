@@ -1,0 +1,18 @@
+/* Modern restrained Kotoba UI */
+.km-line-svg{width:19px;height:19px;display:inline-block;stroke:currentColor;fill:none;vertical-align:middle}
+.theme-tile .tile-art{height:56px;display:flex;align-items:center;justify-content:space-around}
+.theme-tile .tile-art .tile-sky,.theme-tile .tile-art .tile-cloud{display:inline-flex;align-items:center;justify-content:center;font-size:0}
+.theme-tile .tile-art .tile-sky .km-line-svg{width:31px;height:31px;filter:drop-shadow(0 2px 3px #0002)}
+.theme-tile .tile-art .tile-cloud .km-line-svg{width:21px;height:21px;opacity:.8}
+body[data-theme-choice="study-classic"]{color-scheme:light}
+body[data-theme="study-classic"]{--p-bg:#f5f7fb;--p-panel:#fff;--p-ink:#27304a;--p-sub:#737d91;--p-stroke:#dfe4ee;--p-accent:#596bd6;--p-strong:#495ac2;--p-light:#e9ecff;--p-decor:#8e9be5;--p-glow:#344d9e19;--p-hero:#f5f7fc;color-scheme:light;font-family:Inter,Segoe UI,system-ui,sans-serif}
+body [data-theme-choice="study-classic"] .tile-art{background:linear-gradient(115deg,#e9ecff,#e0e7f7);color:#5064cb}
+body[data-theme="study-classic"] .theme-tile{border-radius:12px}
+body[data-theme="study-classic"] .theme-tile[aria-pressed="true"]{border-color:#596bd6}
+body[data-theme="study-classic"] header{background:#fff}
+body[data-theme="study-classic"] .section-kicker{background:#edf0ff;color:#4e5fbd}
+body[data-theme="study-classic"] button,body[data-theme="study-classic"] input,body[data-theme="study-classic"] select{accent-color:#596bd6}
+
+body .km-v2-logo[data-km-icon],body .km-dashboard-mark[data-km-icon]{display:inline-flex;align-items:center;justify-content:center}
+body .km-v2-logo .km-line-svg,body .km-dashboard-mark .km-line-svg{width:21px;height:21px}
+body[data-theme="study-classic"] .logo{background:#596bd6;color:#fff;transform:none;box-shadow:none;border-radius:11px}

@@ -92,7 +92,7 @@
   }
   async function restore(){
     const cfg=await chrome.storage.local.get({kotobaActivity:null,kotobaTheme:'midnight-neon',kotobaAnkiDashboard:null,kotobaDashboardGoals:{cards:5,minutes:20},ankiVocabularyKnown:[],ankiVocabularyLearning:[],ankiVocabularySyncReport:null});
-    const themes=new Set(['midnight-neon','cotton-candy','matcha-cream','sunset-pop','black-gold']);
+    const themes=new Set(['midnight-neon','cotton-candy','matcha-cream','sunset-pop','black-gold','study-classic']);
     document.body.dataset.theme=themes.has(cfg.kotobaTheme)?cfg.kotobaTheme:'midnight-neon';
     activity=cfg.kotobaActivity||empty();anki=cfg.kotobaAnkiDashboard||null;
     goals={cards:Number(cfg.kotobaDashboardGoals?.cards)||5,minutes:Number(cfg.kotobaDashboardGoals?.minutes)||20};

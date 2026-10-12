@@ -1,27 +1,13 @@
-KOTOBA MINER v1.12.8 - READY TO INSTALL
-=======================================
+Kotoba Miner v2.2 — Read this first
 
-THIS IS THE ACTUAL BROWSER EXTENSION (NOT A TEST PROJECT).
-The file "manifest.json" must be directly inside the folder Opera loads.
+Update your existing Opera extension:
+1. Back up your existing Kotoba folder.
+2. Unzip this archive. Open its single Kotoba-Miner-v2.2 folder.
+3. Copy all files *inside* it into your existing loaded extension folder (replace old files).
+4. Open opera://extensions and click Reload on Kotoba.
+5. Refresh your video tabs.
+6. On YouTube or Netflix, click the Opera toolbar Kotoba extension icon and Enable the site. On other video websites, approve the site-specific permission when asked.
 
-TO UPDATE YOUR EXISTING KOTOBA WITHOUT LOSING SETTINGS:
-1. Close any pages on which Kotoba is running.
-2. Back up your current working Kotoba extension folder.
-3. Open this "Kotoba-Miner-v1.12.8" folder.
-4. Copy ALL its files into your EXISTING extension folder, replacing files.
-5. Go to opera://extensions and click Reload on your existing Kotoba entry.
-6. Refresh the video page. Press Alt+T to cycle Japanese, both, English.
+New video sites start DISABLED. The floating 語 button is visible only on sites you enable. Existing explicit approvals are preserved.
 
-DO NOT select this ZIP file in Opera. Extract it first.
-DO NOT load the "tests" folder. This release does not contain development tests.
-DO NOT remove and reinstall the extension unless necessary; it may lose its
-existing extension ID and browser-stored Kotoba vocabulary/settings.
-
-FOR A NEW INSTALL:
-1. Extract the ZIP.
-2. Open opera://extensions and turn on Developer mode.
-3. Click Load unpacked and select "Kotoba-Miner-v1.12.8".
-4. Confirm that folder directly contains manifest.json.
-
-Limitations: English subtitles need accessible English captions or opt-in
-translation; some sites, including DRM-protected players, may not expose them.
+Themes and comprehension tracker now live in the 語 floating menu.

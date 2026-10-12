@@ -1,0 +1,74 @@
+/* Kotoba 2.1 — quiet interface / consistent original line icon language */
+#kotoba-root .km-line-svg,.km-line-svg{display:inline-block;flex:none;width:17px;height:17px;vertical-align:middle;pointer-events:none;stroke:currentColor;fill:none;}
+#kotoba-root i[data-km-icon]{font-style:normal;display:inline-flex;align-items:center;justify-content:center;flex:none;width:18px;height:18px;}
+#kotoba-root .km-quickmenu .km-menu-item>span:first-child{display:flex;align-items:center;gap:9px;flex-wrap:wrap;text-align:left;font-weight:670;}
+#kotoba-root .km-study-menu .km-menu-item>span:first-child>small{display:block;flex-basis:100%;margin-left:27px;margin-top:-4px;font-weight:470;font-size:10px;opacity:.8;line-height:1.45;}
+#kotoba-root .km-study-menu .km-menu-item>span:first-child:not(:has(i))>small{margin-left:0}
+#kotoba-root .km-menu-item .km-plain-icon{width:18px;height:18px;color:var(--km-muted);display:inline-flex;align-items:center;justify-content:center}
+#kotoba-root .km-menu-item .km-plain-icon .km-line-svg{width:16px;height:16px}
+#kotoba-root .km-menu-dismiss .km-line-svg,#kotoba-root .km-close .km-line-svg,#kotoba-root .km-miner-close .km-line-svg,#kotoba-root .km-tools-close .km-line-svg{width:16px;height:16px}
+#kotoba-root .km-rail-cloud-frame,#kotoba-root .km-rail-cloud-frame:not([hidden]){display:none!important}
+#kotoba-root .km-sidebar::before,#kotoba-root .km-sidebar::after,#kotoba-root .km-head::after{display:none!important;content:none!important}
+#kotoba-root .km-sidebar{border-radius:16px 0 0 16px!important;overflow:hidden!important;box-shadow:-10px 0 36px var(--km-shadow)!important;border-left:1px solid var(--km-border)!important}
+#kotoba-root .km-head{background:var(--km-surface)!important;min-height:65px!important;height:65px!important;padding:12px 17px!important;border-bottom:1px solid var(--km-border)!important}
+#kotoba-root .km-brand{transform:none!important;border-radius:10px!important;box-shadow:none!important;width:36px!important;height:36px!important;}
+#kotoba-root .km-brand-copy strong{font-weight:790;font-size:15px!important;letter-spacing:-.3px!important}
+#kotoba-root .km-brand-copy small{letter-spacing:0!important;font-size:10px!important}
+#kotoba-root .km-rail-head{background:var(--km-canvas)!important;padding:14px 14px 10px!important;border-bottom:1px solid var(--km-border)!important}
+#kotoba-root .km-rail-title{display:flex!important;align-items:center;justify-content:space-between;gap:12px;margin:0 0 11px!important}
+#kotoba-root .km-rail-title strong{font-size:16px!important;letter-spacing:-.35px!important}
+#kotoba-root .km-rail-actions{display:flex;align-items:center;gap:8px}
+#kotoba-root .km-count{border-radius:8px!important;box-shadow:none!important;font-size:10px!important;font-weight:700!important;padding:5px 8px!important}
+#kotoba-root .km-filter-row{display:none!important}
+#kotoba-root .km-rail-title .km-tools-toggle{display:inline-flex!important;align-items:center;justify-content:center;flex:none;width:30px;height:30px;padding:6px;border-radius:9px!important;border:1px solid var(--km-border)!important;color:var(--km-ink)!important;background:var(--km-surface)!important;box-shadow:none!important}
+#kotoba-root .km-tools-toggle .km-line-svg{width:16px;height:16px}
+#kotoba-root .km-study-tabs{margin:0!important;padding:3px!important;border:1px solid var(--km-border)!important;border-radius:11px!important;gap:3px!important;background:var(--km-surface-2)!important;box-shadow:none!important}
+#kotoba-root .km-study-tabs button{border-radius:8px!important;padding:8px 4px!important;font-size:11px!important;font-weight:690!important;display:flex;gap:6px;align-items:center;justify-content:center}
+#kotoba-root .km-study-tabs button.is-active{background:var(--km-surface)!important;color:var(--km-ink)!important;box-shadow:0 1px 4px var(--km-shadow)!important}
+#kotoba-root .km-study-tabs .km-line-svg{width:14px;height:14px}
+#kotoba-root .km-status:not(.is-error){display:none!important}
+#kotoba-root .km-status.is-error{background:transparent!important;border:0!important;padding:7px 0!important;box-shadow:none!important;font-size:11px!important}
+#kotoba-root .km-footer{height:auto!important;min-height:34px!important;padding:6px 13px!important;display:flex!important;align-items:center;justify-content:flex-end!important;background:var(--km-surface)!important;border-top:1px solid var(--km-border)!important;color:var(--km-muted)!important}
+#kotoba-root .km-footer .km-open-dict{display:inline-flex!important;align-items:center;gap:6px;border:0!important;background:transparent!important;color:var(--km-muted)!important;padding:5px 7px!important;font-size:10px!important;font-weight:690!important;border-radius:6px!important}
+#kotoba-root .km-footer .km-open-dict:hover{color:var(--km-accent-deep)!important;background:var(--km-accent-pale)!important}
+#kotoba-root .km-footer .km-line-svg{width:14px;height:14px}
+#kotoba-root .km-tools{position:relative;box-shadow:0 8px 20px var(--km-shadow)!important;border:1px solid var(--km-border)!important;border-radius:12px!important;padding:12px!important;margin-top:9px!important;background:var(--km-surface)!important}
+#kotoba-root .km-tools .km-filter{display:block!important;width:100%;margin:8px 0 12px;border-radius:9px!important}
+#kotoba-root .km-sidebar .km-cue{border-radius:10px!important;box-shadow:none!important;transition:background .12s ease,border-color .12s ease!important}
+#kotoba-root .km-sidebar .km-cue.active{box-shadow:inset 3px 0 var(--km-accent)!important;border-color:var(--km-border)!important;background:var(--km-accent-pale)!important;transform:none!important}
+#kotoba-root .km-sidebar .km-cue:before,#kotoba-root .km-sidebar .km-cue:after{display:none!important;content:none!important}
+#kotoba-root .km-quickmenu{border:1px solid var(--km-border)!important;border-radius:15px!important;background:var(--km-surface)!important;box-shadow:0 16px 45px var(--km-shadow)!important}
+#kotoba-root .km-floating-gloss{border:1px solid var(--km-border)!important;border-radius:14px!important;box-shadow:0 16px 42px var(--km-shadow)!important;background:var(--km-surface)!important;color:var(--km-ink)!important}
+#kotoba-root .km-floating-gloss::before,#kotoba-root .km-floating-gloss::after{display:none!important;content:none!important}
+#kotoba-root .km-gloss-tabs{display:flex!important;gap:5px!important;padding:7px 11px!important;flex-wrap:nowrap!important}
+#kotoba-root .km-gloss-tab{display:inline-flex!important;align-items:center;justify-content:center;flex:1;min-width:0!important;border-radius:8px!important;box-shadow:none!important;font-size:0!important;background:transparent!important;border:1px solid transparent!important}
+#kotoba-root .km-gloss-tab .km-line-svg{width:19px;height:19px}
+#kotoba-root .km-gloss-tab:hover{background:var(--km-accent-pale)!important}
+#kotoba-root .km-gloss-tab[aria-pressed="true"]{color:var(--km-accent-deep)!important;background:var(--km-accent-pale)!important;border-color:var(--km-border)!important}
+#kotoba-root .km-gloss-title-actions .km-gloss-btn{border-radius:10px!important;display:inline-flex!important;align-items:center;justify-content:center}
+#kotoba-root .km-gloss-title-actions .km-line-svg{width:18px;height:18px}
+#kotoba-root .km-gloss-details .km-line-svg{width:13px;height:13px;margin-left:4px}
+#kotoba-root .km-gloss-common{font-size:9px!important;letter-spacing:0!important;border-radius:6px!important;box-shadow:none!important}
+#kotoba-root .km-miner{border:1px solid var(--km-border)!important;border-radius:16px!important;box-shadow:0 18px 48px var(--km-shadow)!important}
+#kotoba-root .km-miner-head{border-bottom:1px solid var(--km-border)!important}
+/* Sixth theme: original neutral-blue studio palette, inspired by modern immersion tools, not copied assets. */
+#kotoba-root[data-theme="study-classic"]{
+  --km-canvas:#f5f7fb;--km-surface:#fff;--km-surface-2:#f0f2f8;--km-ink:#252b41;--km-muted:#6a7185;--km-border:#e0e4ee;
+  --km-accent:#596bd6;--km-accent-deep:#495bc4;--km-accent-pale:#e9ecff;--km-secondary:#7789e5;--km-glow:rgba(76,99,191,.13);--km-shadow:rgba(25,35,80,.13);
+  --km-header-bg:#fff;--km-highlight:#e9ecff;--km-video-bg:rgba(24,28,44,.87);--km-cloud-bg:#fff;--km-bar:#596bd6;
+  --km-font:Inter,"Segoe UI",system-ui,sans-serif;--km-jp-font:"Yu Gothic","Noto Sans JP",Meiryo,sans-serif;
+}
+#kotoba-root[data-theme="study-classic"] .km-brand,#kotoba-root[data-theme="study-classic"] .km-launcher,#kotoba-root[data-theme="study-classic"] .km-menu-logo{background:#596bd6!important;color:#fff!important;border-radius:11px!important;box-shadow:0 4px 12px #3547882b!important;transform:none!important}
+#kotoba-root[data-theme="study-classic"] .km-quickmenu,#kotoba-root[data-theme="study-classic"] .km-sidebar,#kotoba-root[data-theme="study-classic"] .km-floating-gloss,#kotoba-root[data-theme="study-classic"] .km-miner{color:var(--km-ink)!important;background:#fff!important;border-color:#e1e5ee!important}
+#kotoba-root[data-theme="study-classic"] .km-gloss-title,#kotoba-root[data-theme="study-classic"] .km-gloss-jp{color:#29314d!important}
+#kotoba-root[data-theme="study-classic"] .km-gloss-primary{color:#20283f!important}
+#kotoba-root[data-theme="study-classic"] .km-gloss-quick,#kotoba-root[data-theme="study-classic"] .km-btn.km-save{background:#596bd6!important;color:white!important;border-color:#596bd6!important}
+#kotoba-root[data-theme="study-classic"] .km-video-subs{--km-video-bg:rgba(20,26,42,.9)!important}
+#kotoba-root[data-theme="study-classic"] .km-rail-head{background:#fff!important}
+#kotoba-root[data-theme="study-classic"] .km-sidebar .km-cue.active{background:#eef0ff!important}
+#kotoba-root[data-theme="study-classic"] .km-menu-item:hover,#kotoba-root[data-theme="study-classic"] .km-menu-item:focus-visible{background:#f1f3ff!important}
+@media (prefers-reduced-motion: reduce){#kotoba-root .km-sidebar .km-cue{transition:none!important}}
+
+#kotoba-root .km-gloss-common::before,#kotoba-root .km-gloss-common::after{display:none!important;content:none!important}
+#kotoba-root .km-gloss-audio-play{display:inline-flex;align-items:center;gap:7px}
+#kotoba-root .km-gloss-audio-play .km-line-svg{width:16px;height:16px}

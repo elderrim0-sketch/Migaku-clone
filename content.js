@@ -1,9 +1,10 @@
-/* Kotoba Miner v1.12.8: Anki study sync, i+1 sentences, focused menu and furigana.
+/* Kotoba Miner v2.0: Anki study sync, i+1 sentences, focused menu and furigana.
    Captions are read only when made available by the page or an imported file.
    Media capture only from player-exposed tracks; no DRM circumvention. */
 (() => {
   if (document.getElementById('kotoba-root')) return;
   const U = globalThis.KMTranscript;
+  const Icons = globalThis.KMIcons;
   if (!U) return;
   const isDemo = location.protocol === 'chrome-extension:' || Boolean(document.querySelector('#demo-caption'));
   const isYT = /(^|\.)youtube\.com$/i.test(location.hostname);
@@ -13,37 +14,46 @@
   const root = document.createElement('div');
   root.id = 'kotoba-root';
   root.innerHTML = `
-    <button class="km-launcher" type="button" aria-label="Kotoba site controls" title="Kotoba controls · drag to move" aria-expanded="false">語<span class="km-indicator"></span></button>
+    <button class="km-launcher" type="button" aria-label="Kotoba site controls" title="Kotoba controls · drag to move" aria-expanded="false" hidden>語<span class="km-indicator"></span></button>
     <div class="km-quickmenu km-study-menu" hidden role="dialog" aria-label="Kotoba study controls">
-      <div class="km-menu-heading"><div class="km-menu-logo">語</div><div><strong>Kotoba Study</strong><small class="km-host">Focus on what you're watching</small></div><button type="button" class="km-menu-dismiss" aria-label="Close study controls">×</button></div>
-      <div class="km-menu-group km-study-actions">
-        <button class="km-menu-item km-site-toggle" type="button" aria-pressed="true"><span>Study mode <small>Enable Kotoba on this site</small></span><span class="km-switch">ON</span></button>
-        <button class="km-menu-item km-show-rail" type="button"><span>Transcript <small>Show or hide subtitles</small></span><span class="km-plain-icon">↗</span></button>
-        <button class="km-menu-item km-language-cycle" type="button"><span>Subtitle languages <small>Alt + T · Japanese / Both / English</small></span><span class="km-language-label km-switch">日本語</span></button>
-        <button class="km-menu-item km-original-toggle" type="button" aria-pressed="true"><span>Hide original captions <small>Keep Japanese CC ON for capture</small></span><span class="km-switch">ON</span></button>
-        <button class="km-menu-item km-open-recs" type="button"><span>✦ Smart i+1 sentences <small>Find one-new-word lines</small></span><span class="km-plain-icon">→</span></button>
-        <button class="km-menu-item km-replay-now" type="button"><span>↻ Replay sentence</span><span class="km-plain-icon">▶</span></button>
-        <button class="km-menu-item km-loop-now" type="button" aria-pressed="false"><span>Loop sentence</span><span class="km-loop-label km-switch">OFF</span></button>
+      <div class="km-menu-heading"><div class="km-menu-logo">語</div><div><strong>Kotoba Study</strong><small class="km-host">Focus on what you're watching</small></div><button type="button" class="km-menu-dismiss" aria-label="Close study controls"><i data-km-icon="x"></i></button></div>
+      <div class="km-v22-menu-content">
+        <div class="km-v22-switches">
+          <button class="km-menu-item km-show-rail" type="button"><span><i data-km-icon="captions"></i><span class="km-v22-menu-copy"><strong>Transcript</strong><small>Show or hide the subtitle list</small></span></span><span class="km-plain-icon" data-km-icon="arrow-right"></span></button>
+          <button class="km-menu-item km-coverage-toggle" type="button" aria-pressed="false"><span><i data-km-icon="chart"></i><span class="km-v22-menu-copy"><strong>Comprehension tracker</strong><small>Vocabulary coverage estimate</small></span></span><span class="km-coverage-value km-v22-switch">OFF</span></button>
+        </div>
+        <div class="km-v22-theme-section">
+          <div class="km-v22-section-label"><strong>Choose a theme</strong><span class="km-theme-current">Cotton Candy</span></div>
+          <div class="km-menu-themes" role="group" aria-label="Kotoba appearance">
+            <button data-theme-choice="cotton-candy" type="button" aria-label="Cotton Candy" title="Cotton Candy"><span class="km-v22-swatch" aria-hidden="true"></span><small>Cotton</small></button>
+            <button data-theme-choice="matcha-cream" type="button" aria-label="Matcha Garden" title="Matcha Garden"><span class="km-v22-swatch" aria-hidden="true"></span><small>Matcha</small></button>
+            <button data-theme-choice="sunset-pop" type="button" aria-label="Bubblegum Pop" title="Bubblegum Pop"><span class="km-v22-swatch" aria-hidden="true"></span><small>Pop</small></button>
+            <button data-theme-choice="midnight-neon" type="button" aria-label="Midnight Neon" title="Midnight Neon"><span class="km-v22-swatch" aria-hidden="true"></span><small>Neon</small></button>
+            <button data-theme-choice="black-gold" type="button" aria-label="Black & Gold" title="Black & Gold"><span class="km-v22-swatch" aria-hidden="true"></span><small>Gold</small></button>
+            <button data-theme-choice="study-classic" type="button" aria-label="Immersion Classic" title="Immersion Classic"><span class="km-v22-swatch" aria-hidden="true"></span><small>Classic</small></button>
+          </div>
+        </div>
+        <div class="km-v22-menu-links">
+          <button class="km-menu-item km-studio-page" type="button"><span><i data-km-icon="library"></i><span class="km-v22-menu-copy"><strong>Kotoba Studio</strong><small>Words, reading & learning</small></span></span><span class="km-plain-icon" data-km-icon="arrow-right"></span></button>
+          <button class="km-menu-item km-dashboard-page" type="button"><span><i data-km-icon="chart"></i><span class="km-v22-menu-copy"><strong>My dashboard</strong><small>Streaks and cards</small></span></span><span class="km-plain-icon" data-km-icon="arrow-right"></span></button>
+          <button class="km-menu-item km-settings-page" type="button"><span><i data-km-icon="settings"></i><span class="km-v22-menu-copy"><strong>All settings</strong><small>Shortcuts, Anki and subtitles</small></span></span><span class="km-plain-icon" data-km-icon="arrow-right"></span></button>
+        </div>
       </div>
-      <button class="km-menu-item km-dashboard-page" type="button"><span>✦ Study dashboard <small>Daily streak, cards and Anki reviews</small></span><span class="km-plain-icon">↗</span></button>
-      <button class="km-menu-item km-settings-page" type="button"><span>⚙ All settings, themes & Anki <small>Open the extension settings tab</small></span><span class="km-plain-icon">↗</span></button>
-      <div class="km-menu-footnote">Q saves your selected word to Anki · Drag 語 to reposition</div>
       <div class="km-hidden-controls" hidden>
+        <button class="km-menu-item km-site-toggle"><span class="km-site-toggle-label">Kotoba disabled</span><span class="km-switch">OFF</span></button>
+        <button class="km-menu-item km-language-cycle"><span>Subtitle language</span><span class="km-language-label km-switch">日本語</span></button>
+        <button class="km-menu-item km-original-toggle"><span>Hide original captions</span><span class="km-switch">ON</span></button>
+        <button class="km-menu-item km-play-mode-cycle"><span class="km-play-mode-description">Free watch</span><span class="km-play-mode-label km-switch">PLAY</span></button>
+        <button class="km-menu-item km-open-recs"><span>i+1</span></button>
+        <button class="km-menu-item km-replay-now"><span>Replay</span></button>
+        <button class="km-menu-item km-loop-now"><span>Loop</span><span class="km-loop-label km-switch">OFF</span></button>
         <button class="km-auto-jp"><span>Auto Japanese captions</span><span class="km-switch">ON</span></button>
         <button class="km-pause-hover"><span>Pause on hover</span><span class="km-switch">ON</span></button>
         <button class="km-video-toggle"><span>Show subs</span><span class="km-video-value">ON</span></button>
-        <button class="km-coverage-toggle"><span>Coverage</span><span class="km-coverage-value">OFF</span></button>
         <button class="km-pitch-toggle"><span>Pitch</span><span class="km-pitch-value">Always</span></button>
         <button class="km-translation-toggle"><span>Translation</span><span class="km-translation-value">OFF</span></button>
         <button class="km-test-speech"></button><button class="km-reset-position"></button>
         <div class="km-studio-mount"></div><div class="km-shortcut-live"></div>
-        <button class="km-ai-summary"></button>
-        <span class="km-theme-current"></span>
-        <div class="km-menu-themes">
-          <button data-theme-choice="cotton-candy"></button><button data-theme-choice="matcha-cream"></button>
-          <button data-theme-choice="sunset-pop"></button><button data-theme-choice="midnight-neon"></button>
-          <button data-theme-choice="black-gold"></button>
-        </div>
       </div>
     </div>
     <div class="km-coverage" aria-label="Approximate vocabulary coverage" hidden>
@@ -72,27 +82,26 @@
     <aside class="km-sidebar" aria-label="Kotoba Japanese transcript sidebar" hidden>
       <header class="km-head">
         <span class="km-brand">語</span>
-        <span class="km-brand-copy"><strong>Kotoba Miner</strong><small>Japanese immersion · v1.12.8</small></span>
-        <button class="km-icon-btn km-close" aria-label="Close transcript sidebar" title="Close sidebar">×</button>
+        <span class="km-brand-copy"><strong>Kotoba Miner</strong><small>Japanese immersion · v2.2</small></span>
+        <button class="km-icon-btn km-close" aria-label="Close transcript sidebar" title="Close sidebar"><i data-km-icon="x"></i></button>
       </header>
       
       <div class="km-rail-head">
         
-        <div class="km-rail-title"><strong>Transcript</strong><span class="km-count">0 lines</span></div>
+        <div class="km-rail-title"><strong>Transcript</strong><span class="km-rail-actions"><span class="km-count">0 lines</span><button class="km-small-btn km-tools-toggle" type="button" aria-expanded="false" aria-controls="km-tools-panel" title="Transcript tools" aria-label="Transcript tools"><i data-km-icon="settings"></i></button></span></div>
         <div class="km-status" role="status" aria-live="polite" title="Subtitle source status">Looking for Japanese subtitles…</div>
         <div class="km-study-tabs" role="group" aria-label="Transcript view">
           <button class="km-tab-lines is-active" type="button" aria-pressed="true">All lines</button>
-          <button class="km-tab-recs" type="button" aria-pressed="false">✦ i+1 picks <span class="km-rec-count">0</span></button>
+          <button class="km-tab-recs" type="button" aria-pressed="false"><i data-km-icon="target"></i> i+1 picks <span class="km-rec-count">0</span></button>
         </div>
         <div class="km-recommend-summary" hidden></div>
         <div class="km-filter-row">
-          <input class="km-filter" placeholder="⌕  Find a word or sentence" aria-label="Filter transcript" />
           <button class="km-follow is-on" type="button" aria-pressed="true" title="Auto-follow video playback">◎ Follow</button>
-          <span class="km-pitch-chip" title="Number of unique words with verified pitch-accent matches">♫ Pitch —</span>
-          <button class="km-small-btn km-tools-toggle" type="button" aria-expanded="false" aria-controls="km-tools-panel" title="Transcript tools">⚙</button>
+          <span class="km-pitch-chip" title="Number of unique words with verified pitch-accent matches" hidden>Pitch —</span>
         </div>
         <div class="km-tools" id="km-tools-panel" role="region" aria-label="Transcript tools" hidden>
-          <div class="km-tools-heading"><strong>Transcript tools</strong><button class="km-tools-close" type="button" title="Close transcript tools" aria-label="Close transcript tools">×</button></div>
+          <div class="km-tools-heading"><strong>Transcript tools</strong><button class="km-tools-close" type="button" title="Close transcript tools" aria-label="Close transcript tools"><i data-km-icon="x"></i></button></div>
+          <input class="km-filter" placeholder="Search transcript" aria-label="Filter transcript" />
           <div class="km-control-row">
             <button class="km-small-btn km-read-yt" type="button" title="Read YouTube's visible transcript panel">↻ Read YouTube</button>
             <label class="km-small-btn km-file-label" title="Import a Japanese .srt or .vtt subtitle file">＋ Import SRT/VTT<input class="km-file" type="file" accept=".srt,.vtt,text/vtt,text/plain" hidden /></label>
@@ -112,25 +121,25 @@
         <div class="km-empty">Waiting for subtitles. Turn on Japanese CC or import a transcript.</div>
       </div>
       <div class="km-miner" hidden>
-        <div class="km-miner-head"><strong>Dictionary & card maker</strong><button class="km-icon-btn km-miner-close" type="button" aria-label="Close dictionary">×</button></div>
+        <div class="km-miner-head"><strong><i data-km-icon="book-open"></i> Word explorer</strong><button class="km-icon-btn km-miner-close" type="button" aria-label="Close dictionary"><i data-km-icon="x"></i></button></div>
         <div class="km-miner-scroll">
           <div class="km-context"></div>
           <form class="km-search-row"><input class="km-query km-input" placeholder="Search 猫, ねこ, cat…" aria-label="Dictionary lookup" maxlength="80"/><button class="km-btn" type="submit">Search</button></form>
           <div class="km-results" aria-live="polite"></div>
           <div class="km-card-section" hidden>
-            <div class="km-status-title">Learning status</div>
-            <div class="km-learning-status" role="group" aria-label="Vocabulary learning status">
+            <div class="km-status-title" hidden>Learning status</div>
+            <div class="km-learning-status" hidden role="group" aria-label="Vocabulary learning status">
               <button type="button" class="km-state" data-word-status="track">◎ Track</button>
               <button type="button" class="km-state" data-word-status="ignore">⊖ Ignore</button>
               <button type="button" class="km-state" data-word-status="learning">◉ Learning</button>
               <button type="button" class="km-state" data-word-status="unknown">? Unknown</button>
               <button type="button" class="km-state" data-word-status="known">✓ Known</button>
             </div>
-            <div class="km-actionbar"><button class="km-btn km-open-card" type="button">✦ Open card creator</button><button class="km-btn km-known-toggle" type="button">✓ Mark word known</button></div>
-            <div class="km-compact-hint">Click any sentence to seek. Hover over a word to pause and see its meaning.</div>
+            <div class="km-actionbar"><button class="km-btn km-open-card" type="button"><i data-km-icon="plus"></i> Create Anki card</button><button class="km-btn km-known-toggle" type="button" hidden>Mark word known</button></div>
+            
             <div class="km-card-creator" hidden>
-              <div class="km-creator-title"><strong>✦ Card creator</strong><div class="km-creator-top-actions"><button class="km-btn km-generate-all" type="button">🪄 Generate all</button><button class="km-icon-btn km-close-card" type="button" aria-label="Close card creator">×</button></div></div>
-              <div class="km-creator-intro">Review the word and sentence, then save to Anki. Open Media attachments only when you need them.</div>
+              <div class="km-creator-title"><strong><i data-km-icon="layers"></i> Make a flashcard</strong><div class="km-creator-top-actions"><button class="km-btn km-generate-all" type="button">Generate all</button><button class="km-icon-btn km-close-card" type="button" aria-label="Close card creator">×</button></div></div>
+              <div class="km-creator-intro">A little memory from what you watched. Edit anything before saving.</div>
               <div class="km-creator-grid">
                 <label>Word<input class="km-field-word" placeholder="Japanese word"></label>
                 <label>Reading<input class="km-field-reading" placeholder="Kana reading"></label>
@@ -138,16 +147,16 @@
               <label>Generated English meaning<textarea class="km-textarea" id="km-definition" spellcheck="false" placeholder="Generated from the most common dictionary meaning"></textarea></label>
               <div class="km-text-fields"><label>Original sentence<textarea class="km-field-sentence" rows="2" spellcheck="false" placeholder="Subtitle sentence"></textarea></label>
               <label>English sentence translation<textarea class="km-field-translation" rows="2" placeholder="Generate to add translation"></textarea></label></div>
-              <div class="km-creator-hotkey"><div><strong>⚡ One-key Anki card</strong><small>Press Q to create an Anki card with a screenshot, accessible sentence audio, and generated fields; the optional recording button below still captures full scenes.</small></div><kbd class="km-record-shortcut">Q</kbd><button type="button" class="km-btn km-quick-save">✦ Quick create</button></div>
-              <details class="km-media-disclosure"><summary><span><strong>▣ Media attachments</strong><small>Screenshot · source audio · video (manual) · word audio</small></span><span class="km-media-chevron">⌄</span></summary>
+              <div class="km-creator-hotkey"><div><strong>One-key Anki card</strong><small>Press Q to create an Anki card with a screenshot, accessible sentence audio, and generated fields; the optional recording button below still captures full scenes.</small></div><kbd class="km-record-shortcut">Q</kbd><button type="button" class="km-btn km-quick-save">Quick create</button></div>
+              <details class="km-media-disclosure"><summary><span><strong>Media attachments</strong><small>Screenshot · source audio · video (manual) · word audio</small></span><span class="km-media-chevron">⌄</span></summary>
               <button type="button" class="km-btn km-record-scene">● Record source scene (optional)</button><div class="km-media-grid">
-                <div class="km-media-tile"><strong>▣ Scene screenshot</strong><div class="km-scene-preview">No screenshot yet</div><button type="button" class="km-btn km-grab-frame">Capture current frame</button><label class="km-file-upload">Upload screenshot<input type="file" class="km-upload-image" accept="image/png,image/jpeg,image/webp" hidden></label></div>
-                <div class="km-media-tile"><strong>🎞 Original video clip</strong><div class="km-clip-state km-media-status">Not recorded</div><video class="km-clip-preview" controls playsinline hidden></video><label class="km-file-upload">Upload video clip<input type="file" class="km-upload-clip" accept="video/webm,video/mp4" hidden></label><small class="km-media-hint">Attached as an optional video in the back of your Anki card. Playback support varies by Anki device.</small></div>
-                <div class="km-media-tile"><strong>♫ Original sentence audio</strong><div class="km-audio-state km-media-status">No source recording</div><audio class="km-source-audio" controls hidden></audio><label class="km-file-upload">Upload original audio<input type="file" class="km-upload-audio" accept="audio/*" hidden></label><small class="km-media-hint">Real voices and sounds from the selected scene. Separate from synthesized pronunciation.</small></div>
-                <div class="km-media-tile"><strong>あ Generated Japanese word audio</strong><div class="km-word-audio-state km-media-status">No generated audio attached</div><audio class="km-word-audio-player" controls hidden></audio><div class="km-tts-actions"><button type="button" class="km-btn km-generate-voice">✦ Generate WAV</button><button type="button" class="km-btn km-word-voice">▷ Play Japanese</button></div><label class="km-file-upload">Upload native word recording<input class="km-upload-word-audio" type="file" accept="audio/*" hidden></label><small class="km-media-hint">Generate and attach with free local VOICEVOX; Play Japanese uses your browser voice when VOICEVOX is unavailable.</small></div>
+                <div class="km-media-tile"><strong>Scene screenshot</strong><div class="km-scene-preview">No screenshot yet</div><button type="button" class="km-btn km-grab-frame">Capture current frame</button><label class="km-file-upload">Upload screenshot<input type="file" class="km-upload-image" accept="image/png,image/jpeg,image/webp" hidden></label></div>
+                <div class="km-media-tile"><strong>Original video clip</strong><div class="km-clip-state km-media-status">Not recorded</div><video class="km-clip-preview" controls playsinline hidden></video><label class="km-file-upload">Upload video clip<input type="file" class="km-upload-clip" accept="video/webm,video/mp4" hidden></label><small class="km-media-hint">Attached as an optional video in the back of your Anki card. Playback support varies by Anki device.</small></div>
+                <div class="km-media-tile"><strong>Original sentence audio</strong><div class="km-audio-state km-media-status">No source recording</div><audio class="km-source-audio" controls hidden></audio><label class="km-file-upload">Upload original audio<input type="file" class="km-upload-audio" accept="audio/*" hidden></label><small class="km-media-hint">Real voices and sounds from the selected scene. Separate from synthesized pronunciation.</small></div>
+                <div class="km-media-tile"><strong>Generated Japanese word audio</strong><div class="km-word-audio-state km-media-status">No generated audio attached</div><audio class="km-word-audio-player" controls hidden></audio><div class="km-tts-actions"><button type="button" class="km-btn km-generate-voice">Generate WAV</button><button type="button" class="km-btn km-word-voice">Play Japanese</button></div><label class="km-file-upload">Upload native word recording<input class="km-upload-word-audio" type="file" accept="audio/*" hidden></label><small class="km-media-hint">Generate and attach with free local VOICEVOX; Play Japanese uses your browser voice when VOICEVOX is unavailable.</small></div>
               </div>
               <div class="km-media-warning">Capture is supported only when the video exposes ordinary browser media tracks. DRM-protected streams may block recording. Downloadable word audio requires a local VOICEVOX engine.</div></details>
-              <div class="km-creator-actions"><button class="km-btn km-generate" type="button">🪄 Refresh fields</button><button class="km-btn km-clear-media" type="button">Clear media</button></div>
+              <div class="km-creator-actions"><button class="km-btn km-generate" type="button">Refresh fields</button><button class="km-btn km-clear-media" type="button">Clear media</button></div>
               <label class="km-edit-label" for="km-deck">Choose destination Anki deck</label>
               <div class="km-deck-row"><select class="km-deck" id="km-deck" aria-label="Anki destination deck" disabled><option value="">Open Anki to load decks…</option></select><button class="km-btn km-refresh-decks" type="button" title="Refresh decks">↻</button></div>
               <div class="km-notice km-deck-notice" role="status">Open Anki Desktop to load decks.</div>
@@ -158,9 +167,10 @@
           </div>
         </div>
       </div>
-      <footer class="km-footer"><span>Tap a line to seek · a word to mine</span><button class="km-open-dict" type="button">Dictionary ↗</button></footer>
+      <footer class="km-footer"><button class="km-open-dict" type="button"><i data-km-icon="book-open"></i> Open dictionary</button></footer>
     </aside>`;
   document.documentElement.appendChild(root);
+  Icons?.hydrate(root);
   const $ = selector => root.querySelector(selector);
   // Move studio outside the dock stacking context so video and coverage never obscure it.
   root.appendChild($('.km-card-creator'));
@@ -180,9 +190,9 @@
   const studioMount=$('.km-studio-mount');
   studioMount.innerHTML=subtitleSettings.markup();
   let masterEnabled = true;
-  let siteEnabled = true;
+  let siteEnabled = false;
   let railOpen = true;
-  let follow = true;
+  let follow = true; // Playback always follows the current subtitle. The legacy button is hidden.
   let previousVideoId = '';
   let cues = [];
   let cueSource = '';
@@ -287,7 +297,8 @@
     'matcha-cream':'Matcha Garden',
     'sunset-pop':'Bubblegum Pop',
     'midnight-neon':'Midnight Neon',
-    'black-gold':'Black & Gold'
+    'black-gold':'Black & Gold',
+    'study-classic':'Immersion Classic'
   });
   let theme = 'cotton-candy';
   let launcherPositions = {};
@@ -317,7 +328,7 @@
   let analysis=null;
   let transcriptView='all';
   let furiganaMode='unknown';
-  let sentenceLoop=false;let sentenceAutoPause=false;let loopCueStart=null;let lastPlaybackCueStart=null;
+  let sentenceLoop=false;let sentenceAutoPause=false;let playMode='normal';let loopCueStart=null;let lastPlaybackCueStart=null;
   let wordStatuses = {};
   let capturedImage=null;
   let capturedAudio=null;
@@ -413,25 +424,46 @@
     try { const url = new URL(location.href); if (isYT) url.searchParams.set('t', Math.floor(sec) + 's'); return url.href; }
     catch { return ''; }
   }
+  const KM_PLAY_MODES=['normal','focus','audio-first','step'];
+  const KM_PLAY_LABELS={normal:'Free watch',focus:'New-word focus','audio-first':'Listen first',step:'Sentence steps'};
+  function setPlayMode(mode){
+    playMode=KM_PLAY_MODES.includes(mode)?mode:'normal';
+    root.dataset.kmPlayMode=playMode;
+    const desc=$('.km-play-mode-description'),label=$('.km-play-mode-label');
+    if(desc)desc.textContent=KM_PLAY_LABELS[playMode];
+    if(label)label.textContent=playMode==='normal'?'PLAY':playMode==='focus'?'FOCUS':playMode==='step'?'STEP':'LISTEN';
+    renderPlayModeVisual();
+  }
+  function renderPlayModeVisual(){
+    const player=video();
+    const activeEmbed=isGenericVideoSite && embeddedCurrent();
+    const playing=activeEmbed?!embeddedPlayer.paused:!!(player&&!player.paused);
+    root.dataset.kmPlaying=String(playing);
+    const cue=currentCue();
+    const index=cue?cues.findIndex(c=>c.start===cue.start):-1;
+    const line=index>=0?analysis?.lines?.[index]:null;
+    root.dataset.kmFocusHidden=String(playMode==='focus' && line?.kind==='comfortable');
+  }
   function displayEnabled() { return masterEnabled && siteEnabled && onWatchPage(); }
   function updateDisplay() {
-    const showLauncher = masterEnabled && onWatchPage();
+    const showLauncher = masterEnabled && siteEnabled && onWatchPage();
     launcher.hidden = !showLauncher;
     launcher.classList.toggle('is-disabled', !siteEnabled);
     $('.km-indicator').textContent = siteEnabled ? '•' : '×';
     $('.km-site-toggle').setAttribute('aria-pressed', String(siteEnabled));
-    $('.km-site-toggle span:first-child').firstChild.textContent = siteEnabled ? 'Enable Kotoba' : 'Kotoba disabled';
+    $('.km-site-toggle-label').textContent = siteEnabled ? 'Kotoba enabled' : 'Kotoba disabled';
     $('.km-site-toggle .km-switch').textContent = siteEnabled ? 'ON' : 'OFF';
     $('.km-auto-jp').setAttribute('aria-pressed', String(autoJapaneseSubtitles));
     $('.km-auto-jp .km-switch').textContent = autoJapaneseSubtitles ? 'ON' : 'OFF';
     $('.km-pause-hover').setAttribute('aria-pressed', String(pauseOnHover));
     $('.km-pause-hover .km-switch').textContent = pauseOnHover ? 'ON' : 'OFF';
     $('.km-show-rail').disabled = !siteEnabled;
-    $('.km-show-rail > span:first-child').textContent = railOpen ? 'Hide transcript sidebar' : 'Open transcript sidebar';
+    $('.km-show-rail .km-v22-menu-copy strong').textContent = railOpen ? 'Hide transcript' : 'Show transcript';
     sidebar.hidden = !(displayEnabled() && railOpen);
     $('.km-rail-cloud-frame').hidden = sidebar.hidden;
     $('.km-video-value').textContent=onVideoEnabled?'ON':'OFF';
     $('.km-coverage-value').textContent=coverageEnabled?'ON':'OFF';
+    $('.km-coverage-toggle').setAttribute('aria-pressed',String(coverageEnabled));
     $('.km-pitch-value').textContent=({always:'Always',hover:'Hover',off:'OFF'})[pitchMode] || 'Always';
     $('.km-translation-value').textContent=sentenceTranslation?'ON':'OFF';
     $('.km-language-label').textContent=({ja:'日本語',dual:'JP + EN',en:'English'})[subtitleLanguageMode];
@@ -447,7 +479,12 @@
 
     if (sidebar.hidden) document.documentElement.classList.remove('km-docked');
     else document.documentElement.classList.add('km-docked');
-    if (!showLauncher) menu.hidden = true;
+    if (!showLauncher) {
+      menu.hidden = true;
+      $('.km-floating-gloss').hidden = true;
+      $('.km-miner').hidden = true;
+      $('.km-card-creator').hidden = true;
+    }
     placeLauncher();
   }
   async function saveSite(enabled) {
@@ -673,6 +710,8 @@
     renderVideoSubtitle();updateDisplay();
   }
   $('.km-language-cycle').addEventListener('click',()=>setSubtitleLanguage(subtitleModes.cycle(subtitleLanguageMode)));
+  $('.km-play-mode-cycle').addEventListener('click',()=>chrome.storage.local.set({kotobaPlayMode:KM_PLAY_MODES[(KM_PLAY_MODES.indexOf(playMode)+1)%KM_PLAY_MODES.length]}));
+  $('.km-studio-page').addEventListener('click',()=>chrome.runtime.sendMessage({type:'OPEN_STUDIO'}).catch(()=>{}));
 
   $('.km-close').addEventListener('click', () => { railOpen = false; updateDisplay(); });
   document.addEventListener('pointerdown', e => { if (!menu.hidden && !menu.contains(e.target) && e.target !== launcher && !launcher.contains(e.target)) { menu.hidden=true; launcher.setAttribute('aria-expanded','false'); } }, true);
@@ -773,28 +812,28 @@
     const tooltip=$('.km-floating-gloss'); tooltip.replaceChildren();
     const header=addText(tooltip,'km-gloss-top','');
     const label=addText(header,'km-gloss-label','KOTOBA · WORD LOOKUP','span');
-    if(entry?.common)addText(header,'km-gloss-common','★ COMMON','span');
+    if(entry?.common)addText(header,'km-gloss-common','COMMON','span');
     const title=addText(tooltip,'km-gloss-title','');
     addText(title,'km-gloss-jp',word,'strong');
     const actions=addText(title,'km-gloss-title-actions','');
-    glossButton(actions,'↗','km-gloss-creator','Send to card creator',async()=>{
+    const creatorIcon=glossButton(actions,'','km-gloss-creator','Send to card creator',async()=>{
       tooltip.hidden=true;await selectWord(word,cue,lemma);if(candidates[candidateIndex])$('.km-open-card').click();
-    });
-    glossButton(actions,'➜','km-gloss-quick','Create Anki card now (Q)',()=>quickCreateCard({word,lemma,cue,entry}));
+    }); Icons?.mount(creatorIcon,'external');
+    const quickIcon=glossButton(actions,'','km-gloss-quick','Create Anki card now (Q)',()=>quickCreateCard({word,lemma,cue,entry}));Icons?.mount(quickIcon,'arrow-right');
     if(entry?.reading && entry.reading!==word)addText(tooltip,'km-gloss-reading',entry.reading);
     const accent=pitchCache.get(word);
     if(accent){
       const pitchBadge=addText(tooltip,'km-gloss-pitch','', 'span');
       pitchBadge.dataset.pitch=accent;
       const names={heiban:'Heiban · flat',atamadaka:'Atamadaka · first-mora drop',nakadaka:'Nakadaka · middle drop',odaka:'Odaka · end drop',variable:'Multiple pitch patterns'};
-      pitchBadge.textContent='♫ '+(names[accent]||'Pitch unavailable')+(pitchApprox.has(word)?' · base-form estimate':'');
+      pitchBadge.textContent=(names[accent]||'Pitch unavailable')+(pitchApprox.has(word)?' · base-form estimate':'');
       pitchBadge.title='Tokyo accent from Kanjium. Conjugated words and regional dialects may have different patterns.';
     }
     const definitions=entry?.meanings?.filter(Boolean)||[];
     const tabs=addText(tooltip,'km-gloss-tabs','');
-    const views=[['meaning','📖','Definitions and senses'],['kanji','字','Kanji meanings and readings'],['sound','♫','Japanese pronunciation'],['image','▣','Source scene image'],['examples','☷','Examples in transcript'],['context','✧','Meaning in context'],['links','↗','Other dictionaries']];
+    const views=[['meaning','book-open','Definitions and senses'],['kanji','word','Kanji meanings and readings'],['sound','volume','Japanese pronunciation'],['image','image','Source scene image'],['examples','list','Examples in transcript'],['context','sparkle','Meaning in context'],['links','external','Other dictionaries']];
     const body=addText(tooltip,'km-gloss-tab-body','');
-    function tabButton(item){const b=addText(tabs,'km-gloss-tab',item[1],'button');b.type='button';b.dataset.glossTab=item[0];b.title=item[2];b.setAttribute('aria-label',item[2]);b.setAttribute('aria-pressed','false');b.addEventListener('click',()=>{clearTimeout(glossTimer);glossPointerInside=true;showTab(item[0]);});return b;}
+    function tabButton(item){const b=addText(tabs,'km-gloss-tab','','button');Icons?.mount(b,item[1]);b.type='button';b.dataset.glossTab=item[0];b.title=item[2];b.setAttribute('aria-label',item[2]);b.setAttribute('aria-pressed','false');b.addEventListener('click',()=>{clearTimeout(glossTimer);glossPointerInside=true;showTab(item[0]);});return b;}
     views.forEach(tabButton);
     function showTab(name){
       glossActiveTab=name;
@@ -842,7 +881,7 @@
         }).catch(()=>{if(area.isConnected)area.textContent='Kanji data unavailable.';});
       } else if(name==='sound'){
         addText(body,'km-gloss-section','JAPANESE WORD AUDIO');
-        glossButton(body,'▶ Play selected voice','km-gloss-audio-play','Play with Japanese system voice',()=>speakJapanese(entry?.reading||word));
+        const voiceButton=glossButton(body,'Play pronunciation','km-gloss-audio-play','Play with Japanese system voice',()=>speakJapanese(entry?.reading||word));Icons?.mount(voiceButton,'volume');
         addText(body,'km-gloss-tab-hint','Change installed Windows voices or VOICEVOX speaker in Kotoba extension settings.');
       } else if(name==='image'){
         addText(body,'km-gloss-section','SCENE FRAME');
@@ -897,9 +936,9 @@
     showTab(glossActiveTab);
     const foot=addText(tooltip,'km-gloss-actions','');
     const status=vocabularyState({surface:word,lemma});
-    addText(foot,'km-gloss-current-status','● '+status.toUpperCase(),'span');
+    addText(foot,'km-gloss-current-status','● '+status.toUpperCase(),'span'); // Visually hidden in v2.2; keyboard status shortcuts still work.
     glossButton(foot,'✓ Known','km-gloss-known','Mark this word known',async()=>{selected=word;await setWordStatus('known');renderGloss(entry,word,lemma,cue);});
-    glossButton(foot,'↗ Dictionary','km-gloss-details','Open full dictionary',()=>{tooltip.hidden=true;selectWord(word,cue,lemma);});
+    const dictionaryLink=glossButton(foot,'Dictionary','km-gloss-details','Open full dictionary',()=>{tooltip.hidden=true;selectWord(word,cue,lemma);});Icons?.mount(dictionaryLink,'external');
   }
   function placeGloss(target) {
     const tooltip=$('.km-floating-gloss');if(tooltip.hidden)return;
@@ -1315,12 +1354,7 @@
       }
     }
   }
-  $('.km-follow').addEventListener('click', () => {
-    follow = !follow;
-    $('.km-follow').classList.toggle('is-on',follow);
-    $('.km-follow').setAttribute('aria-pressed',String(follow));
-    if (follow) { manualScrollUntil = 0; syncActive(true); }
-  });
+  // Follow is always enabled. Manual scrolling gets a short grace period.
   $('.km-list-wrap').addEventListener('wheel',()=>{manualScrollUntil=Date.now()+8000;},{passive:true});
   $('.km-filter').addEventListener('input',e=>{filter=e.target.value.trim().toLowerCase(); renderCues(); syncActive(true);});
 
@@ -1515,7 +1549,7 @@
     if(entry.meanings.length>1){
       addText(res,'km-definition-label','OTHER MEANINGS');
       const other=addText(res,'km-dictionary-secondary','');
-      entry.meanings.slice(1,10).forEach((meaning,i)=>addText(other,'km-extra-meaning',(i+2)+'. '+meaning));
+      entry.meanings.slice(1,5).forEach((meaning,i)=>addText(other,'km-extra-meaning',(i+2)+'. '+meaning));
     }
     if(entry.matchNote)addText(res,'km-match-note',entry.matchNote);
     addText(res,'km-meta',[entry.pos.join(', '),entry.jlpt,entry.common?'Common word':''].filter(Boolean).join(' · '));
@@ -2126,7 +2160,9 @@
       }else if(sentenceLoop && player && loopCueStart!==null && !captureBusy){
         const cue=cues.find(x=>x.start===loopCueStart);
         if(cue && player.currentTime*1000 >= cue.end-80 && !player.paused)player.currentTime=cue.start/1000;
-      }else if(sentenceAutoPause && player && !player.paused && current && lastPlaybackCueStart!==null && current.start!==lastPlaybackCueStart && !captureBusy){
+      }else if((sentenceAutoPause||playMode==='step') && isGenericVideoSite && embeddedCurrent() && !embeddedPlayer.paused && current && lastPlaybackCueStart!==null && current.start!==lastPlaybackCueStart && !captureBusy){
+        controlEmbedded('pause');
+      }else if((sentenceAutoPause||playMode==='step') && player && !player.paused && current && lastPlaybackCueStart!==null && current.start!==lastPlaybackCueStart && !captureBusy){
         player.pause();player.currentTime=Math.max(0,(current.start-50)/1000);
       }
       if(current)lastPlaybackCueStart=current.start;
@@ -2138,16 +2174,18 @@
       launcher.dataset.captionStatus=hasJapanese?'detected':'waiting';
     }
     if(displayEnabled()) renderVideoSubtitle();
+    renderPlayModeVisual();
     placeLauncher();
   }
-  chrome.storage.local.get({enabled:true,siteEnabledV3:{},onVideoEnabled:true,coverageEnabled:false,pitchMode:'always',sentenceTranslation:false,kotobaSubtitleMode:'ja',autoJapaneseSubtitles:true,pauseOnHover:true,kotobaLookupHoverModifier:'alt',autoGenerateWordAudio:true,kotobaHotkeys:{},kotobaDictionaryPositions:{},knownWords:[],wordStatuses:{},kotobaTheme:'cotton-candy',kotobaLauncherPositions:{},kotobaSubtitleStyle:{},kotobaHideOriginalCaptions:true,kotobaFuriganaMode:'unknown',kotobaSentenceAutoPause:false,ankiVocabularyKnown:[],ankiVocabularyLearning:[]}).then(settings=>{
+  chrome.storage.local.get({enabled:true,siteEnabledV3:{},onVideoEnabled:true,coverageEnabled:false,pitchMode:'always',sentenceTranslation:false,kotobaSubtitleMode:'ja',autoJapaneseSubtitles:true,pauseOnHover:true,kotobaLookupHoverModifier:'alt',autoGenerateWordAudio:true,kotobaHotkeys:{},kotobaDictionaryPositions:{},knownWords:[],wordStatuses:{},kotobaTheme:'cotton-candy',kotobaLauncherPositions:{},kotobaSubtitleStyle:{},kotobaHideOriginalCaptions:true,kotobaFuriganaMode:'unknown',kotobaSentenceAutoPause:false,ankiVocabularyKnown:[],ankiVocabularyLearning:[],kotobaPlayMode:'normal'}).then(settings=>{
     subtitleStyle=subtitleSettings.normalize(settings.kotobaSubtitleStyle);syncStudioInputs();
     autoGenerateWordAudio=settings.autoGenerateWordAudio!==false;
     hideOriginalCaptions=settings.kotobaHideOriginalCaptions!==false;
     hotkeys=KMKeys.validate(settings.kotobaHotkeys);redrawShortcuts();
     lookupHoverMode=LookupHover.normalize(settings.kotobaLookupHoverModifier);
     masterEnabled=settings.enabled!==false;
-    siteEnabled=settings.siteEnabledV3?.[site]!==false;
+    // Opt-in per site: an absent entry means OFF, including YouTube and Netflix.
+    siteEnabled=isDemo || settings.siteEnabledV3?.[site]===true;
     onVideoEnabled=settings.onVideoEnabled!==false;coverageEnabled=settings.coverageEnabled===true;
     pitchMode=['always','hover','off'].includes(settings.pitchMode)?settings.pitchMode:'always';
     sentenceTranslation=!!settings.sentenceTranslation;subtitleLanguageMode=subtitleModes.normalize(settings.kotobaSubtitleMode);autoJapaneseSubtitles=settings.autoJapaneseSubtitles!==false;pauseOnHover=settings.pauseOnHover!==false;
@@ -2156,7 +2194,7 @@
     ankiVocabularyKnown=new Set(settings.ankiVocabularyKnown||[]);
     ankiVocabularyLearning=new Set(settings.ankiVocabularyLearning||[]);refreshCombinedKnown();
     furiganaMode=['off','all','unknown','hover'].includes(settings.kotobaFuriganaMode)?settings.kotobaFuriganaMode:'unknown';
-    sentenceAutoPause=!!settings.kotobaSentenceAutoPause;
+    sentenceAutoPause=!!settings.kotobaSentenceAutoPause;setPlayMode(settings.kotobaPlayMode);
     applyTheme(settings.kotobaTheme);
     launcherPositions=settings.kotobaLauncherPositions && typeof settings.kotobaLauncherPositions==='object'?settings.kotobaLauncherPositions:{};
     customLauncherPosition=launcherPositions[site] || null;
@@ -2177,7 +2215,7 @@
     if(changes.kotobaHotkeys){hotkeys=KMKeys.validate(changes.kotobaHotkeys.newValue);redrawShortcuts();}
     if(changes.kotobaLookupHoverModifier){lookupHoverMode=LookupHover.normalize(changes.kotobaLookupHoverModifier.newValue);clearTimeout(hoverLookupKeyTimer);if(!glossPointerInside)gloss.hidden=true;}
     if(changes.enabled) {masterEnabled=changes.enabled.newValue!==false;updateDisplay();}
-    if(changes.siteEnabledV3) {siteEnabled=changes.siteEnabledV3.newValue?.[site]!==false;updateDisplay();}
+    if(changes.siteEnabledV3) {siteEnabled=isDemo || changes.siteEnabledV3.newValue?.[site]===true;updateDisplay();}
     if(changes.onVideoEnabled) {onVideoEnabled=changes.onVideoEnabled.newValue!==false;updateDisplay();}
     if(changes.kotobaHideOriginalCaptions){hideOriginalCaptions=changes.kotobaHideOriginalCaptions.newValue!==false;syncOriginalCaptions();}
     if(changes.coverageEnabled) {coverageEnabled=changes.coverageEnabled.newValue!==false;updateDisplay();}
@@ -2195,6 +2233,7 @@
     }
     if(changes.kotobaFuriganaMode){furiganaMode=changes.kotobaFuriganaMode.newValue||'unknown';renderCues();shownVideoText='';renderVideoSubtitle();}
     if(changes.kotobaSentenceAutoPause)sentenceAutoPause=!!changes.kotobaSentenceAutoPause.newValue;
+    if(changes.kotobaPlayMode)setPlayMode(changes.kotobaPlayMode.newValue);
     if (changes.kotobaTheme) applyTheme(changes.kotobaTheme.newValue);
     if(changes.kotobaLauncherPositions) {
       launcherPositions=changes.kotobaLauncherPositions.newValue || {};

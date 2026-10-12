@@ -1,0 +1,5 @@
+/* Video study modes. Never obscure the source player, only Kotoba's own subtitle layer. */
+#kotoba-root[data-km-play-mode="audio-first"][data-km-playing="true"] .km-video-subs,
+#kotoba-root[data-km-play-mode="focus"][data-km-focus-hidden="true"] .km-video-subs {opacity:0!important;pointer-events:none!important;}
+#kotoba-root[data-km-play-mode="audio-first"] .km-video-subs,
+#kotoba-root[data-km-play-mode="focus"] .km-video-subs {transition:opacity 90ms ease;}

@@ -1,5 +1,5 @@
 const $ = selector => document.querySelector(selector);
-const THEMES = ['cotton-candy', 'matcha-cream', 'sunset-pop', 'midnight-neon', 'black-gold'];
+const THEMES = ['cotton-candy', 'matcha-cream', 'sunset-pop', 'midnight-neon', 'black-gold', 'study-classic'];
 function applyTheme(value) {
   const theme = THEMES.includes(value) ? value : 'cotton-candy';
   document.body.dataset.theme = theme;
@@ -283,3 +283,8 @@ refreshPitchStatus();
 document.querySelector('#km-open-dashboard')?.addEventListener('click',()=>{
   chrome.tabs.create({url:chrome.runtime.getURL('dashboard.html')});
 });
+
+// Kotoba v2.0 desktop studio workspace.
+document.querySelector('#km-open-studio2')?.addEventListener('click',()=>chrome.tabs.create({url:chrome.runtime.getURL('studio.html')}));
+
+KMIcons?.hydrate(document);

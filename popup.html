@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Kotoba Miner</title>
+  <title>Kotoba Miner 2.2</title>
   <link rel="stylesheet" href="popup.css"/>
   <link rel="stylesheet" href="popup-reader.css"/>
-  <link rel="stylesheet" href="popup-themes.css"/>
+  <link rel="stylesheet" href="popup-themes.css"/><link rel="stylesheet" href="popup-v21.css"/>
   <link rel="stylesheet" href="popup-v06.css"/>
   <link rel="stylesheet" href="popup-v08.css"/>
   <link rel="stylesheet" href="design-v09.css"/>
@@ -16,17 +16,23 @@
   <link rel="stylesheet" href="design-v15.css"/><link rel="stylesheet" href="design-v16.css"/><link rel="stylesheet" href="design-v17.css"/>
   <link rel="stylesheet" href="design-v18.css"/><link rel="stylesheet" href="design-v19.css"/><link rel="stylesheet" href="popup-scroll-fix.css"/>
 <link rel="stylesheet" href="popup-dashboard.css"/>
-<link rel="stylesheet" href="popup-universal.css"/></head>
+<link rel="stylesheet" href="popup-universal.css"/><link rel="stylesheet" href="popup-studio-v2.css"/><link rel="stylesheet" href="popup-v22.css"/></head>
 <body>
   <header>
     <div class="logo">語</div>
-    <div><h1>Kotoba Miner</h1><p>Japanese immersion toolkit <span>v1.12.6</span></p></div>
+    <div><h1>Kotoba Miner</h1><p>Japanese immersion toolkit <span>v2.2</span></p></div>
   </header>
   <main>
-    <button id="km-open-dashboard" type="button" class="km-dashboard-cta"><span class="km-dashboard-mark">✦</span><span><strong>My Study Dashboard</strong><small>Streaks · cards mined · Anki reviews · daily goals</small></span><span class="km-dashboard-arrow">↗</span></button>
+    <section class="km-v22-site-panel" aria-label="Activation for the current website">
+      <div class="km-v22-site-icon" data-km-icon="video" aria-hidden="true"></div>
+      <div class="km-v22-site-detail"><strong id="km-v22-site-title">Checking current site…</strong><small id="km-v22-site-hint">Off on new sites by default</small></div>
+      <button id="km-v22-site-enable" class="km-v22-site-button" type="button" disabled>Enable</button>
+    </section>
+    <button id="km-open-studio2" class="km-studio-launch" type="button"><span class="km-v2-logo" data-km-icon="library"></span><span><strong>Open Kotoba Studio 2.2</strong><small>Word Browser · Reader · Listening modes · Backups</small></span><span aria-hidden="true">↗</span></button>
+    <button id="km-open-dashboard" type="button" class="km-dashboard-cta"><span class="km-dashboard-mark" data-km-icon="chart"></span><span><strong>My Study Dashboard</strong><small>Streaks · cards mined · Anki reviews · daily goals</small></span><span class="km-dashboard-arrow">↗</span></button>
     <div class="banner"><div class="dot"></div><div><strong>Learn from what you watch</strong><p>Tap words to mine them. Drag the little 語 button to move it anywhere.</p></div></div>
     <section class="km-universal-section" aria-label="Universal Video Reader settings">
-      <div class="section-title"><h2>🎬 Universal Subtitle Reader</h2><span class="section-kicker">Your video websites</span></div>
+      <div class="section-title"><h2>Universal Subtitle Reader</h2><span class="section-kicker">Your video websites</span></div>
       <p class="help">Enable Kotoba on the current video site. It looks for Japanese HTML5 captions and readable subtitle overlays without bypassing protected players.</p>
       <div class="km-universal-box"><div><strong id="km-universal-domain">Checking website…</strong><small id="km-universal-hint">Only the chosen site receives access</small></div><button id="km-universal-enable" type="button" disabled>Enable on this site</button></div>
       <p class="km-universal-status" id="km-universal-status" role="status" aria-live="polite">Open a video and choose a site.</p>
@@ -44,7 +50,7 @@
       <p class="help">No captions? Use the transcript's ⋯ Tools → Import SRT/VTT. Embedded or DRM-protected players may not expose subtitle text.</p>
     </section>
     <section class="km-reader-settings">
-      <div class="section-title"><h2>📖 Website Reader</h2><span class="section-kicker">Wikipedia + your sites</span></div>
+      <div class="section-title"><h2>Website Reader</h2><span class="section-kicker">Wikipedia + your sites</span></div>
       <p class="help">Hover Japanese words in article headings, subtitles, links and paragraphs. See the word's meaning and reading, or translate the full line.</p>
       <div class="km-reader-site-panel"><div><strong id="km-reader-site-name">Checking current tab…</strong><small id="km-reader-site-hint">Wikipedia and Wiktionary are supported automatically.</small></div><button type="button" id="km-reader-site-button" disabled>Enable</button></div>
       <div class="field enable-row"><label for="km-reader-auto-speak">Speak Japanese words when I hover <small>Optional: read after a short pause. Tap ▶ for manual pronunciation.</small></label><input id="km-reader-auto-speak" type="checkbox"/></div>
@@ -52,34 +58,38 @@
       <button id="km-reader-demo" class="km-reader-demo" type="button">Try Website Reader demo ↗</button>
       <p class="help" id="km-reader-notice" aria-live="polite">Other websites require your permission before Kotoba can read them.</p>
     </section>
-    <div class="field enable-row"><label for="enabled">Show Kotoba controls on YouTube</label><input id="enabled" type="checkbox" checked/></div>
+    <div class="field enable-row"><label for="enabled">Master switch for enabled video sites</label><input id="enabled" type="checkbox" checked/></div>
     <section class="appearance-section">
-      <div class="section-title"><h2>Appearance</h2><span class="section-kicker">5 themes</span></div>
-      <p class="help">Five styles with different shapes, spacing and surfaces—not just different colours.</p>
+      <div class="section-title"><h2>Appearance</h2><span class="section-kicker">6 themes</span></div>
+      <p class="help">Six styles, one consistent interface. Pick the atmosphere that works for your studying.</p>
       <div class="theme-grid" role="group" aria-label="Choose appearance theme">
         <button class="theme-tile" type="button" data-theme-choice="cotton-candy" aria-pressed="true">
-          <span class="tile-art" aria-hidden="true"><span class="tile-sky">☁</span><span class="tile-cloud">✿</span></span>
+          <span class="tile-art" aria-hidden="true"><span class="tile-sky" data-km-icon="cloud"></span><span class="tile-cloud" data-km-icon="sparkle"></span></span>
           <span class="tile-name">Cotton Candy</span><span class="tile-desc">Dreamy &amp; sweet</span><span class="tile-check" aria-hidden="true">✓</span>
         </button>
         <button class="theme-tile" type="button" data-theme-choice="matcha-cream" aria-pressed="false">
-          <span class="tile-art" aria-hidden="true"><span class="tile-sky">❀</span><span class="tile-cloud">✿</span></span>
+          <span class="tile-art" aria-hidden="true"><span class="tile-sky" data-km-icon="flower"></span><span class="tile-cloud" data-km-icon="flower"></span></span>
           <span class="tile-name">Matcha Garden</span><span class="tile-desc">Tea-house &amp; botanical</span><span class="tile-check" aria-hidden="true">✓</span>
         </button>
         <button class="theme-tile" type="button" data-theme-choice="sunset-pop" aria-pressed="false">
-          <span class="tile-art" aria-hidden="true"><span class="tile-sky">♥</span><span class="tile-cloud">✦</span></span>
+          <span class="tile-art" aria-hidden="true"><span class="tile-sky" data-km-icon="heart"></span><span class="tile-cloud" data-km-icon="sparkle"></span></span>
           <span class="tile-name">Bubblegum Pop</span><span class="tile-desc">Bold &amp; bubbly</span><span class="tile-check" aria-hidden="true">✓</span>
         </button>
         <button class="theme-tile" type="button" data-theme-choice="midnight-neon" aria-pressed="false">
-          <span class="tile-art" aria-hidden="true"><span class="tile-sky">☾</span><span class="tile-cloud">✧</span></span>
+          <span class="tile-art" aria-hidden="true"><span class="tile-sky" data-km-icon="moon"></span><span class="tile-cloud" data-km-icon="sparkle"></span></span>
           <span class="tile-name">Midnight Neon</span><span class="tile-desc">Dream after dark</span><span class="tile-check" aria-hidden="true">✓</span>
         </button>
         <button class="theme-tile" type="button" data-theme-choice="black-gold" aria-pressed="false">
-          <span class="tile-art" aria-hidden="true"><span class="tile-sky">◆</span><span class="tile-cloud">✦</span></span>
+          <span class="tile-art" aria-hidden="true"><span class="tile-sky" data-km-icon="diamond"></span><span class="tile-cloud" data-km-icon="sparkle"></span></span>
           <span class="tile-name">Black &amp; Gold</span><span class="tile-desc">Luxe &amp; timeless</span><span class="tile-check" aria-hidden="true">✓</span>
+        </button>
+        <button class="theme-tile" type="button" data-theme-choice="study-classic" aria-pressed="false">
+          <span class="tile-art" aria-hidden="true"><span class="tile-sky" data-km-icon="book-open"></span><span class="tile-cloud" data-km-icon="layers"></span></span>
+          <span class="tile-name">Immersion Classic</span><span class="tile-desc">Calm, focused, modern</span><span class="tile-check" aria-hidden="true">✓</span>
         </button>
       </div>
     </section>
-    <section class="km-popup-studio-section"><div class="section-title"><h2>✦ Subtitle Studio</h2><span class="section-kicker">Live controls</span></div><details class="km-popup-studio"><summary>Customize fonts, outlines & backgrounds</summary><div class="km-popup-studio-mount"></div></details></section>
+    <section class="km-popup-studio-section"><div class="section-title"><h2>Subtitle Studio</h2><span class="section-kicker">Live controls</span></div><details class="km-popup-studio"><summary>Customize fonts, outlines & backgrounds</summary><div class="km-popup-studio-mount"></div></details></section>
     <section class="immersion-settings">
       <div class="section-title"><h2>Immersion</h2><span class="section-kicker">Automatic &amp; distraction-free</span></div>
       <div class="field enable-row"><label for="auto-ja">Automatically select Japanese subtitles <small>When the video offers a JA track</small></label><input id="auto-ja" type="checkbox" checked/></div>
@@ -119,7 +129,7 @@
       </details>
     </section>
     <section class="km-ai-settings">
-      <div class="section-title"><h2>✦ Local AI tutor</h2><span class="section-kicker">Optional · on demand</span></div>
+      <div class="section-title"><h2>Local AI tutor</h2><span class="section-kicker">Optional · on demand</span></div>
       <p class="help">Explain a Japanese sentence or summarise the subtitles using Ollama running on your computer. No transcript is sent anywhere until you press an AI button.</p>
       <div class="field"><label for="km-ai-model">Ollama model</label><select id="km-ai-model"><option value="">Select a local model</option></select></div>
       <button id="km-check-ai" type="button">Find installed models</button>
@@ -168,8 +178,8 @@
   <script src="shortcuts.js"></script>
   <script src="popup-studio.js"></script>
   <script src="lookup-hover.js"></script>
-  <script src="popup.js"></script>
+  <script src="ui-icons.js"></script><script src="popup.js"></script>
   <script src="popup-reader.js"></script>
   <script src="popup-universal.js"></script>
-</body>
+<script src="popup-site-v22.js"></script></body>
 </html>

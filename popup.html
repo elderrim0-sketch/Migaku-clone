@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Kotoba Miner</title>
+  <link rel="stylesheet" href="popup.css"/>
+  <link rel="stylesheet" href="popup-reader.css"/>
+  <link rel="stylesheet" href="popup-themes.css"/>
+  <link rel="stylesheet" href="popup-v06.css"/>
+  <link rel="stylesheet" href="popup-v08.css"/>
+  <link rel="stylesheet" href="design-v09.css"/>
+<link rel="stylesheet" href="popup-studio.css" />
+  <link rel="stylesheet" href="design-v13.css"/>
+  <link rel="stylesheet" href="design-v14.css"/>
+  <link rel="stylesheet" href="design-v15.css"/><link rel="stylesheet" href="design-v16.css"/><link rel="stylesheet" href="design-v17.css"/>
+  <link rel="stylesheet" href="design-v18.css"/><link rel="stylesheet" href="design-v19.css"/><link rel="stylesheet" href="popup-scroll-fix.css"/>
+<link rel="stylesheet" href="popup-dashboard.css"/>
+<link rel="stylesheet" href="popup-universal.css"/></head>
+<body>
+  <header>
+    <div class="logo">語</div>
+    <div><h1>Kotoba Miner</h1><p>Japanese immersion toolkit <span>v1.12.6</span></p></div>
+  </header>
+  <main>
+    <button id="km-open-dashboard" type="button" class="km-dashboard-cta"><span class="km-dashboard-mark">✦</span><span><strong>My Study Dashboard</strong><small>Streaks · cards mined · Anki reviews · daily goals</small></span><span class="km-dashboard-arrow">↗</span></button>
+    <div class="banner"><div class="dot"></div><div><strong>Learn from what you watch</strong><p>Tap words to mine them. Drag the little 語 button to move it anywhere.</p></div></div>
+    <section class="km-universal-section" aria-label="Universal Video Reader settings">
+      <div class="section-title"><h2>🎬 Universal Subtitle Reader</h2><span class="section-kicker">Your video websites</span></div>
+      <p class="help">Enable Kotoba on the current video site. It looks for Japanese HTML5 captions and readable subtitle overlays without bypassing protected players.</p>
+      <div class="km-universal-box"><div><strong id="km-universal-domain">Checking website…</strong><small id="km-universal-hint">Only the chosen site receives access</small></div><button id="km-universal-enable" type="button" disabled>Enable on this site</button></div>
+      <p class="km-universal-status" id="km-universal-status" role="status" aria-live="polite">Open a video and choose a site.</p>
+      <div class="km-embedded-access" id="km-embedded-access" hidden>
+        <label for="km-universal-frame-list">Embedded video player domain</label>
+        <select id="km-universal-frame-list" aria-label="Choose embedded video player"></select>
+        <button id="km-universal-frame-enable" type="button">Enable Japanese captions in this player</button>
+        <small id="km-universal-frame-hint">The video is inside a separate website. Approve that player's domain to read its accessible subtitle text.</small>
+      </div>
+      <div class="km-universal-original">
+        <label for="km-hide-original-captions"><strong>Hide the player’s original captions</strong><small>Keep Japanese CC switched ON in the player. Hide only the extra caption text while Kotoba reads it.</small></label>
+        <input type="checkbox" id="km-hide-original-captions" checked />
+      </div>
+      <div class="km-universal-actions"><button class="km-universal-refresh" id="km-universal-scan" type="button" disabled>↻ Check Japanese subtitles</button><button class="km-universal-refresh" id="km-universal-demo" type="button">Try player demo ↗</button></div>
+      <p class="help">No captions? Use the transcript's ⋯ Tools → Import SRT/VTT. Embedded or DRM-protected players may not expose subtitle text.</p>
+    </section>
+    <section class="km-reader-settings">
+      <div class="section-title"><h2>📖 Website Reader</h2><span class="section-kicker">Wikipedia + your sites</span></div>
+      <p class="help">Hover Japanese words in article headings, subtitles, links and paragraphs. See the word's meaning and reading, or translate the full line.</p>
+      <div class="km-reader-site-panel"><div><strong id="km-reader-site-name">Checking current tab…</strong><small id="km-reader-site-hint">Wikipedia and Wiktionary are supported automatically.</small></div><button type="button" id="km-reader-site-button" disabled>Enable</button></div>
+      <div class="field enable-row"><label for="km-reader-auto-speak">Speak Japanese words when I hover <small>Optional: read after a short pause. Tap ▶ for manual pronunciation.</small></label><input id="km-reader-auto-speak" type="checkbox"/></div>
+      <div class="field enable-row"><label for="km-reader-auto-translate">Translate Japanese titles on hover <small>Optional: sends hovered text to MyMemory</small></label><input id="km-reader-auto-translate" type="checkbox"/></div>
+      <button id="km-reader-demo" class="km-reader-demo" type="button">Try Website Reader demo ↗</button>
+      <p class="help" id="km-reader-notice" aria-live="polite">Other websites require your permission before Kotoba can read them.</p>
+    </section>
+    <div class="field enable-row"><label for="enabled">Show Kotoba controls on YouTube</label><input id="enabled" type="checkbox" checked/></div>
+    <section class="appearance-section">
+      <div class="section-title"><h2>Appearance</h2><span class="section-kicker">5 themes</span></div>
+      <p class="help">Five styles with different shapes, spacing and surfaces—not just different colours.</p>
+      <div class="theme-grid" role="group" aria-label="Choose appearance theme">
+        <button class="theme-tile" type="button" data-theme-choice="cotton-candy" aria-pressed="true">
+          <span class="tile-art" aria-hidden="true"><span class="tile-sky">☁</span><span class="tile-cloud">✿</span></span>
+          <span class="tile-name">Cotton Candy</span><span class="tile-desc">Dreamy &amp; sweet</span><span class="tile-check" aria-hidden="true">✓</span>
+        </button>
+        <button class="theme-tile" type="button" data-theme-choice="matcha-cream" aria-pressed="false">
+          <span class="tile-art" aria-hidden="true"><span class="tile-sky">❀</span><span class="tile-cloud">✿</span></span>
+          <span class="tile-name">Matcha Garden</span><span class="tile-desc">Tea-house &amp; botanical</span><span class="tile-check" aria-hidden="true">✓</span>
+        </button>
+        <button class="theme-tile" type="button" data-theme-choice="sunset-pop" aria-pressed="false">
+          <span class="tile-art" aria-hidden="true"><span class="tile-sky">♥</span><span class="tile-cloud">✦</span></span>
+          <span class="tile-name">Bubblegum Pop</span><span class="tile-desc">Bold &amp; bubbly</span><span class="tile-check" aria-hidden="true">✓</span>
+        </button>
+        <button class="theme-tile" type="button" data-theme-choice="midnight-neon" aria-pressed="false">
+          <span class="tile-art" aria-hidden="true"><span class="tile-sky">☾</span><span class="tile-cloud">✧</span></span>
+          <span class="tile-name">Midnight Neon</span><span class="tile-desc">Dream after dark</span><span class="tile-check" aria-hidden="true">✓</span>
+        </button>
+        <button class="theme-tile" type="button" data-theme-choice="black-gold" aria-pressed="false">
+          <span class="tile-art" aria-hidden="true"><span class="tile-sky">◆</span><span class="tile-cloud">✦</span></span>
+          <span class="tile-name">Black &amp; Gold</span><span class="tile-desc">Luxe &amp; timeless</span><span class="tile-check" aria-hidden="true">✓</span>
+        </button>
+      </div>
+    </section>
+    <section class="km-popup-studio-section"><div class="section-title"><h2>✦ Subtitle Studio</h2><span class="section-kicker">Live controls</span></div><details class="km-popup-studio"><summary>Customize fonts, outlines & backgrounds</summary><div class="km-popup-studio-mount"></div></details></section>
+    <section class="immersion-settings">
+      <div class="section-title"><h2>Immersion</h2><span class="section-kicker">Automatic &amp; distraction-free</span></div>
+      <div class="field enable-row"><label for="auto-ja">Automatically select Japanese subtitles <small>When the video offers a JA track</small></label><input id="auto-ja" type="checkbox" checked/></div>
+      <div class="field"><label for="km-dictionary-hover-modifier">Open word dictionary with</label>
+        <select id="km-dictionary-hover-modifier" aria-label="Modifier required to show dictionary when hovering a Japanese word">
+          <option value="alt">Alt + hover (recommended)</option>
+          <option value="ctrl">Ctrl + hover</option>
+          <option value="shift">Shift + hover</option>
+          <option value="alt+shift">Alt + Shift + hover</option>
+          <option value="ctrl+shift">Ctrl + Shift + hover</option>
+          <option value="ctrl+alt">Ctrl + Alt + hover</option>
+          <option value="none">Hover only (old behaviour)</option>
+        </select>
+        <p class="help">Applies to video subtitles, transcript words and Website Reader. Hold the keys, then hover—or press them while your cursor is already on a word. Normal hover still targets vocabulary status shortcuts. Click a word to open the full dictionary.</p>
+      </div>
+      <div class="field enable-row"><label for="pause-hover">Pause playback on word hover</label><input id="pause-hover" type="checkbox" checked/></div>
+      <div class="field"><label for="km-subtitle-language">Subtitle language cycle (Alt + T)</label><select id="km-subtitle-language"><option value="ja">Japanese only</option><option value="dual">Japanese + English</option><option value="en">English only</option></select><p class="help">Alt + T cycles these three modes during playback. English uses accessible English caption tracks when available. On sites without English captions, turn on optional sentence translation for an English fallback (sends Japanese text to MyMemory). Otherwise English-only will show no text.</p></div>
+      <div class="field enable-row"><label for="video-subs">On-video interactive subtitles</label><input id="video-subs" type="checkbox" checked/></div>
+      <div class="field enable-row"><label for="coverage">Vocabulary comprehension bar (hidden by default)</label><input id="coverage" type="checkbox"/></div>
+      <div class="field"><label for="km-furigana-mode">Furigana over kanji</label><select id="km-furigana-mode"><option value="unknown">Unknown words only</option><option value="all">All annotated words</option><option value="hover">Only on word hover</option><option value="off">Off</option></select><p class="help">Shows available readings above words rather than in brackets. Readings depend on caption annotations.</p></div>
+      <div class="field enable-row"><label for="km-sentence-autopause">Auto-pause after each subtitle sentence</label><input type="checkbox" id="km-sentence-autopause"/></div>
+      <p class="help">Study controls on the floating 語 button also support replay and sentence looping.</p>
+      <div class="field enable-row"><label for="translation">Allow sentence translation (hover or English fallback)</label><input id="translation" type="checkbox"/></div>
+      <div class="field"><label for="pitch-mode">Pitch accent display</label><select id="pitch-mode"><option value="always">Always</option><option value="hover">On hover only</option><option value="off">Off</option></select></div>
+      <div class="km-pitch-manager">
+        <div class="km-pitch-manager-title"><strong>♫ Pitch dictionary</strong><span class="km-pitch-dot" aria-hidden="true"></span></div>
+        <div id="km-pitch-manager-status" class="help" role="status" aria-live="polite">Checking accent data…</div>
+        <button id="km-install-pitch" type="button">↓ Install full Kanjium dictionary</button>
+        <p class="help">Pitch patterns are language data, not colour guesses. If automatic download fails, use the transcript tools to import <code>accents.txt</code> from <a href="https://github.com/mifunetoshiro/kanjium" target="_blank" rel="noopener">Kanjium</a> (Uros O., CC BY-SA 4.0).</p>
+      </div>
+      <p class="help">YouTube auto-selection is best-effort and can't add captions to videos without Japanese subtitles. Translation, if enabled, sends hovered sentences to MyMemory.</p>
+      <details class="shortcut-list" open><summary>⌨ Custom keyboard shortcuts</summary>
+        <p class="help">Choose any shortcut (including a single letter like Q). Click a binding, then press your desired keys. Shortcuts won't activate while typing. Browser and YouTube shortcuts may take priority.</p>
+        <div id="km-hotkeys" class="km-hotkey-editor"></div>
+        <button id="km-reset-hotkeys" type="button" class="km-reset-hotkeys">↺ Restore default shortcuts</button>
+        <div id="km-hotkeys-notice" class="help" aria-live="polite"></div>
+      </details>
+    </section>
+    <section class="km-ai-settings">
+      <div class="section-title"><h2>✦ Local AI tutor</h2><span class="section-kicker">Optional · on demand</span></div>
+      <p class="help">Explain a Japanese sentence or summarise the subtitles using Ollama running on your computer. No transcript is sent anywhere until you press an AI button.</p>
+      <div class="field"><label for="km-ai-model">Ollama model</label><select id="km-ai-model"><option value="">Select a local model</option></select></div>
+      <button id="km-check-ai" type="button">Find installed models</button>
+      <p class="help" id="km-ai-status" aria-live="polite">Install Ollama and pull a model such as gemma3:4b to enable optional AI.</p>
+    </section>
+    <section>
+      <div class="section-title"><h2>Anki connection</h2><button id="test" type="button">↻ Refresh decks</button></div>
+      <div id="connection" class="status" aria-live="polite">Opening Anki connection…</div>
+      <label for="deck">Choose the deck for your cards</label>
+      <select id="deck" disabled><option value="">Checking Anki decks…</option></select>
+      <details class="shortcut-list"><summary>🔊 Generated word audio (optional)</summary>
+        <p class="help">To attach a generated Japanese WAV file to Anki, run the free VOICEVOX desktop app or local engine on 127.0.0.1:50021. Kotoba now tests your installed Japanese system voice first. If no Japanese voice is available, install a Japanese text-to-speech voice in your OS or run VOICEVOX for playable WAV audio.</p>
+        <div class="field enable-row"><label for="km-auto-tts">Generate word audio automatically when a card opens (VOICEVOX)</label><input id="km-auto-tts" type="checkbox" checked></div>
+        <button id="km-check-tts" type="button">Find Japanese voices</button>
+        <div class="field"><label for="km-system-voice">Windows / browser voice (spoken playback)</label><select id="km-system-voice"><option value="">Automatic Japanese voice</option></select></div>
+        <div class="field"><label for="km-voicevox-speaker">VOICEVOX speaker (attachable WAV)</label><select id="km-voicevox-speaker"><option value="">First available speaker</option></select></div><button id="km-test-native-tts" type="button">▶ Test Japanese pronunciation</button><div id="km-tts-status" class="help" aria-live="polite"></div>
+      </details>
+      <p class="help">Only your real Anki decks appear here. The same choice also appears when making each card.</p>
+      <div class="new-deck-row">
+        <input id="new-deck" type="text" maxlength="100" placeholder="New deck name (optional)" aria-label="New Anki deck name"/>
+        <button id="create-deck" type="button">Create</button>
+      </div>
+      <p class="help">Create a deck here if you don't see the one you want. Card note type: <b>Basic</b>.</p>
+      <section class="km-anki-vocabulary">
+        <div class="section-title"><h2>✦ Anki → Kotoba vocabulary</h2><span class="section-kicker">i+1 intelligence</span></div>
+        <p class="help">Learn in Anki, then see your knowledge reflected in Kotoba. Syncs Japanese vocabulary cards from your Anki collection, including cards not reviewed yet.</p>
+        <div class="field enable-row"><label for="km-anki-sync-enabled">Automatically update my Japanese vocabulary every 15 minutes <small>Works while Anki Desktop and Kotoba's extension are running</small></label><input id="km-anki-sync-enabled" type="checkbox"/></div>
+        <label for="km-anki-sync-decks">Decks to include</label>
+        <select id="km-anki-sync-decks" multiple size="5" aria-label="Anki decks to analyse"><option value="">Connect Anki to load decks</option></select>
+        <p class="help">Leave everything unselected to scan Japanese vocabulary across your Anki collection. Ctrl-click to select several decks. Only recognised Japanese word fields count.</p>
+        <button id="km-sync-collection" type="button">↻ Sync my Anki vocabulary now</button>
+        <div id="km-anki-sync-status" class="status small" role="status" aria-live="polite">Not synced yet</div>
+        <p class="help">21+ day review interval = known; all other recognised Anki words (including new cards) = tracked. Unreviewed cards do not count as known. Up to 6,000 cards are checked per sync. This is an estimate, not proof of comprehension.</p>
+      </section>
+      <details>
+        <summary>Advanced: AnkiConnect API key</summary>
+        <input id="anki-key" type="password" placeholder="Optional, if enabled in Anki" autocomplete="off"/>
+        <p class="help">Stored in this browser extension only. Leave blank for default AnkiConnect setups.</p>
+      </details>
+    </section>
+    <button class="demo" id="demo" type="button">Open interactive demo <span>↗</span></button>
+    <div id="saved" class="status small" aria-live="polite"></div>
+  </main>
+  <footer><span>No account · Local Anki integration</span><a href="https://ankiweb.net/shared/info/2055492159" target="_blank" rel="noopener noreferrer">AnkiConnect docs ↗</a></footer>
+  <script src="subtitle-style.js"></script>
+  <script src="shortcuts.js"></script>
+  <script src="popup-studio.js"></script>
+  <script src="lookup-hover.js"></script>
+  <script src="popup.js"></script>
+  <script src="popup-reader.js"></script>
+  <script src="popup-universal.js"></script>
+</body>
+</html>

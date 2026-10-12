@@ -1,0 +1,73 @@
+/* Universal video pages: reliable close-button centres regardless of host styles. */
+#kotoba-root .km-icon-btn.km-close,
+#kotoba-root .km-study-menu .km-menu-dismiss {
+  box-sizing:border-box!important;
+  display:grid!important;place-items:center!important;
+  flex:0 0 32px!important;width:32px!important;height:32px!important;min-width:32px!important;min-height:32px!important;
+  padding:0!important;margin:0!important;
+  text-align:center!important;line-height:1!important;
+  font-family:Arial,"Segoe UI",sans-serif!important;font-size:19px!important;
+  position:relative!important;top:auto!important;left:auto!important;right:auto!important;
+  translate:none!important;transform:none!important;
+}
+#kotoba-root .km-head .km-close {margin-left:auto!important;z-index:4!important;}
+#kotoba-root .km-study-menu .km-menu-heading>div:nth-child(2){min-width:0;flex:1;}
+#kotoba-root .km-study-menu .km-menu-heading {display:flex!important;flex-direction:row!important;align-items:center!important;}
+#kotoba-root .km-quickmenu {max-width:calc(100vw - 16px)!important;overscroll-behavior:contain;}
+
+/* v1.12.4: native player captions remain in the DOM for live capture. */
+/* Kotoba: keeps caption nodes measurable and readable by the video adapter.
+   Only when enabled by a top-level page with explicit frame permission. */
+html.km-hide-original-captions .vjs-text-track-display,
+html.km-hide-original-captions .jw-text-track-display,
+html.km-hide-original-captions .plyr__captions,
+html.km-hide-original-captions .shaka-text-container,
+html.km-hide-original-captions .clappr-captions,
+html.km-hide-original-captions .mejs__captions-layer,
+html.km-hide-original-captions [data-testid="subtitle"],
+html.km-hide-original-captions [data-testid="captions"],
+html.km-hide-original-captions video::cue,
+html.km-hide-original-captions .vjs-text-track-display *,
+html.km-hide-original-captions .jw-text-track-display *,
+html.km-hide-original-captions .plyr__captions *,
+html.km-hide-original-captions .shaka-text-container *,
+html.km-hide-original-captions .clappr-captions *,
+html.km-hide-original-captions .mejs__captions-layer *,
+html.km-hide-original-captions [data-testid="subtitle"] *,
+html.km-hide-original-captions [data-testid="captions"] * {
+  color:transparent!important;-webkit-text-fill-color:transparent!important;
+  text-shadow:none!important;background:transparent!important;
+  background-color:transparent!important;box-shadow:none!important;
+}
+/* Caption classes from common custom HTML5 players: avoid controls and page prose. */
+html.km-hide-original-captions :is(.jwplayer,.video-js,.plyr,.shaka-video-container,.clappr-player,.mejs__container,.html5-video-player,.player) :is(.subtitle,.subtitles,.caption-text,.caption-line,.caption-segment,.caption-container,.caption-display,.subtitle-container,.subtitle-text),
+html.km-hide-original-captions :is(.jwplayer,.video-js,.plyr,.shaka-video-container,.clappr-player,.mejs__container,.html5-video-player,.player) :is(.subtitle,.subtitles,.caption-text,.caption-line,.caption-segment,.caption-container,.caption-display,.subtitle-container,.subtitle-text) * {
+  color:transparent!important;-webkit-text-fill-color:transparent!important;
+  text-shadow:none!important;background:transparent!important;
+  background-color:transparent!important;box-shadow:none!important;
+}
+
+/* v1.12.4: theme/site independent close controls and safe dictionary box. */
+#kotoba-root .km-miner-head .km-miner-close,
+#kotoba-root .km-miner-head .km-icon-btn,
+#kotoba-root .km-gloss-title-actions .km-gloss-btn{
+  box-sizing:border-box!important;display:grid!important;place-items:center!important;
+  line-height:1!important;text-indent:0!important;letter-spacing:0!important;
+  translate:none!important;transform:none!important;float:none!important;
+}
+#kotoba-root .km-miner-head .km-miner-close{
+  flex:0 0 34px!important;width:34px!important;height:34px!important;min-width:34px!important;
+  padding:0!important;margin:0 0 0 auto!important;position:static!important;
+  font:20px/1 Arial,sans-serif!important;
+}
+#kotoba-root .km-miner{max-height:calc(100dvh - 16px)!important;overscroll-behavior:contain}
+#kotoba-root .km-miner-scroll{min-height:0!important;overflow-y:auto!important}
+#kotoba-root .km-floating-gloss{box-sizing:border-box!important;max-height:calc(100dvh - 16px)!important;overscroll-behavior:contain}
+
+/* Exact native caption nodes discovered by the universal adapter. */
+html.km-hide-original-captions .km-native-cue-node,
+html.km-hide-original-captions .km-native-cue-node *{
+  color:transparent!important;-webkit-text-fill-color:transparent!important;
+  text-shadow:none!important;background:transparent!important;
+  background-color:transparent!important;box-shadow:none!important;
+}

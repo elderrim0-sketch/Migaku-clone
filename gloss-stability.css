@@ -1,0 +1,19 @@
+/* v1.9.2 — prevent the Kanji/other hover tabs from resizing the floating
+   dictionary under the cursor and accidentally triggering mouseleave. */
+#kotoba-root .km-floating-gloss .km-gloss-tab-body {
+  box-sizing:border-box;
+  height:clamp(126px,25vh,212px)!important;
+  min-height:0!important;
+  max-height:none!important;
+  overflow-y:auto!important;
+  overscroll-behavior:contain;
+}
+#kotoba-root .km-floating-gloss .km-gloss-kanji-grid {min-height:44px;}
+#kotoba-root .km-floating-gloss .km-gloss-tabs {
+  flex-shrink:0;
+}
+@media (max-height:550px){
+  #kotoba-root .km-floating-gloss .km-gloss-tab-body {
+    height:clamp(85px,20vh,120px)!important;
+  }
+}

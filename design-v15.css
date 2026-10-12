@@ -1,0 +1,240 @@
+/* Kotoba 1.5 — uncluttered immersion, plain comprehension, Bubblegum ribbon frame,
+   and Matcha Garden. Theme decorations must never cover subtitle text. */
+
+/* PLAIN, COMPACT COMPREHENSION (all themes): never draw clouds on this widget. */
+#kotoba-root .km-coverage,
+#kotoba-root[data-theme='cotton-candy'] .km-coverage,
+#kotoba-root[data-theme='sunset-pop'] .km-coverage,
+#kotoba-root[data-theme='midnight-neon'] .km-coverage {
+  box-sizing:border-box!important;
+  min-height:0!important;
+  max-width:min(358px,calc(100vw - 26px))!important;
+  border-radius:15px!important;
+  padding:10px 13px 9px!important;
+  border:1px solid var(--km-border)!important;
+  background:var(--km-surface)!important;
+  box-shadow:0 8px 25px var(--km-shadow)!important;
+  isolation:auto!important;
+  transform:none!important;
+  transition:box-shadow .15s ease!important;
+}
+#kotoba-root .km-coverage::before,
+#kotoba-root .km-coverage::after,
+#kotoba-root[data-theme='cotton-candy'] .km-coverage::before,
+#kotoba-root[data-theme='cotton-candy'] .km-coverage::after,
+#kotoba-root[data-theme='sunset-pop'] .km-coverage::before,
+#kotoba-root[data-theme='sunset-pop'] .km-coverage::after,
+#kotoba-root[data-theme='midnight-neon'] .km-coverage::before,
+#kotoba-root[data-theme='midnight-neon'] .km-coverage::after { display:none!important;content:none!important; }
+#kotoba-root .km-coverage .km-cloud-scene,
+#kotoba-root[data-theme='cotton-candy'] .km-cloud-scene{display:none!important}
+#kotoba-root .km-coverage-head,#kotoba-root .km-coverage-meter{
+  transform:none!important;position:relative!important;z-index:1!important;
+}
+#kotoba-root .km-coverage-head {font-size:11px!important;gap:8px!important;line-height:1.4;}
+#kotoba-root .km-coverage-head .km-unique {font-size:15px!important}
+#kotoba-root .km-coverage-head .km-level {padding:2px 6px;font-size:9px!important}
+#kotoba-root .km-coverage-label {font-size:10px!important;color:var(--km-muted)}
+#kotoba-root .km-coverage-percent {font-size:15px!important}
+#kotoba-root .km-coverage-meter,
+#kotoba-root[data-theme='cotton-candy'] .km-coverage-meter{
+  height:7px!important;margin:7px 0 0!important;padding:1px!important;
+  background:var(--km-accent-pale)!important;border:1px solid var(--km-border)!important;
+  border-radius:99px!important;
+}
+#kotoba-root .km-coverage-fill,
+#kotoba-root[data-theme='cotton-candy'] .km-coverage-fill{background:var(--km-bar)!important;box-shadow:none!important}
+#kotoba-root .km-coverage-sub,#kotoba-root .km-coverage-description{display:none!important}
+
+/* ALWAYS SHOW TRANSCRIPT, NOT ITS SETTINGS. Optional tools become an overlay. */
+#kotoba-root .km-head{height:62px!important;min-height:62px!important;padding:9px 15px!important}
+#kotoba-root .km-rail-head{position:relative!important;z-index:20!important;padding:12px 14px 12px!important}
+#kotoba-root .km-rail-title{margin-bottom:4px!important}
+#kotoba-root .km-rail-title strong{font-size:18px!important}
+#kotoba-root .km-status{
+  min-height:0!important;max-height:28px;overflow:hidden;white-space:nowrap;
+  text-overflow:ellipsis;margin:2px 0 10px!important;
+  font-size:10px!important;line-height:1.4!important;
+}
+#kotoba-root .km-filter-row{align-items:stretch!important;gap:7px!important}
+#kotoba-root .km-filter{padding:10px 12px!important;min-height:38px!important}
+#kotoba-root .km-follow{padding:7px 10px!important;font-size:11px!important}
+#kotoba-root .km-tools-toggle{flex:0 0 37px!important;width:37px;min-width:37px;font-size:17px!important;padding:7px!important}
+#kotoba-root .km-tools-toggle.is-on{border-color:var(--km-accent)!important;background:var(--km-accent-pale)!important;color:var(--km-accent-deep)!important}
+#kotoba-root .km-tools:not([hidden]){
+  display:block!important;position:absolute!important;top:calc(100% - 1px)!important;
+  left:10px!important;right:10px!important;z-index:31!important;
+  max-height:min(62vh,510px)!important;overflow:auto!important;
+  padding:12px!important;border:1px solid var(--km-border)!important;
+  border-radius:0 0 21px 21px!important;
+  background:var(--km-surface)!important;color:var(--km-ink)!important;
+  box-shadow:0 18px 36px var(--km-shadow)!important;
+}
+#kotoba-root .km-tools-heading{display:flex;align-items:center;justify-content:space-between;margin:0 0 6px;font-size:12px;color:var(--km-ink)}
+#kotoba-root .km-tools-close{width:28px;height:28px;display:grid;place-items:center;border-radius:50%;border:1px solid var(--km-border);background:var(--km-surface-2);color:var(--km-ink);font-size:19px}
+#kotoba-root .km-tools:not([hidden]) .km-control-row{margin:6px 0 9px!important}
+#kotoba-root .km-pitch-legend{border-radius:12px;margin:8px 0 5px;border:1px solid var(--km-border)!important}
+#kotoba-root .km-tools-hint,#kotoba-root .km-pitch-import-status{font-size:10px!important;line-height:1.5!important;color:var(--km-muted)!important}
+#kotoba-root .km-list-wrap{z-index:1!important;position:relative!important;}
+#kotoba-root .km-list-wrap{padding:12px!important}
+#kotoba-root .km-cue{margin:0 0 8px!important;min-height:0!important;padding:12px 13px!important;}
+#kotoba-root .km-cue-text{line-height:1.85!important;letter-spacing:.012em;}
+#kotoba-root .km-footer{min-height:38px!important;padding:8px 13px!important}
+#kotoba-root .km-rail-cloud-frame[hidden]{display:none!important}
+
+/* Slim down the card creator; media advanced sections remain accessible. */
+#kotoba-root .km-card-creator{padding:16px 18px 13px!important;max-height:min(89vh,900px)!important}
+#kotoba-root .km-creator-title{margin:-16px -18px 10px!important;top:-16px!important}
+#kotoba-root .km-creator-intro{font-size:11px!important;padding:9px 12px!important;margin-bottom:12px!important}
+#kotoba-root .km-card-creator label:not(.km-file-upload){font-size:11px!important;margin-bottom:10px!important}
+#kotoba-root .km-card-creator .km-textarea,
+#kotoba-root .km-card-creator .km-field-sentence,
+#kotoba-root .km-card-creator .km-field-translation{min-height:54px!important;padding:9px 11px!important}
+#kotoba-root .km-text-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+#kotoba-root .km-creator-hotkey{padding:10px 12px!important;margin:7px 0 11px!important}
+#kotoba-root .km-media-disclosure{margin:10px 0 12px;border:1px solid var(--km-border);border-radius:16px;background:var(--km-surface);overflow:hidden}
+#kotoba-root .km-media-disclosure>summary{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:12px 14px;cursor:pointer;list-style:none;color:var(--km-ink);
+}
+#kotoba-root .km-media-disclosure>summary::-webkit-details-marker{display:none}
+#kotoba-root .km-media-disclosure>summary strong{display:block;font-size:12px;font-weight:850}
+#kotoba-root .km-media-disclosure>summary small{display:block;margin-top:3px;color:var(--km-muted);font-size:10px}
+#kotoba-root .km-media-chevron{font-size:16px;color:var(--km-accent-deep);transition:transform .15s}
+#kotoba-root .km-media-disclosure[open] .km-media-chevron{transform:rotate(180deg)}
+#kotoba-root .km-media-disclosure .km-media-grid{padding:2px 12px 12px}
+#kotoba-root .km-media-disclosure .km-media-warning{margin:0 12px 12px}
+#kotoba-root .km-creator-actions{position:static!important;box-shadow:none!important;margin:10px 0!important;padding:0!important;border:0!important;background:transparent!important}
+#kotoba-root .km-card-creator .km-deck-row{margin:6px 0}
+#kotoba-root .km-card-creator .km-save{padding:12px!important}
+
+/* BUBBLEGUM POP: real candy ribbon around every edge, not a cloud/wave. */
+#kotoba-root[data-theme='sunset-pop'] .km-sidebar{
+  top:15px!important;right:15px!important;
+  height:calc(100dvh - 30px)!important;
+  width:calc(min(390px,100vw) - 30px)!important;
+  border:7px solid transparent!important;
+  border-radius:27px!important;
+  background:
+    linear-gradient(180deg,#fffaff,#fff2fa) padding-box,
+    repeating-linear-gradient(135deg,#f979b9 0 12px,#fff1a9 12px 24px,#8fe6f2 24px 36px,#ffb2d3 36px 48px) border-box!important;
+  box-shadow:0 16px 40px #bb4a8761,0 0 0 2px #ffedf7!important;
+  isolation:isolate;overflow:hidden!important;
+}
+#kotoba-root[data-theme='sunset-pop'] .km-sidebar::before,
+#kotoba-root[data-theme='sunset-pop'] .km-sidebar::after{display:none!important;content:none!important}
+#kotoba-root[data-theme='sunset-pop'] .km-rail-cloud-frame{display:none!important}
+#kotoba-root[data-theme='sunset-pop'] .km-head{
+  background:linear-gradient(115deg,#fda1cd,#ffd1e7 55%,#a4eefa)!important;
+  border-radius:19px 19px 0 0!important;
+  border-bottom:1px solid #f3c3df!important;
+}
+#kotoba-root[data-theme='sunset-pop'] .km-brand-copy strong,
+#kotoba-root[data-theme='sunset-pop'] .km-rail-title strong{color:#5c2b59!important}
+#kotoba-root[data-theme='sunset-pop'] .km-brand-copy small{color:#874b80!important}
+#kotoba-root[data-theme='sunset-pop'] .km-rail-head{background:#fff9fd!important}
+#kotoba-root[data-theme='sunset-pop'] .km-status{color:#8e5c85!important}
+#kotoba-root[data-theme='sunset-pop'] .km-filter,
+#kotoba-root[data-theme='sunset-pop'] .km-follow,
+#kotoba-root[data-theme='sunset-pop'] .km-tools-toggle{
+  color:#642e5d!important;background:#fff!important;border:1px solid #efb5d5!important;
+}
+#kotoba-root[data-theme='sunset-pop'] .km-tools:not([hidden]){background:#fff7fd!important}
+#kotoba-root[data-theme='sunset-pop'] .km-cue{
+  background:#fff!important;border:1px solid #f1c6df!important;
+  border-radius:17px!important;box-shadow:0 3px 9px #d784ab15!important;
+}
+#kotoba-root[data-theme='sunset-pop'] .km-cue::after{display:none!important}
+#kotoba-root[data-theme='sunset-pop'] .km-cue.is-current{
+  background:linear-gradient(125deg,#ffe5f1 0%,#fff5cc 55%,#e3faff 100%)!important;
+  border-left:4px solid #f779b6!important;
+}
+#kotoba-root[data-theme='sunset-pop'] .km-cue-text{color:#593253!important;font-weight:700!important}
+#kotoba-root[data-theme='sunset-pop'] .km-footer{background:#fff6fc!important;color:#785370!important}
+#kotoba-root[data-theme='sunset-pop'] .km-coverage{
+  background:#fff9fd!important;border:1px solid #eeb8d4!important;
+}
+
+/* MATCHA GARDEN: warm paper, ceremonial tea bowl, lively fern details. */
+#kotoba-root[data-theme='matcha-cream']{
+  --km-canvas:#f4f5e8;--km-surface:#fffdf5;--km-surface-2:#e8eecf;
+  --km-ink:#293e2d;--km-muted:#6f8265;--km-border:#d2ddbc;
+  --km-accent:#6f973b;--km-accent-deep:#466b2c;--km-accent-pale:#e2efc5;
+  --km-secondary:#c5a26b;--km-glow:#92b06644;--km-shadow:#43543a32;
+  --km-header-bg:linear-gradient(115deg,#e8eed4,#f7f4dc 53%,#e2eac7);
+  --km-highlight:linear-gradient(120deg,#e5f0d1,#faf3d8);
+  --km-cloud-bg:linear-gradient(130deg,#fffdf5,#eaf1dc);
+  --km-bar:linear-gradient(90deg,#a5bf56,#52893a,#cbb77b);
+  --km-jp-font:'Yu Gothic','Meiryo','Noto Sans CJK JP',sans-serif;
+}
+#kotoba-root[data-theme='matcha-cream'] .km-sidebar{
+  border-left:6px solid #a4b979!important;border-radius:19px 0 0 19px!important;
+  background:
+    radial-gradient(circle at 90% 15%,#e2e6bc70 0 28px,transparent 29px),
+    repeating-linear-gradient(0deg,transparent 0 35px,#929f7a0b 36px 37px),
+    #f8f8ee!important;
+  box-shadow:-17px 0 45px #3145293d!important;
+}
+#kotoba-root[data-theme='matcha-cream'] .km-head{
+  background:linear-gradient(100deg,#405f3c,#527849 55%,#83a25e)!important;
+  border-bottom:2px solid #c9bc8f!important;
+}
+#kotoba-root[data-theme='matcha-cream'] .km-head::before{
+  content:'🍵';position:absolute;right:58px;top:9px;font-size:23px;opacity:.92;
+}
+#kotoba-root[data-theme='matcha-cream'] .km-head::after{content:'✿';right:90px;top:20px;font-size:13px;color:#e4dda8!important;opacity:.9}
+#kotoba-root[data-theme='matcha-cream'] .km-brand{
+  color:#375633!important;border:1px solid #f0f3d3!important;border-radius:50%!important;
+  background:linear-gradient(140deg,#f9f8e8,#d7e4b6)!important;
+}
+#kotoba-root[data-theme='matcha-cream'] .km-brand-copy strong{color:#fffefa!important;font-size:15px!important}
+#kotoba-root[data-theme='matcha-cream'] .km-brand-copy small{color:#e4ebcb!important}
+#kotoba-root[data-theme='matcha-cream'] .km-close{background:#436541!important;color:#f5f7e8!important;border-color:#90a979!important}
+#kotoba-root[data-theme='matcha-cream'] .km-rail-head{background:#f8f8eb!important}
+#kotoba-root[data-theme='matcha-cream'] .km-rail-title strong{font-family:Georgia,serif!important;letter-spacing:0!important;font-size:21px!important}
+#kotoba-root[data-theme='matcha-cream'] .km-status{color:#66785c!important}
+#kotoba-root[data-theme='matcha-cream'] .km-filter,
+#kotoba-root[data-theme='matcha-cream'] .km-follow,
+#kotoba-root[data-theme='matcha-cream'] .km-tools-toggle{
+  background:#fffdf5!important;border:1px solid #cfdbbd!important;color:#354e33!important;
+  border-radius:12px!important;
+}
+#kotoba-root[data-theme='matcha-cream'] .km-list-wrap{background:#f8f8ee!important}
+#kotoba-root[data-theme='matcha-cream'] .km-cue{
+  background:#fffefa!important;border:1px solid #e1e7cf!important;border-radius:15px!important;
+  border-left:3px solid #b8cda0!important;
+  box-shadow:0 4px 12px #68835910!important;
+}
+#kotoba-root[data-theme='matcha-cream'] .km-cue.is-current{
+  background:linear-gradient(130deg,#e5f0d2,#f8f5df)!important;
+  border-left:4px solid #719647!important;
+  box-shadow:0 5px 15px #69835a24!important;
+}
+#kotoba-root[data-theme='matcha-cream'] .km-cue.is-current::before{content:'❀';color:#597f4a!important}
+#kotoba-root[data-theme='matcha-cream'] .km-cue-text{font-size:16px!important;color:#293e2d!important}
+#kotoba-root[data-theme='matcha-cream'] .km-footer{background:#f0f2e1!important}
+#kotoba-root[data-theme='matcha-cream'] .km-coverage{background:#fcfdf5!important;border:1px solid #d3dfc0!important}
+
+@media (max-width:900px){
+  #kotoba-root .km-text-fields{grid-template-columns:1fr}
+  #kotoba-root[data-theme='sunset-pop'] .km-sidebar{
+    top:9px!important;right:9px!important;
+    width:calc(min(390px,100vw) - 18px)!important;
+    height:calc(100dvh - 18px)!important;
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  #kotoba-root .km-media-chevron{transition:none!important}
+}
+
+/* Dark card fields and the interactive demo should retain readable contrast. */
+#kotoba-root[data-theme='midnight-neon'] .km-creator-intro,
+#kotoba-root[data-theme='midnight-neon'] .km-creator-hotkey{
+  color:#d0d8f0!important;background:#23293c!important;border-color:#3b4362!important;
+}
+#kotoba-root[data-theme='midnight-neon'] .km-creator-intro *{color:#d0d8f0!important}
+#kotoba-root[data-theme='midnight-neon'] .km-media-disclosure{background:#1e2436!important;border-color:#3a4563!important}
+html[data-km-theme='sunset-pop'] body p{color:#fff6ff!important}
+html[data-km-theme='sunset-pop'] body .eyebrow{color:#ffe4f7!important}
+html[data-km-theme='sunset-pop'] body .controls small{color:#f5dbea!important}
+html[data-km-theme='midnight-neon'] body p{color:#b5c1e2!important}

@@ -1,0 +1,34 @@
+/* v1.7 — tasteful depth and genuinely distinct theme surfaces. Meaning colours stay semantic. */
+#kotoba-root .km-floating-gloss{
+  border-width:1px!important;
+  box-shadow:0 24px 52px var(--km-shadow),0 8px 0 -4px color-mix(in srgb,var(--km-accent) 22%,transparent),inset 0 2px 0 rgba(255,255,255,.1)!important;
+  transition:box-shadow .2s ease,transform .2s ease;
+}
+#kotoba-root .km-gloss-tab{width:36px!important;height:36px!important;flex-basis:36px!important;font-size:16px!important;
+  box-shadow:inset 0 1px 2px rgba(255,255,255,.22),0 3px 7px var(--km-shadow)!important;}
+#kotoba-root .km-gloss-tab[aria-pressed=true]{transform:translateY(-2px);box-shadow:0 7px 13px var(--km-glow),inset 0 2px 0 #ffffff44!important;}
+#kotoba-root .km-gloss-kanji-card{margin:8px 14px;padding:11px 13px;border-radius:16px;background:var(--km-surface-2);border:1px solid var(--km-border);box-shadow:0 4px 12px var(--km-shadow);}
+#kotoba-root .km-gloss-kanji-symbol{display:block;font:850 35px/1.3 var(--km-reading-font);color:var(--km-accent-deep);}
+#kotoba-root .km-gloss-kanji-card .km-gloss-primary,#kotoba-root .km-gloss-kanji-card .km-gloss-tab-hint{padding:3px 0!important;}
+#kotoba-root .km-gloss-wiki,#kotoba-root .km-gloss-ai{margin:11px 16px;padding:11px 14px!important;border-radius:14px;background:var(--km-accent-pale)!important;color:var(--km-accent-deep)!important;}
+#kotoba-root .km-gloss-wiki-extract,#kotoba-root .km-gloss-ai-result{display:block;white-space:pre-wrap;margin:6px 16px;padding:12px 13px;border:1px solid var(--km-border);background:var(--km-surface-2);border-radius:14px;line-height:1.65;font-size:12px;color:var(--km-ink);}
+#kotoba-root .km-ai-summary-result:not([hidden]){padding:16px;margin:12px;background:var(--km-surface);border:1px solid var(--km-border);border-radius:19px;max-height:40vh;overflow:auto;box-shadow:0 12px 25px var(--km-shadow);}
+#kotoba-root .km-ai-summary-title{font:800 13px var(--km-font);margin-bottom:9px;color:var(--km-accent-deep);}
+#kotoba-root .km-ai-summary-text{font:500 12px/1.7 var(--km-font);white-space:pre-wrap;color:var(--km-ink);}
+#kotoba-root .km-cue{box-shadow:0 6px 14px -6px var(--km-shadow),inset 0 1px 0 #ffffff12;}
+#kotoba-root .km-cue.is-current{box-shadow:0 10px 23px var(--km-glow),inset 0 1px 0 #ffffff24;}
+#kotoba-root .km-coverage{box-shadow:0 7px 20px var(--km-shadow),inset 0 -1px 0 #fff2!important;}
+#kotoba-root .km-brand{box-shadow:0 8px 15px var(--km-glow),inset 0 3px 0 #ffffff4a;}
+#kotoba-root .km-launcher{box-shadow:0 10px 18px var(--km-glow),0 3px 0 -1px var(--km-shadow),inset 0 3px 0 #ffffff88!important;}
+/* Cotton candy's playful softness, intentionally cloud-free coverage strip */
+#kotoba-root[data-theme='cotton-candy'] .km-gloss-tab{background:linear-gradient(145deg,#fff,#ffd5ed)!important;color:#af4b88!important;}
+#kotoba-root[data-theme='cotton-candy'] .km-gloss-tab[aria-pressed=true]{background:linear-gradient(145deg,#ffd3ea,#c8f5ff)!important;}
+#kotoba-root[data-theme='sunset-pop'] .km-gloss-tab{background:linear-gradient(145deg,#ffdbf0,#ffb4e5)!important;color:#833678!important;}
+#kotoba-root[data-theme='sunset-pop'] .km-gloss-tab[aria-pressed=true]{background:linear-gradient(140deg,#f8a9d5,#8de8ff)!important;}
+#kotoba-root[data-theme='matcha-cream'] .km-gloss-tab{background:linear-gradient(145deg,#fffef3,#deefc4)!important;color:#526d35!important;}
+#kotoba-root[data-theme='midnight-neon'] .km-gloss-tab{background:#222840!important;border:1px solid #343e61!important;color:#c3c9ff!important;box-shadow:0 5px 12px #060716!important;}
+#kotoba-root[data-theme='midnight-neon'] .km-gloss-tab[aria-pressed=true]{background:#383257!important;color:#fff!important;}
+#kotoba-root[data-theme='black-gold'] .km-gloss-tab{background:linear-gradient(#302c20,#201e17)!important;color:#f6d38b!important;border:1px solid #56492d!important;}
+#kotoba-root[data-theme='black-gold'] .km-gloss-tab[aria-pressed=true]{background:linear-gradient(#7b642e,#352913)!important;}
+@media(max-width:420px){#kotoba-root .km-gloss-tabs{gap:5px!important;padding-inline:10px!important}#kotoba-root .km-gloss-tab{flex-basis:34px!important;width:34px!important;height:34px!important}}
+@media(prefers-reduced-motion:reduce){#kotoba-root .km-gloss-tab,#kotoba-root .km-floating-gloss{transition:none!important}}

@@ -1,0 +1,100 @@
+/* Kotoba 1.9 — focused study controls, i+1 list, furigana & connected Anki state */
+#kotoba-root .km-study-menu{
+  width:306px!important;max-width:calc(100vw - 18px)!important;
+  max-height:min(510px,calc(100dvh - 22px))!important;
+  padding:12px!important;border-radius:22px!important;
+  background:linear-gradient(155deg,#131526ec,#25253aef)!important;
+  border:1px solid #ffffff26!important;
+  box-shadow:0 18px 55px #03050d92,0 3px 0 #ffffff13 inset!important;
+  backdrop-filter:blur(26px)!important;
+  overflow:auto!important;
+}
+#kotoba-root .km-study-menu .km-menu-heading{padding:7px 7px 12px!important;margin-bottom:9px;border-bottom:1px solid #ffffff21}
+#kotoba-root .km-study-menu .km-study-actions{display:flex;flex-direction:column;gap:3px;padding:2px 0 9px}
+#kotoba-root .km-study-menu .km-menu-item{min-height:47px!important;padding:10px 12px!important;border-radius:13px!important}
+#kotoba-root .km-study-menu .km-menu-item:hover{background:#b29aff1c!important}
+#kotoba-root .km-study-menu .km-menu-footnote{line-height:1.5;color:#aaa8c0}
+#kotoba-root .km-study-menu .km-settings-page{border:1px solid #ffffff26!important;background:#ffffff0f!important;margin-top:2px}
+#kotoba-root .km-study-menu .km-hidden-controls{display:none!important}
+#kotoba-root .km-study-menu .km-menu-heading small{color:#b4b4d2}
+#kotoba-root .km-study-menu .km-loop-label{font-size:10px}
+
+#kotoba-root .km-study-tabs{display:flex;gap:7px;margin:10px 0 5px;padding:3px;border:1px solid var(--km-border);border-radius:13px;background:var(--km-surface);}
+#kotoba-root .km-study-tabs button{flex:1;min-width:0;padding:9px 6px;border:0;border-radius:10px;color:var(--km-muted);background:transparent;font:850 11px/1.2 var(--km-font);cursor:pointer;}
+#kotoba-root .km-study-tabs button.is-active{background:var(--km-accent-pale);color:var(--km-accent-deep);box-shadow:0 3px 9px var(--km-glow)}
+#kotoba-root .km-rec-count{display:inline-grid;place-items:center;min-width:17px;height:17px;padding:0 3px;background:var(--km-surface-2);border-radius:99px;font-size:10px}
+#kotoba-root .km-recommend-summary{font-size:10px;color:var(--km-muted);padding:7px 5px;line-height:1.5}
+#kotoba-root .km-cue.km-recommendation{border-left:3px solid var(--km-accent)!important;background:var(--km-surface)!important;padding-top:10px!important}
+#kotoba-root .km-recommend-top{display:flex;gap:8px;align-items:center;justify-content:space-between;color:var(--km-accent-deep);font:800 10px/1.3 var(--km-font);margin-bottom:8px}
+#kotoba-root .km-recommend-top span:last-child{color:var(--km-muted);font-weight:650}
+#kotoba-root .km-recommend-actions{display:flex;justify-content:flex-end;margin-top:9px}
+#kotoba-root .km-mine-target{border:1px solid var(--km-border);background:var(--km-accent-pale);color:var(--km-accent-deep);border-radius:10px;padding:8px 11px;font:800 11px var(--km-font);cursor:pointer}
+#kotoba-root .km-mine-target:hover{filter:brightness(.98);transform:translateY(-1px)}
+
+/* Inline readings are drawn as real ruby above the word instead of bracketed text. */
+#kotoba-root .km-word-token ruby{ruby-position:over;ruby-align:center;white-space:nowrap}
+#kotoba-root .km-word-token rt{font-size:.49em;letter-spacing:.01em;line-height:1.1;color:var(--km-muted);font-weight:700;user-select:none}
+#kotoba-root .km-word-token[data-furigana="hover"] rt{visibility:hidden}
+#kotoba-root .km-word-token[data-furigana="hover"]:is(:hover,:focus-visible) rt{visibility:visible}
+#kotoba-root .km-word-token[data-furigana="unknown"][data-known-reading="true"] rt{visibility:hidden}
+#kotoba-root .km-word-token:has(ruby){padding-top:3px;padding-bottom:3px;}
+
+/* Anki status: do not change pitch semantics, use thin underlines for learning status. */
+#kotoba-root .km-word-token[data-learning="learning"]{text-decoration:underline dotted #efb34a 2px!important;text-underline-offset:5px}
+#kotoba-root .km-word-token[data-learning="known"]{text-decoration:underline solid #0fb99e 1px!important;text-underline-offset:5px}
+#kotoba-root .km-word-token[data-learning="ignore"]{opacity:.43}
+
+/* Keep five theme identities while preserving sharp Japanese legibility. */
+#kotoba-root[data-theme="cotton-candy"] .km-recommendation{box-shadow:0 8px 18px #dc86b42a!important}
+#kotoba-root[data-theme="matcha-cream"] .km-study-tabs button.is-active{background:#d5e8c3;color:#2f6240}
+#kotoba-root[data-theme="sunset-pop"] .km-recommendation{border-radius:22px!important}
+#kotoba-root[data-theme="midnight-neon"] .km-study-tabs{background:#171c2c;border-color:#313a55}
+#kotoba-root[data-theme="black-gold"] .km-recommendation{border-left-color:#e5c277!important}
+
+/* The settings popup doubles as a full tab. */
+@media (min-width:650px){
+  body:has(.km-anki-vocabulary){width:min(800px,calc(100% - 40px))!important;margin:24px auto!important;border-radius:24px;box-shadow:0 18px 80px #0006;overflow:visible}
+  body:has(.km-anki-vocabulary) main{padding:24px 34px}
+  body:has(.km-anki-vocabulary) .km-anki-vocabulary{padding:20px;border-radius:20px}
+}
+.km-anki-vocabulary{padding:15px;margin-top:18px;border:1px solid var(--pm-border,#586a5c);border-radius:18px;background:rgba(125,151,126,.065)}
+.km-anki-vocabulary .section-title{padding-bottom:8px}
+.km-anki-vocabulary select[multiple]{min-height:115px;font-size:12px;line-height:1.4}
+.km-anki-vocabulary select[multiple] option{padding:5px 8px}
+.km-anki-vocabulary #km-sync-collection{width:100%;margin-top:12px;padding:12px 13px;border-radius:12px;border:1px solid #8fa980;color:inherit;background:#a4b98c20;font-weight:800}
+.km-anki-vocabulary #km-anki-sync-status{margin-top:9px;font-size:12px;line-height:1.55;text-align:left}
+/* Recommendation rows contain a header, sentence and mine action stacked vertically. */
+#kotoba-root .km-cue.km-recommendation{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:7px!important}
+#kotoba-root .km-cue.km-recommendation .km-cue-text{display:block!important;flex:none!important;width:100%!important;min-width:0;overflow-wrap:break-word!important;white-space:normal!important;line-height:1.85!important}
+#kotoba-root .km-recommend-top{width:100%;flex-wrap:wrap;flex-shrink:0}
+#kotoba-root .km-recommend-actions{width:100%;flex-shrink:0}
+
+/* v1.12.5 — familiarity underline independent of the pitch-accent TEXT colour. */
+#kotoba-root .km-word-token[data-learning="unknown"],
+#kotoba-root .km-video-japanese .km-word-token[data-learning="unknown"]{
+  text-decoration-line:underline!important;
+  text-decoration-style:solid!important;
+  text-decoration-color:#ff405b!important;
+  text-decoration-thickness:3px!important;
+  text-underline-offset:5px!important;
+  box-shadow:none!important;
+}
+#kotoba-root .km-word-token[data-learning="track"],
+#kotoba-root .km-video-japanese .km-word-token[data-learning="track"]{
+  text-decoration:underline solid #a77aff 2px!important;
+  text-underline-offset:5px!important;
+  box-shadow:none!important;
+}
+#kotoba-root .km-word-token[data-learning="learning"],
+#kotoba-root .km-video-japanese .km-word-token[data-learning="learning"]{
+  text-decoration:underline dotted #ffa733 2px!important;
+  text-underline-offset:5px!important;
+  box-shadow:none!important;
+}
+#kotoba-root .km-word-token[data-learning="known"],
+#kotoba-root .km-video-japanese .km-word-token[data-learning="known"]{
+  text-decoration:underline solid #22bc93 1px!important;
+  text-underline-offset:5px!important;
+  box-shadow:none!important;
+}
+#kotoba-root .km-word-token[data-learning="ignore"]{text-decoration:none!important;box-shadow:none!important;opacity:.45;}

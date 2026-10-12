@@ -1,0 +1,38 @@
+/* Kotoba: keeps caption nodes measurable and readable by the video adapter.
+   Only when enabled by a top-level page with explicit frame permission. */
+html.km-hide-original-captions .vjs-text-track-display,
+html.km-hide-original-captions .jw-text-track-display,
+html.km-hide-original-captions .plyr__captions,
+html.km-hide-original-captions .shaka-text-container,
+html.km-hide-original-captions .clappr-captions,
+html.km-hide-original-captions .mejs__captions-layer,
+html.km-hide-original-captions [data-testid="subtitle"],
+html.km-hide-original-captions [data-testid="captions"],
+html.km-hide-original-captions video::cue,
+html.km-hide-original-captions .vjs-text-track-display *,
+html.km-hide-original-captions .jw-text-track-display *,
+html.km-hide-original-captions .plyr__captions *,
+html.km-hide-original-captions .shaka-text-container *,
+html.km-hide-original-captions .clappr-captions *,
+html.km-hide-original-captions .mejs__captions-layer *,
+html.km-hide-original-captions [data-testid="subtitle"] *,
+html.km-hide-original-captions [data-testid="captions"] * {
+  color:transparent!important;-webkit-text-fill-color:transparent!important;
+  text-shadow:none!important;background:transparent!important;
+  background-color:transparent!important;box-shadow:none!important;
+}
+/* Caption classes from common custom HTML5 players: avoid controls and page prose. */
+html.km-hide-original-captions :is(.jwplayer,.video-js,.plyr,.shaka-video-container,.clappr-player,.mejs__container,.html5-video-player,.player) :is(.subtitle,.subtitles,.caption-text,.caption-line,.caption-segment,.caption-container,.caption-display,.subtitle-container,.subtitle-text),
+html.km-hide-original-captions :is(.jwplayer,.video-js,.plyr,.shaka-video-container,.clappr-player,.mejs__container,.html5-video-player,.player) :is(.subtitle,.subtitles,.caption-text,.caption-line,.caption-segment,.caption-container,.caption-display,.subtitle-container,.subtitle-text) * {
+  color:transparent!important;-webkit-text-fill-color:transparent!important;
+  text-shadow:none!important;background:transparent!important;
+  background-color:transparent!important;box-shadow:none!important;
+}
+
+/* A detected subtitle element, regardless of a site's custom class name. */
+html.km-hide-original-captions .km-native-cue-node,
+html.km-hide-original-captions .km-native-cue-node *{
+  color:transparent!important;-webkit-text-fill-color:transparent!important;
+  text-shadow:none!important;background:transparent!important;
+  background-color:transparent!important;box-shadow:none!important;
+}

@@ -1,0 +1,6 @@
+/* Subtitle language toggle: hide one language without affecting the study transcript. */
+#kotoba-root .km-video-japanese[hidden],
+#kotoba-root .km-video-translation[hidden],
+#kotoba-root .km-video-subs[hidden] { display:none !important; }
+#kotoba-root .km-video-subs:has(.km-video-japanese[hidden]) .km-video-translation:not([hidden]) { border-top:0 !important; margin-top:0 !important; padding-top:2px !important; }
+#kotoba-root .km-language-cycle .km-language-label { min-width:62px; text-align:center; white-space:nowrap; }

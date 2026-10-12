@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="color-scheme" content="dark light"/>
+  <title>Kotoba • Study Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css"/>
+</head>
+<body data-theme="midnight-neon">
+  <div class="backdrop" aria-hidden="true"><span class="orb orb-a"></span><span class="orb orb-b"></span></div>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand"><div class="logo">語</div><div><strong>Kotoba <span>Study Studio</span></strong><small>JAPANESE IMMERSION • V1.11</small></div></div>
+      <div class="actions"><span class="local-label"><span class="dot"></span> Saved locally</span><button id="open-settings" class="button secondary" type="button"> <span aria-hidden="true">⚙</span> Settings</button><button id="refresh-anki" class="button primary" type="button">↻ Refresh Anki</button></div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow">✦ YOUR LEARNING JOURNEY</div>
+          <h1>Every word<br/><span>adds up.</span></h1>
+          <p>Little sessions become real progress. Here's what you've mined, watched and read with Kotoba.</p>
+          <div class="date-line"><span id="today-date">Today</span><span class="divider-dot">◆</span><span>Keep showing up, one sentence at a time.</span></div>
+        </div>
+        <div class="streak-card panel">
+          <div class="streak-top"><span>YOUR KOTOBA STREAK</span><span class="streak-icon">✦</span></div>
+          <div class="streak-core"><span class="streak-flame">✿</span><strong id="streak-count">0</strong><span class="streak-units">day streak</span></div>
+          <div class="streak-caption" id="streak-hint">Study for a minute or mine a card to start your streak.</div>
+          <div class="streak-dots" id="streak-dots" aria-label="Last seven days of Kotoba activity"></div>
+        </div>
+      </section>
+
+      <section class="metrics" aria-label="Your study statistics">
+        <article class="metric panel"><span class="metric-icon pink">✦</span><div><span class="metric-label">Cards mined today</span><strong id="cards-today">0</strong><small id="cards-total">0 recorded total</small></div></article>
+        <article class="metric panel"><span class="metric-icon blue">▶</span><div><span class="metric-label">Immersion today</span><strong id="minutes-today">0m</strong><small id="minutes-detail">0m watching · 0m reading</small></div></article>
+        <article class="metric panel"><span class="metric-icon purple">↻</span><div><span class="metric-label">Anki reviews today</span><strong id="reviews-today">—</strong><small>Anki's study day · all decks</small></div></article>
+        <article class="metric panel"><span class="metric-icon green">✓</span><div><span class="metric-label">Mature Anki vocabulary</span><strong id="known-count">—</strong><small id="known-detail">Connect vocabulary sync in Settings</small></div></article>
+      </section>
+
+      <section class="middle-grid">
+        <article class="panel study-chart">
+          <div class="section-head"><div><span class="eyebrow">YOUR WEEK AT A GLANCE</span><h2>Study activity</h2></div><span class="hint-pill">Last 7 days</span></div>
+          <div class="legend"><span><b class="legend-watch"></b> Watching</span><span><b class="legend-read"></b> Reading</span><span><b class="legend-card"></b> Card mined</span></div>
+          <div id="week-chart" class="week-chart" role="img" aria-label="Kotoba activity over the last seven days"></div>
+          <p class="muted footnote">Minutes are estimates of active foreground study. Paused videos and background tabs aren't counted.</p>
+        </article>
+        <article class="panel goals-panel">
+          <div class="section-head"><div><span class="eyebrow">ONE SMALL STEP DAILY</span><h2>Today's goals</h2></div><span class="goal-sparkle">✧</span></div>
+          <div class="goal-block"><div class="goal-line"><strong>Mine vocabulary</strong><span id="cards-progress-label">0 / 5 cards</span></div><div class="track"><div id="cards-progress" class="fill pink-fill"></div></div></div>
+          <div class="goal-block"><div class="goal-line"><strong>Spend time immersing</strong><span id="minutes-progress-label">0 / 20 min</span></div><div class="track"><div id="minutes-progress" class="fill purple-fill"></div></div></div>
+          <div class="goal-editor"><label>Daily cards <input id="goal-cards" type="number" min="1" max="100" value="5"/></label><label>Daily minutes <input id="goal-minutes" type="number" min="1" max="240" value="20"/></label></div>
+          <div id="goal-notice" class="goal-note" role="status">Goals save automatically on this browser.</div>
+        </article>
+      </section>
+
+      <section class="bottom-grid">
+        <article class="panel history-panel">
+          <div class="section-head"><div><span class="eyebrow">CONSISTENCY OVER PERFECTION</span><h2>Recent study days</h2></div><span id="tracked-total" class="hint-pill">0 tracked sessions</span></div>
+          <div class="heatmap" id="study-calendar" aria-label="Activity over the past 21 days"></div>
+          <div class="calendar-key"><span>Less</span><i></i><i></i><i></i><i></i><span>More</span></div>
+          <div class="anki-strip"><div><strong id="anki-added">—</strong><small>Cards added to Anki today · all decks</small></div><div><strong id="anki-review-days">—</strong><small>Days reviewed in Anki (last 7)</small></div></div>
+        </article>
+        <article class="panel recent-panel">
+          <div class="section-head"><div><span class="eyebrow">YOUR SENTENCE-MINING TRAIL</span><h2>Recently mined</h2></div><button id="export-csv" class="export" type="button">↓ Export CSV</button></div>
+          <div id="recent-list" class="recent-list"><p class="muted">No cards mined yet. Hover a Japanese word and press Q to start.</p></div>
+        </article>
+      </section>
+      <div class="status-line"><span id="anki-status" aria-live="polite">Anki not checked yet.</span><span id="local-status">Stats begin when this version is installed; previous activity is not backfilled.</span></div>
+    </main>
+    <footer><span>語 Kotoba Miner · Your data stays in this browser unless you explicitly export it.</span><span>Made for steady Japanese progress ✦</span></footer>
+  </div>
+  <script src="activity-logic.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>

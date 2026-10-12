@@ -1,0 +1,107 @@
+{
+  "manifest_version": 3,
+  "name": "Kotoba Miner",
+  "short_name": "Kotoba",
+  "version": "1.12.8",
+  "description": "Kotoba v1.12.8: Alt+T cycles Japanese, dual-language, and English subtitles; quiet hover translation.",
+  "permissions": [
+    "storage",
+    "tts",
+    "activeTab",
+    "alarms",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://jisho.org/*",
+    "https://www.youtube.com/*",
+    "http://127.0.0.1/*",
+    "https://raw.githubusercontent.com/*",
+    "https://cdn.jsdelivr.net/*",
+    "https://api.mymemory.translated.net/*",
+    "https://kanjiapi.dev/*",
+    "https://ja.wikipedia.org/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Kotoba Miner"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://youtube.com/*",
+        "*://*.youtube.com/*"
+      ],
+      "js": [
+        "youtube-page.js"
+      ],
+      "world": "MAIN",
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://youtube.com/*",
+        "*://*.youtube.com/*",
+        "https://www.netflix.com/*",
+        "https://netflix.com/*"
+      ],
+      "js": [
+        "transcript.js",
+        "shortcuts.js",
+        "word-parser.js",
+        "learning.js",
+        "subtitle-style.js",
+        "video-layout.js",
+        "universal-subtitles.js",
+        "lookup-hover.js",
+        "subtitle-modes.js",
+        "content.js"
+      ],
+      "css": [
+        "content.css",
+        "themes.css",
+        "design-v06.css",
+        "design-v07.css",
+        "design-v08.css",
+        "design-v09.css",
+        "design-v10.css",
+        "design-v11.css",
+        "design-v12.css",
+        "design-v13.css",
+        "design-v14.css",
+        "design-v15.css",
+        "design-v16.css",
+        "design-v17.css",
+        "design-v18.css",
+        "design-v19.css",
+        "gloss-stability.css",
+        "ui-alignment-v1123.css",
+        "vocabulary-v1125.css",
+        "subtitle-language-v1128.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://*.wikipedia.org/*",
+        "https://*.wiktionary.org/*"
+      ],
+      "js": [
+        "word-parser.js",
+        "shortcuts.js",
+        "lookup-hover.js",
+        "reader.js"
+      ],
+      "css": [
+        "reader.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "optional_host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ]
+}

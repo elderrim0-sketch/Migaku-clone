@@ -1,0 +1,10 @@
+.km-reader-settings{border:1px solid #4b416c;border-radius:20px;padding:14px;margin:17px 0;background:linear-gradient(135deg,#282344,#1a203b);color:#f6ebff}
+.km-reader-settings .section-title{margin:0}
+.km-reader-settings .help{font-size:11px;color:#c6b6db;line-height:1.5}
+.km-reader-site-panel{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid #55456f;background:#18192e;border-radius:14px;padding:11px;margin:10px 0}
+.km-reader-site-panel strong{display:block;font-size:12px;overflow-wrap:anywhere}
+.km-reader-site-panel small{display:block;font-size:10px;color:#afafcc;line-height:1.5;margin-top:3px}
+.km-reader-site-panel button,.km-reader-demo{cursor:pointer;border-radius:11px;border:1px solid #8e75cb;background:linear-gradient(135deg,#9171d2,#cf82bc);font-size:12px;color:#fff;font-weight:800;padding:10px 13px;flex:none}
+.km-reader-site-panel button:disabled{opacity:.55;cursor:wait}
+.km-reader-settings .field{margin-top:14px}
+.km-reader-demo{width:100%;margin-top:8px;padding:11px}

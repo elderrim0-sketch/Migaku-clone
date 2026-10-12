@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Kotoba Miner — interactive demo v1.12.8</title>
+<link rel="stylesheet" href="content.css"/>
+<link rel="stylesheet" href="themes.css"/>
+<link rel="stylesheet" href="design-v06.css"/><link rel="stylesheet" href="design-v07.css"/><link rel="stylesheet" href="design-v08.css"/><link rel="stylesheet" href="design-v09.css"/><link rel="stylesheet" href="design-v10.css"/><link rel="stylesheet" href="design-v11.css"/><link rel="stylesheet" href="design-v12.css"/><link rel="stylesheet" href="design-v13.css"/><link rel="stylesheet" href="design-v14.css"/><link rel="stylesheet" href="design-v15.css"/>
+<style>
+:root { color-scheme: dark; font-family:system-ui,-apple-system,sans-serif; }
+body { margin:0; min-height:100vh; color:#f0f6ec; background:radial-gradient(ellipse at 40% 25%, #273e3b, #101614 75%); }
+main { max-width:970px; padding:55px 28px; margin:0 auto; }
+.eyebrow { letter-spacing:2px; font-size:12px; color:#c0f5a2; text-transform:uppercase; font-weight:800; }
+h1 { font-size:clamp(36px,5vw,70px); margin:10px 0 12px; letter-spacing:-2px; }
+p { color:#b4c9b7; font-size:15px; line-height:1.7; max-width:680px; }
+.player { position:relative; height:min(48vw,440px); min-height:300px; display:grid; place-items:center; margin:38px 0 18px; border:1px solid #466352; border-radius:20px; overflow:hidden; background:linear-gradient(140deg,#132920,#304638 55%,#12231d); box-shadow:0 20px 70px #0009; }
+.sun { position:absolute; width:180px; height:180px; border-radius:100%; background:linear-gradient(#e2b977,#c58b57); left:19%; top:19%; box-shadow:0 0 150px #f7ba6560; }
+.hill { position:absolute; width:110%; height:45%; bottom:-15%; transform:rotate(-8deg); border-radius:50% 45% 0 0; background:#092018; }
+.hill.second { bottom:-26%; transform:rotate(13deg); background:#06130f; }
+.video-label { position:absolute; top:17px; left:19px; background:#0007; padding:9px 13px; border-radius:8px; font-size:13px; }
+.captions { position:absolute; bottom:44px; z-index:1; text-align:center; padding:10px 20px; background:#050b098c; border-radius:8px; font-size:clamp(18px,3vw,29px); font-weight:750; text-shadow:0 2px 5px black; }
+.controls { display:flex; align-items:center; gap:15px; flex-wrap:wrap; }
+.controls button { background:#c6f5a9; padding:12px 17px; border:0; color:#15231b; font-weight:800; border-radius:10px; cursor:pointer; }
+.controls small { color:#9db4a4; }
+.km-captions-active .captions { visibility:hidden; }
+</style>
+<link rel="stylesheet" href="design-v16.css"/><link rel="stylesheet" href="design-v17.css"/><link rel="stylesheet" href="design-v18.css"/><link rel="stylesheet" href="design-v19.css"/><link rel="stylesheet" href="gloss-stability.css"/><link rel="stylesheet" href="ui-alignment-v1123.css"/></head>
+<body>
+<main class="demo-main">
+<div class="eyebrow">Kotoba Miner · v1.12.8 playground</div>
+<h1>Learn from every line.</h1>
+<p>This is an interactive demo with fake subtitles, not a copyrighted video. Hold Alt and hover a Japanese word to open its dictionary. Click the right-hand transcript to jump; click individual words to look them up and prepare an Anki card. Drag the <strong>語</strong> bubble to move it anywhere; its placement will be remembered. You can search English words, too.</p>
+<div class="player">
+  <div class="sun"></div><div class="hill"></div><div class="hill second"></div>
+  <div class="video-label">DEMO PLAYER · Japanese CC enabled</div>
+  <div class="captions"><span class="ytp-caption-segment" id="demo-caption">今日はいい天気ですね。</span></div>
+</div>
+<div class="controls"><button id="next">Next subtitle →</button><small id="count">Sentence 1 of 5</small><small>This page works offline with the small backup word list; full dictionary needs internet.</small></div>
+</main>
+<script src="transcript.js"></script>
+<script src="shortcuts.js"></script>
+<script src="word-parser.js"></script>
+<script src="learning.js"></script>
+<script src="subtitle-style.js"></script>
+<script src="video-layout.js"></script>
+<script src="lookup-hover.js"></script><script src="subtitle-modes.js"></script><script src="content.js"></script>
+<script src="demo.js"></script>
+</body>
+</html>

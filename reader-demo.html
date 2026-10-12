@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" data-kotoba-reader-demo="true">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kotoba Reader — Wikipedia-style Demo</title>
+<style>
+  :root{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:#25314a;background:#f6f5fb}
+  *{box-sizing:border-box}
+  body{margin:0}
+  header{height:68px;background:#fff;border-bottom:1px solid #d9dce7;padding:18px 5vw;display:flex;justify-content:space-between;align-items:center}
+  header strong{font-size:21px;color:#6746a6}header a{color:#646f86;text-decoration:none;font-size:13px}
+  main{max-width:1100px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:45px;margin:48px auto;padding:0 22px}
+  .toc{background:white;border:1px solid #dee1e9;border-radius:14px;padding:24px;align-self:start;position:sticky;top:20px}
+  .toc a{display:block;margin:15px 0;color:#355f9f;text-decoration:none}
+  article{background:white;border:1px solid #dce0e9;border-radius:18px;padding:32px 42px;box-shadow:0 12px 38px #3d456a0e;line-height:1.9}
+  article h1{font-size:36px;line-height:1.4;border-bottom:1px solid #d4d6e1;padding-bottom:18px;margin:0}
+  article h2{font-size:25px;border-bottom:1px solid #dedfe9;margin-top:36px;line-height:1.4}
+  article h3{font-size:21px}
+  article p,article li{font-size:18px}
+  article a{color:#2f71b6;text-decoration:underline}
+  .notice{padding:13px 17px;background:#f1e9ff;border-left:4px solid #9965ec;margin:20px 0;border-radius:0 10px 10px 0;font-size:13px}
+  @media(max-width:700px){main{display:block;margin:20px auto}.toc{display:none}article{padding:23px 20px}article h1{font-size:28px}}
+</style>
+<link rel="stylesheet" href="reader.css">
+</head>
+<body>
+<header><strong>📖 Kotoba Reader</strong><a href="https://ja.wikipedia.org/" target="_blank" rel="noopener">Open Japanese Wikipedia ↗</a></header>
+<main>
+<nav class="toc"><strong>Contents</strong><a href="#intro">Introduction</a><a href="#history">History</a><a href="#practice">Practice</a></nav>
+<article>
+<h1>日本語の学習 — Learning Japanese</h1>
+<div class="notice">Hover over words such as <strong>日本語</strong>, <strong>勉強</strong> or <strong>図書館</strong>. Click a word to pin its dictionary card. It also works on links and headings.</div>
+<section id="intro"><h2>日本語とは何ですか？</h2>
+<p>日本語は日本で使われている言語です。日本語を勉強する人は世界中にいます。</p>
+<p>For example, <a href="#practice">日本語</a> is the Japanese language and <a href="#history">文化</a> means culture. Normal page links should remain clickable.</p></section>
+<section id="history"><h2>日本の文化と歴史</h2>
+<p>日本には長い歴史と豊かな文化があります。図書館や博物館で新しいことを学べます。</p>
+<h3>便利な言葉と表現</h3>
+<ul><li>ありがとうございます — thank you</li><li>お願いします — polite request</li><li>美しい景色を見る — see beautiful scenery</li></ul></section>
+<section id="practice"><h2>勉強の方法</h2><p>毎日少しずつ読んで、知らない単語を調べましょう。</p><p>Examples can also appear inside a <a href="#intro">paragraph link containing 日本語 and 読書</a>.</p></section>
+</article>
+</main>
+<script src="word-parser.js"></script><script src="shortcuts.js"></script><script src="lookup-hover.js"></script><script src="reader.js"></script>
+</body></html>

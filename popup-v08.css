@@ -1,0 +1,18 @@
+/* Unified modern controls for all five selectable themes. */
+:root {font-family:"Trebuchet MS","Yu Gothic UI",system-ui,sans-serif;}
+body {font-family:"Trebuchet MS","Yu Gothic UI","Segoe UI",system-ui,sans-serif;}
+main section {border-radius:16px;}
+.immersion-settings .enable-row, .enable-row {min-height:44px;border-bottom:1px solid var(--line,#ffffff1d);gap:12px;}
+.immersion-settings .enable-row:last-of-type {border-bottom:0;}
+.enable-row label {font-size:12px;font-weight:750;letter-spacing:-.01em;}
+.enable-row label small {display:block;font-size:10px;font-weight:500;opacity:.65;margin-top:2px;}
+input[type="checkbox"] {appearance:none!important;-webkit-appearance:none!important;position:relative;width:41px!important;height:23px!important;border:1px solid #8b8b9a88!important;border-radius:20px!important;background:#7b7c8a66!important;cursor:pointer;flex:0 0 auto;padding:0!important;transition:background-color .18s,border-color .18s;}
+input[type="checkbox"]::after {content:"";position:absolute;width:15px;height:15px;border-radius:50%;background:#fff;top:3px;left:3px;box-shadow:0 2px 4px #0003;transition:left .18s;}
+input[type="checkbox"]:checked {background:linear-gradient(110deg,#cb8deb,#f2a7cf)!important;border-color:#f2b8ff!important;}
+input[type="checkbox"]:checked::after {left:21px;}
+input[type="checkbox"]:focus-visible {outline:2px solid #c7a5ff;outline-offset:2px;}
+.shortcut-list {border-top:1px solid #8c8c9c33;margin-top:11px;padding-top:7px;}
+.shortcut-list summary {font-size:12px;font-weight:800;cursor:pointer;padding:9px 5px;border-radius:8px;}
+.shortcut-pairs {display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;margin:9px 0;font-size:10px;}
+.shortcut-pairs kbd {padding:5px 7px;border-radius:6px;background:#88849a22;border:1px solid #88849a40;white-space:nowrap;font:700 9px "Trebuchet MS",system-ui,sans-serif;}
+.section-title h2 {letter-spacing:-.03em;}

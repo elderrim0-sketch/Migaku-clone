@@ -1,0 +1,7 @@
+/* Primary navigation to the personal activity dashboard. */
+#km-open-dashboard{display:flex;align-items:center;gap:14px;width:100%;padding:15px 17px;margin:5px 0 18px;border:1px solid #8f79e8;border-radius:17px;background:linear-gradient(105deg,#463879,#534a85 55%,#315c79);color:#fff;text-align:left;cursor:pointer;box-shadow:0 8px 22px #4e3e8645;transition:transform .18s ease,box-shadow .18s ease}
+#km-open-dashboard:hover{transform:translateY(-2px);box-shadow:0 11px 23px #775ac36e}
+#km-open-dashboard .km-dashboard-mark{display:grid;place-items:center;width:41px;height:41px;flex-shrink:0;border-radius:12px;background:linear-gradient(145deg,#d99ef8,#81d8ef);color:#fff;font-size:22px;box-shadow:inset 0 1px 0 #fff7,0 5px 12px #0002}
+#km-open-dashboard strong{display:block;font-size:14px;color:#fff}
+#km-open-dashboard small{display:block;margin-top:4px;color:#e0d8ff;font-size:10px}
+#km-open-dashboard .km-dashboard-arrow{margin-left:auto;font-size:19px}

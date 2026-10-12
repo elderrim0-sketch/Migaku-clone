@@ -1,0 +1,15 @@
+/* v1.9.1: scrolling must work both in the browser-action popup and in a full settings tab. */
+html { overflow-y:auto; scrollbar-gutter:stable; }
+body { min-height:0; height:auto; }
+@media (min-width:650px) {
+  html:has(.km-anki-vocabulary) {height:auto!important;min-height:100%;overflow-x:hidden!important;overflow-y:auto!important;}
+  body:has(.km-anki-vocabulary) {
+    height:auto!important;max-height:none!important;
+    overflow:visible!important;
+    padding-bottom:26px;
+  }
+}
+@media (max-width:649px) {
+  html {max-height:min(600px, 96dvh);overflow-x:hidden;overflow-y:auto;overscroll-behavior-y:contain;}
+  body {overflow:visible;}
+}

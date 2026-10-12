@@ -1,0 +1,83 @@
+/* Kotoba 1.0: friendly, legible immersion UI. Five distinct theme expressions. */
+#kotoba-root {
+  --km-display-font: 'Trebuchet MS', 'Arial Rounded MT Bold', 'Segoe UI', sans-serif;
+  --km-reading-font: 'Yu Gothic UI', 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+  --km-popup-highlight: #d47cb9;
+  font-family:var(--km-display-font);
+}
+#kotoba-root .km-sidebar {
+  box-shadow:-23px 0 70px #09071983, inset 2px 0 #ffffff10;
+  font-family:var(--km-display-font);
+}
+#kotoba-root .km-head {
+  min-height:74px;
+  background:linear-gradient(115deg,var(--km-canvas),var(--km-surface));
+  border-bottom:1px solid var(--km-border);
+}
+#kotoba-root .km-brand-copy strong {font-size:18px;letter-spacing:-.04em;font-weight:900}
+#kotoba-root .km-rail-title strong {font-size:19px;letter-spacing:-.045em;font-weight:900}
+#kotoba-root .km-cue-text,#kotoba-root .km-video-japanese {font-family:var(--km-reading-font);letter-spacing:.016em}
+#kotoba-root .km-word-token {border-bottom:2px solid transparent;padding:1px 1.5px;border-radius:6px;transition:transform .12s,background .12s,border-color .12s;position:relative}
+#kotoba-root .km-word-token:hover,#kotoba-root .km-word-token:focus-visible {border-bottom-color:var(--km-accent);transform:translateY(-1px);text-decoration:none!important;outline:none;background:color-mix(in srgb,var(--km-accent) 18%,transparent)}
+#kotoba-root .km-floating-gloss {
+  pointer-events:auto; z-index:2147483646;
+  width:318px; max-width:min(318px, calc(100vw - 16px));
+  padding:0; background:var(--km-surface);color:var(--km-ink);
+  border:1px solid var(--km-border);border-radius:20px;
+  backdrop-filter:blur(22px) saturate(1.2);
+  box-shadow:0 24px 70px #070511a3,0 2px 0 #ffffff12 inset;
+  overflow:hidden; text-shadow:none; text-align:left;
+  font-family:var(--km-display-font); font-size:13px;font-weight:500;
+  animation:km-gloss-appear .15s cubic-bezier(.2,.9,.1,1) both;
+}
+@keyframes km-gloss-appear {from{opacity:0;translate:0 8px;scale:.98}to{opacity:1;translate:0 0;scale:1}}
+#kotoba-root .km-gloss-top {padding:12px 16px 5px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+#kotoba-root .km-gloss-label {font-size:9px;letter-spacing:.17em;font-weight:950;color:var(--km-muted);text-transform:uppercase}
+#kotoba-root .km-gloss-common {font-size:9px;font-weight:900;padding:4px 8px;background:color-mix(in srgb,var(--km-accent) 18%,transparent);border-radius:99px;color:var(--km-accent)}
+#kotoba-root .km-gloss-title {padding:0 14px 0 16px;display:flex;align-items:center;gap:8px}
+#kotoba-root .km-gloss-jp {font:800 28px/1.4 var(--km-reading-font);letter-spacing:-.035em;flex:1;overflow-wrap:anywhere;color:var(--km-ink)}
+#kotoba-root .km-gloss-reading {padding:0 16px;font-family:var(--km-reading-font);font-size:12px;font-weight:700;color:var(--km-muted)}
+#kotoba-root .km-gloss-section {padding:9px 16px 4px;letter-spacing:.12em;font-weight:900;font-size:9px;color:var(--km-muted)}
+#kotoba-root .km-gloss-primary {padding:0 16px 6px;font-weight:850;font-size:17px;line-height:1.36;letter-spacing:-.025em;color:var(--km-ink)}
+#kotoba-root .km-gloss-other {margin:6px 0 0;border-top:1px solid var(--km-border);padding-top:2px}
+#kotoba-root .km-gloss-secondary {padding:3px 16px;line-height:1.42;font-size:12px;color:var(--km-ink);opacity:.74}
+#kotoba-root .km-gloss-actions {display:flex;align-items:center;gap:8px;padding:12px 14px 14px;margin-top:9px;border-top:1px solid var(--km-border);background:color-mix(in srgb,var(--km-canvas) 65%,transparent)}
+#kotoba-root .km-gloss-btn {border:1px solid var(--km-border);border-radius:11px;color:var(--km-ink);background:var(--km-canvas);padding:9px 11px;font-size:11px;font-weight:850;white-space:nowrap;transition:transform .13s,filter .13s}
+#kotoba-root .km-gloss-btn:hover {transform:translateY(-2px);filter:brightness(1.12)}
+#kotoba-root .km-gloss-speak {width:40px;height:40px;padding:0;border-radius:50%;background:var(--km-accent);color:var(--km-canvas);font-size:15px;box-shadow:0 5px 16px color-mix(in srgb,var(--km-accent) 35%,transparent)}
+#kotoba-root .km-gloss-details {flex:1}
+#kotoba-root .km-gloss-mine {background:var(--km-accent);color:var(--km-canvas);border-color:var(--km-accent);flex:1}
+#kotoba-root .km-miner {border-radius:20px!important;border:1px solid var(--km-border)!important;box-shadow:0 18px 76px #040510bd!important;overflow:hidden}
+#kotoba-root .km-miner-head {min-height:48px;padding:11px 17px;letter-spacing:-.015em;font-weight:900;background:linear-gradient(100deg,var(--km-canvas),var(--km-surface))}
+#kotoba-root .km-miner-scroll {padding:16px 18px 18px}
+#kotoba-root .km-result {border:1px solid var(--km-border);border-radius:15px;background:color-mix(in srgb,var(--km-surface) 82%,var(--km-canvas));padding:15px;margin-top:8px}
+#kotoba-root .km-result-first {align-items:center}
+#kotoba-root .km-word {font-family:var(--km-reading-font);font-size:27px;line-height:1.3;font-weight:850;color:var(--km-ink)}
+#kotoba-root .km-word-pronounce {width:33px;height:33px;display:grid;place-items:center;border:1px solid var(--km-border);border-radius:50%;font-size:14px;background:var(--km-accent);color:var(--km-canvas);cursor:pointer}
+#kotoba-root .km-reading {font-family:var(--km-reading-font)}
+#kotoba-root .km-definition-label {color:var(--km-muted);font-size:9px;letter-spacing:.12em;font-weight:900;margin:14px 0 5px}
+#kotoba-root .km-primary-meaning {font-size:16px;font-weight:850;letter-spacing:-.02em;margin:0 0 9px;color:var(--km-ink)}
+#kotoba-root .km-dictionary-secondary {display:grid;gap:4px}
+#kotoba-root .km-extra-meaning {font-size:12px;line-height:1.5;color:var(--km-ink);opacity:.8}
+#kotoba-root .km-search-row .km-query {border-radius:13px;font-size:13px}
+#kotoba-root .km-candidates .km-chip {border-radius:99px}
+#kotoba-root .km-card-creator {font-family:var(--km-display-font)}
+#kotoba-root .km-card-creator input,#kotoba-root .km-card-creator textarea {font-family:var(--km-reading-font);font-size:13px}
+#kotoba-root .km-menu-item,#kotoba-root .km-state,#kotoba-root .km-small-btn,#kotoba-root .km-btn {transition:transform .16s,filter .16s,background .16s}
+#kotoba-root .km-btn:hover:not(:disabled),#kotoba-root .km-state:hover:not(:disabled) {transform:translateY(-1px)}
+/* Theme-specific personality, without sacrificing reading contrast. */
+#kotoba-root[data-theme='cotton-candy'] .km-floating-gloss {border-radius:24px 24px 30px 19px;border:2px solid #edb2d5;background:linear-gradient(145deg,#fff8fe,#fce4f6 72%,#e7ecff);color:#42264b}
+#kotoba-root[data-theme='cotton-candy'] .km-gloss-primary,#kotoba-root[data-theme='cotton-candy'] .km-gloss-jp,#kotoba-root[data-theme='cotton-candy'] .km-gloss-secondary {color:#42264b}
+#kotoba-root[data-theme='cotton-candy'] .km-gloss-mine {background:linear-gradient(120deg,#ee7eba,#b891f7);color:white;border-color:#dd9bd8}
+#kotoba-root[data-theme='cotton-candy'] .km-gloss-speak {background:#92dfee;color:#32345e}
+#kotoba-root[data-theme='cotton-candy'] .km-floating-gloss::before {content:'✿';position:absolute;right:60px;top:15px;font-size:18px;color:#edb5d7;pointer-events:none}
+#kotoba-root[data-theme='cotton-candy'] .km-sidebar {border-top-left-radius:27px}
+#kotoba-root[data-theme='matcha-cream'] .km-floating-gloss,#kotoba-root[data-theme='matcha-cream'] .km-miner {border-radius:9px!important;box-shadow:0 12px 36px #14291647!important}
+#kotoba-root[data-theme='matcha-cream'] .km-gloss-btn {border-radius:6px}
+#kotoba-root[data-theme='matcha-cream'] .km-gloss-common {border-radius:4px}
+#kotoba-root[data-theme='sunset-pop'] .km-floating-gloss {border-radius:24px 16px 26px 14px;border:2px solid #f8a7b5;box-shadow:7px 9px 0 #f68cbd3a,0 18px 40px #0009}
+#kotoba-root[data-theme='midnight-neon'] .km-floating-gloss {border-color:#9a85ff8c;box-shadow:0 0 35px #7b6cff25,0 20px 65px #030113}
+#kotoba-root[data-theme='black-gold'] .km-floating-gloss {border:1px solid #c8a35d;background:linear-gradient(145deg,#171410,#211b14);color:#f6e2b3;border-radius:12px}
+#kotoba-root[data-theme='black-gold'] .km-gloss-primary,#kotoba-root[data-theme='black-gold'] .km-gloss-jp,#kotoba-root[data-theme='black-gold'] .km-gloss-secondary {color:#f6e2b3}
+#kotoba-root[data-theme='black-gold'] .km-gloss-mine {color:#18120b;background:linear-gradient(110deg,#e9cc84,#b98b44)}
+@media (prefers-reduced-motion:reduce){#kotoba-root .km-floating-gloss {animation:none}#kotoba-root .km-gloss-btn {transition:none}}

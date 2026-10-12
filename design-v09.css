@@ -1,0 +1,22 @@
+/* v0.9 recording and voice builder surfaces: theme-token responsive */
+#kotoba-root .km-creator-hotkey {margin:10px 0;padding:12px 14px;border:1px solid var(--km-border);border-radius:16px;background:var(--km-surface);display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap;color:var(--km-ink)}
+#kotoba-root .km-creator-hotkey strong{font-size:13px}
+#kotoba-root .km-creator-hotkey small{display:block;font-size:11px;opacity:.75;margin-top:3px}
+#kotoba-root .km-creator-hotkey kbd{color:var(--km-ink);background:var(--km-canvas);border:1px solid var(--km-border);border-radius:9px;padding:5px 10px;white-space:nowrap}
+#kotoba-root .km-media-tile .km-media-status {font-size:12px;line-height:1.5;min-height:20px;opacity:.85}
+#kotoba-root .km-media-tile .km-btn {margin:3px 3px 3px 0}
+#kotoba-root .km-clip-preview {width:100%;max-height:210px;aspect-ratio:16/9;border-radius:12px;background:#111a;object-fit:contain}
+#kotoba-root .km-audio-preview {display:block;width:100%;height:42px;margin:8px 0}
+#kotoba-root .km-media-tile strong{display:block;font-size:13px;margin-bottom:9px}
+#kotoba-root .km-media-tile .km-media-hint{font-size:11px;opacity:.75;display:block;margin-top:6px;line-height:1.45}
+#kotoba-root .km-record-scene.is-recording{background:#f85179;color:#fff;animation:km-rec-pulse 1.25s infinite}
+@keyframes km-rec-pulse{0%,100%{box-shadow:0 0 0 0 #ff38677e}50%{box-shadow:0 0 0 9px #ff386700}}
+#kotoba-root[data-theme=matcha-cream] .km-creator-hotkey{border-radius:7px}
+#kotoba-root[data-theme=black-gold] .km-creator-hotkey{border-color:#8c6727}
+#kotoba-root[data-theme=cotton-candy] .km-creator-hotkey{border-radius:30px 16px 30px 16px}
+.km-hotkey-editor{display:grid;gap:7px;margin-top:12px}
+.km-hotkey-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 8px;border-bottom:1px solid #aaa4}
+.km-hotkey-row>span{font-size:12px;font-weight:700}
+.km-hotkey-bind{white-space:nowrap;min-width:100px;min-height:32px;border-radius:9px;border:1px solid #8887;cursor:pointer;font-size:11px;font-weight:800;padding:5px 9px;outline-offset:2px}
+.km-hotkey-bind:focus{outline:2px solid #ef79c7}
+.km-reset-hotkeys{margin-top:12px!important;font-weight:750}

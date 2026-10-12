@@ -1,0 +1,27 @@
+KOTOBA MINER v1.12.8 - READY TO INSTALL
+=======================================
+
+THIS IS THE ACTUAL BROWSER EXTENSION (NOT A TEST PROJECT).
+The file "manifest.json" must be directly inside the folder Opera loads.
+
+TO UPDATE YOUR EXISTING KOTOBA WITHOUT LOSING SETTINGS:
+1. Close any pages on which Kotoba is running.
+2. Back up your current working Kotoba extension folder.
+3. Open this "Kotoba-Miner-v1.12.8" folder.
+4. Copy ALL its files into your EXISTING extension folder, replacing files.
+5. Go to opera://extensions and click Reload on your existing Kotoba entry.
+6. Refresh the video page. Press Alt+T to cycle Japanese, both, English.
+
+DO NOT select this ZIP file in Opera. Extract it first.
+DO NOT load the "tests" folder. This release does not contain development tests.
+DO NOT remove and reinstall the extension unless necessary; it may lose its
+existing extension ID and browser-stored Kotoba vocabulary/settings.
+
+FOR A NEW INSTALL:
+1. Extract the ZIP.
+2. Open opera://extensions and turn on Developer mode.
+3. Click Load unpacked and select "Kotoba-Miner-v1.12.8".
+4. Confirm that folder directly contains manifest.json.
+
+Limitations: English subtitles need accessible English captions or opt-in
+translation; some sites, including DRM-protected players, may not expose them.

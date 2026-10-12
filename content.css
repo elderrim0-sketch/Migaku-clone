@@ -1,0 +1,129 @@
+/* Kotoba styles: namespaced to avoid changing YouTube unless the dock is open. */
+html.km-docked { --km-rail-width: 370px; }
+@media (min-width: 900px) {
+  html.km-docked ytd-app { width:calc(100% - var(--km-rail-width)) !important; max-width:calc(100% - var(--km-rail-width)) !important; }
+  html.km-docked main.demo-main { width:calc(100% - var(--km-rail-width)); margin-left:0; }
+}
+#kotoba-root, #kotoba-root * { box-sizing:border-box; }
+#kotoba-root { font-family:system-ui,-apple-system,"Segoe UI",sans-serif; position:fixed; z-index:2147483646; top:0; left:0; color:#e8f3e9; font-size:13px; line-height:1.45; pointer-events:none; }
+#kotoba-root [hidden] { display:none !important; }
+#kotoba-root button, #kotoba-root select, #kotoba-root input, #kotoba-root textarea { font:inherit; }
+#kotoba-root button { cursor:pointer; }
+#kotoba-root button:disabled { cursor:not-allowed; opacity:.5; }
+#kotoba-root .km-launcher { pointer-events:auto; position:fixed; left:auto; top:78px; width:40px; height:40px; border:1px solid #daffbd; border-radius:12px; box-shadow:0 5px 18px #0009; background:#bdf79b; color:#18301e; font-weight:900; font-size:22px; transition:transform .15s, background .15s; padding:0; display:grid; place-items:center; z-index:2; }
+#kotoba-root .km-launcher:hover { transform:scale(1.07); }
+#kotoba-root .km-launcher.is-disabled { background:#23342a; color:#c3d0c2; border-color:#637366; }
+#kotoba-root .km-indicator { position:absolute; bottom:-5px; right:-4px; height:15px; width:15px; font-size:12px; display:grid; place-items:center; line-height:1; border-radius:50%; background:#0c2115; color:#bdf79b; }
+#kotoba-root .km-quickmenu { pointer-events:auto; position:fixed; top:126px; width:256px; border:1px solid #46614c; border-radius:15px; padding:7px; background:#142219; box-shadow:0 16px 50px #000b; z-index:3; }
+#kotoba-root .km-menu-heading { display:flex; flex-direction:column; gap:2px; padding:10px 11px; border-bottom:1px solid #334639; }
+#kotoba-root .km-menu-heading strong { font-size:14px; }
+#kotoba-root .km-menu-heading small { color:#a2b6a5; }
+#kotoba-root .km-menu-item { width:100%; display:flex; justify-content:space-between; align-items:center; gap:8px; border:0; border-radius:8px; padding:11px; background:transparent; color:#e3f1df; text-align:left; }
+#kotoba-root .km-menu-item:hover { background:#263b29; }
+#kotoba-root .km-switch { background:#bdf79b; color:#18301e; border-radius:7px; padding:3px 7px; font-size:10px; font-weight:800; }
+#kotoba-root .km-site-toggle[aria-pressed=false] .km-switch { background:#47554b; color:#fff; }
+#kotoba-root .km-sidebar { pointer-events:auto; position:fixed; top:0; right:0; width:370px; height:100dvh; display:flex; flex-direction:column; border-left:1px solid #365040; background:#101914; box-shadow:-15px 0 45px #0008; overflow:hidden; z-index:1; color:#f0f5ee; }
+#kotoba-root .km-head { height:68px; flex:0 0 auto; display:flex; align-items:center; gap:11px; padding:13px 15px; background:#17271d; border-bottom:1px solid #2d4133; }
+#kotoba-root .km-brand { display:grid; place-items:center; width:36px; height:36px; border-radius:11px; background:#bdf79b; color:#18301e; font-weight:900; font-size:22px; }
+#kotoba-root .km-brand-copy { min-width:0; flex:1; display:flex; flex-direction:column; }
+#kotoba-root .km-brand-copy strong { font-size:15px; letter-spacing:.1px; }
+#kotoba-root .km-brand-copy small { color:#9fb3a0; font-size:10px; }
+#kotoba-root .km-icon-btn { display:grid; place-items:center; width:31px; height:31px; border-radius:9px; border:1px solid #38513e; background:#203024; color:#b6c8bb; font-size:21px; }
+#kotoba-root .km-rail-head { flex:0 0 auto; padding:15px 15px 12px; border-bottom:1px solid #2e4134; background:#121e17; }
+#kotoba-root .km-rail-title { display:flex; justify-content:space-between; align-items:center; gap:8px; font-size:17px; margin-bottom:7px; }
+#kotoba-root .km-count { font-size:11px; font-weight:600; color:#c4e6b5; background:#263e2c; border-radius:25px; padding:5px 9px; white-space:nowrap; }
+#kotoba-root .km-status { font-size:11px; color:#9eb79e; min-height:22px; margin:0 0 8px; line-height:1.5; }
+#kotoba-root .km-status.is-error { color:#ebba9c; }
+#kotoba-root .km-control-row { display:flex; gap:7px; margin:8px 0 10px; }
+#kotoba-root .km-small-btn { display:flex; align-items:center; justify-content:center; flex:1; font-size:11px; text-align:center; padding:7px 7px; border-radius:8px; background:#263b2b; color:#d9edce; border:1px solid #46624b; cursor:pointer; white-space:nowrap; }
+#kotoba-root .km-small-btn:hover { background:#35553a; }
+#kotoba-root .km-filter-row { display:flex; gap:7px; }
+#kotoba-root .km-filter, #kotoba-root .km-input { background:#0b140e; border:1px solid #36543c; border-radius:9px; color:#eff6ed; min-width:0; padding:9px 10px; outline:none; }
+#kotoba-root .km-filter { flex:1; }
+#kotoba-root .km-filter:focus, #kotoba-root .km-input:focus { border-color:#bdf79b; }
+#kotoba-root .km-follow { border:1px solid #3c5844; border-radius:9px; color:#9bad9c; background:#18271d; padding:7px 9px; white-space:nowrap; font-size:11px; }
+#kotoba-root .km-follow.is-on { background:#334d2c; color:#d3fbb5; }
+#kotoba-root .km-list-wrap { overflow:auto; overflow-x:hidden; flex:1; min-height:100px; overscroll-behavior:contain; scrollbar-color:#49644b #142019; }
+#kotoba-root .km-cue { display:flex; align-items:flex-start; gap:10px; padding:12px 13px; border-bottom:1px solid #203027; border-left:3px solid transparent; min-height:57px; }
+#kotoba-root .km-cue:hover { background:#182a20; }
+#kotoba-root .km-cue.is-current { background:#243b28; border-left-color:#c2f6a5; }
+#kotoba-root .km-time { border:0; background:#23392a; color:#b2d4ae; border-radius:7px; padding:4px 5px; font-size:11px; width:45px; flex:0 0 45px; font-variant-numeric:tabular-nums; }
+#kotoba-root .km-time:hover { color:#17251a; background:#bdf79b; }
+#kotoba-root .km-cue-text { color:#e4ebe2; line-height:1.7; font-size:15px; min-width:0; flex:1; overflow-wrap:anywhere; }
+#kotoba-root .km-word-token { display:inline; padding:0 1px; margin:0; border:0; border-radius:3px; color:inherit; background:transparent; font-size:inherit; line-height:inherit; vertical-align:baseline; }
+#kotoba-root .km-word-token:hover, #kotoba-root .km-word-token:focus { background:#bdf79b; color:#18301e; }
+#kotoba-root .km-empty { font-size:13px; color:#a8bca9; padding:24px 18px; text-align:center; line-height:1.7; }
+#kotoba-root .km-footer { display:flex; justify-content:space-between; gap:8px; align-items:center; flex:0 0 auto; min-height:44px; padding:8px 12px; background:#18261c; border-top:1px solid #2a4031; font-size:10px; color:#9cb6a2; }
+#kotoba-root .km-open-dict { font-size:11px; white-space:nowrap; color:#c9f5b1; border:0; background:transparent; }
+#kotoba-root .km-miner { flex:0 1 auto; max-height:58%; min-height:190px; background:#14231a; border-top:2px solid #9dd87c; display:flex; flex-direction:column; box-shadow:0 -8px 25px #0005; }
+#kotoba-root .km-miner-head { display:flex; justify-content:space-between; align-items:center; flex:0 0 auto; padding:8px 14px; font-size:12px; border-bottom:1px solid #324736; }
+#kotoba-root .km-miner-scroll { overflow-y:auto; padding:11px 15px 15px; scrollbar-color:#49644b #142019; }
+#kotoba-root .km-context { color:#afc4a9; font-size:12px; white-space:normal; margin:0 0 10px; border-left:2px solid #92ce74; padding-left:9px; }
+#kotoba-root .km-search-row { display:flex; gap:7px; }
+#kotoba-root .km-query { width:100%; flex:1; }
+#kotoba-root .km-btn { color:#e5f3e4; background:#294130; border:1px solid #496b51; border-radius:9px; padding:8px 10px; font-weight:650; }
+#kotoba-root .km-btn:hover { background:#365640; }
+#kotoba-root .km-loading { color:#c4f6a4; padding:10px 0; }
+#kotoba-root .km-result { padding:10px 0; border-bottom:1px solid #324836; }
+#kotoba-root .km-result-first { display:flex; gap:9px; align-items:baseline; flex-wrap:wrap; }
+#kotoba-root .km-word { font-size:24px; font-weight:800; color:#c8ffaf; }
+#kotoba-root .km-reading { color:#b0cbb1; font-size:13px; }
+#kotoba-root .km-meaning { font-size:13px; margin:5px 0; }
+#kotoba-root .km-meta { font-size:10px; color:#9ba99c; }
+#kotoba-root .km-candidates, #kotoba-root .km-external { display:flex; flex-wrap:wrap; gap:7px; margin:8px 0; }
+#kotoba-root .km-chip { background:#243b2b; color:#cde4c5; padding:5px 8px; border:1px solid #415f49; border-radius:8px; font-size:11px; }
+#kotoba-root .km-chip.active { color:#132318; background:#bdf79b; }
+#kotoba-root a { color:#c0ecb5; font-size:11px; text-decoration:underline; text-underline-offset:3px; }
+#kotoba-root .km-eyebrow { text-transform:uppercase; letter-spacing:1.3px; font-size:10px; color:#9fbd9d; margin:12px 0 8px; font-weight:800; }
+#kotoba-root .km-preview { color:#d9e6d1; font-size:12px; white-space:pre-wrap; border-left:3px solid #8bcf74; padding-left:9px; }
+#kotoba-root .km-edit-label { display:block; color:#b6c3b1; font-size:11px; margin:9px 0 5px; }
+#kotoba-root .km-textarea { background:#0d1911; color:#e9f3e4; border:1px solid #44614a; border-radius:9px; padding:10px; width:100%; min-height:55px; resize:vertical; }
+#kotoba-root .km-deck-row { display:flex; gap:7px; }
+#kotoba-root .km-deck { flex:1; min-width:0; border:1px solid #45674c; border-radius:9px; background:#0e1712; color:#ecf2ed; padding:8px; color-scheme:dark; }
+#kotoba-root .km-save { width:100%; background:#bdf79b; color:#112116; margin-top:10px; font-weight:800; }
+#kotoba-root .km-save:hover { background:#d1ffb9; }
+#kotoba-root .km-notice { font-size:11px; color:#a3bca7; margin:8px 0; overflow-wrap:anywhere; }
+#kotoba-root .km-notice.error { color:#ffc4ad; }
+@media (max-width:899px) {
+  #kotoba-root .km-sidebar { width:min(370px, 100vw); }
+  #kotoba-root .km-launcher { z-index:3; }
+}
+
+/* v0.4: native-feeling on-player captions, fluent Japanese reading typography, pitch cues. */
+html.km-captions-active .ytp-caption-window-container { visibility:hidden !important; }
+#kotoba-root { --km-jp-font: "Hiragino Kaku Gothic ProN", "Yu Gothic", "YuGothic", "Meiryo", "Noto Sans CJK JP", sans-serif; }
+#kotoba-root .km-video-subs { pointer-events:auto; position:fixed; left:50vw; bottom:18vh; transform:translateX(-50%); min-width:140px; max-width:75vw; padding:8px 22px; border-radius:11px; text-align:center; z-index:4; background:rgba(10,12,14,.76); backdrop-filter:blur(8px); box-shadow:0 4px 20px #0008; }
+#kotoba-root .km-video-japanese { font-family:var(--km-jp-font); font-size:clamp(22px,2.55vw,38px); line-height:1.72; letter-spacing:.035em; font-weight:750; text-shadow:0 2px 4px black,0 1px 14px #000; white-space:normal; overflow-wrap:anywhere; }
+#kotoba-root .km-video-translation { font-family:system-ui,sans-serif; font-size:clamp(12px,1.1vw,16px); line-height:1.42; font-weight:600; letter-spacing:0; color:#fff1cb; border-top:1px solid #5e6859; margin-top:5px; padding:7px 3px 1px; }
+#kotoba-root .km-coverage { pointer-events:auto; position:fixed; width:340px; padding:10px 12px; z-index:4; border-radius:10px; border:1px solid #607f67; background:#101a16de; backdrop-filter:blur(10px); box-shadow:0 5px 19px #0008; }
+#kotoba-root .km-coverage-head { display:flex; gap:12px; justify-content:space-between; align-items:center; font-size:13px; font-weight:700; }
+#kotoba-root .km-coverage-head em { font-style:normal; font-size:10px; color:#b0c2b0; font-weight:500; }
+#kotoba-root .km-coverage-percent { color:#c2f2a7; font-size:16px; }
+#kotoba-root .km-coverage-meter { width:100%; height:6px; margin:9px 0 7px; border-radius:12px; background:#526253; overflow:hidden; }
+#kotoba-root .km-coverage-fill { background:linear-gradient(90deg,#7bbaeb,#b1f0a2); height:100%; width:0; border-radius:12px; transition:width .3s; }
+#kotoba-root .km-coverage-description { color:#bed0c0; font-size:10px; line-height:1.35; }
+#kotoba-root .km-menu-explainer { color:#9cae9c; font-size:10px; padding:8px 12px 6px; border-top:1px solid #334639; }
+#kotoba-root .km-pitch-legend { display:flex; gap:8px; align-items:center; justify-content:center; flex-wrap:wrap; font-size:10px; padding:7px 3px; border-bottom:1px solid #2c4532; background:#0c1411; }
+#kotoba-root .km-pitch-heiban { color:#87c7ff; } #kotoba-root .km-pitch-atamadaka { color:#ff888e; }
+#kotoba-root .km-pitch-nakadaka { color:#ffc16e; } #kotoba-root .km-pitch-odaka { color:#a1e3ad; }
+#kotoba-root .km-cue { padding:12px 17px; cursor:pointer; } 
+#kotoba-root .km-cue-text { font-family:var(--km-jp-font); font-size:17px; line-height:1.85; letter-spacing:.025em; font-weight:650; }
+#kotoba-root .km-word-token { border-radius:4px; transition:background-color .1s; }
+#kotoba-root[data-pitch-mode='always'] .km-word-token[data-pitch='heiban'] { color:#87c7ff; }
+#kotoba-root[data-pitch-mode='always'] .km-word-token[data-pitch='atamadaka'] { color:#ff888e; }
+#kotoba-root[data-pitch-mode='always'] .km-word-token[data-pitch='nakadaka'] { color:#ffc16e; }
+#kotoba-root[data-pitch-mode='always'] .km-word-token[data-pitch='odaka'] { color:#a1e3ad; }
+#kotoba-root[data-pitch-mode='hover'] .km-word-token[data-pitch='heiban']:hover { color:#87c7ff; }
+#kotoba-root[data-pitch-mode='hover'] .km-word-token[data-pitch='atamadaka']:hover { color:#ff888e; }
+#kotoba-root[data-pitch-mode='hover'] .km-word-token[data-pitch='nakadaka']:hover { color:#ffc16e; }
+#kotoba-root[data-pitch-mode='hover'] .km-word-token[data-pitch='odaka']:hover { color:#a1e3ad; }
+#kotoba-root .km-word-token:hover,#kotoba-root .km-word-token:focus { background:#3e5f44; color:#fff; }
+#kotoba-root .km-word-token.km-known-word { text-decoration:underline dotted #b0ffc2 1px; text-underline-offset:5px; }
+#kotoba-root .km-floating-gloss { pointer-events:none; position:fixed; z-index:8; width:max-content; max-width:262px; padding:10px 12px; background:#f6fff0; color:#192b1b; border-radius:10px; box-shadow:0 6px 30px #000b; line-height:1.45; font-size:13px; font-weight:650; }
+#kotoba-root .km-known-row { display:flex; gap:8px; align-items:center; margin:8px 0 4px; }
+#kotoba-root .km-known-row small { color:#93aa97; font-size:10px; }
+#kotoba-root .km-known-toggle { font-size:11px; }
+@media (max-width:800px) { #kotoba-root .km-video-japanese { font-size:23px; } #kotoba-root .km-video-subs {padding:6px 10px;} #kotoba-root .km-coverage { width:220px; } }
+
+/* Universal reader status dot */
+#kotoba-root .km-launcher[data-caption-status="detected"] .km-indicator{background:#45ce9d!important;box-shadow:0 0 0 2px #ffffff99,0 0 11px #64e7b0}

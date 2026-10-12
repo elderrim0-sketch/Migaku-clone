@@ -1,0 +1,26 @@
+.km-popup-studio {margin:12px 0;border-radius:16px;border:1px solid #ffffff29;padding:10px;background:var(--surface,#251b35);}
+.km-popup-studio summary {cursor:pointer;font-size:12px;font-weight:850;color:var(--accent,#edb3e1);padding:8px}
+.km-popup-studio-mount {padding:8px 3px;color:var(--ink,#f6efff);}
+.km-popup-studio-mount .km-studio-intro {font-size:11px;opacity:.7;line-height:1.5}
+.km-popup-studio-mount .km-style-example {padding:17px 8px;margin:12px 0;text-align:center;border-radius:16px;border:1px solid #ffffff22;background:#1c142b;display:flex;flex-direction:column;gap:7px}
+.km-popup-studio-mount .km-style-example-jp {font-family:'Yu Gothic','Meiryo',sans-serif}
+.km-popup-studio-mount .km-style-example-en {font-size:12px}
+.km-popup-studio-mount .km-studio-tabs {display:flex;gap:6px;margin:12px 0}
+.km-popup-studio-mount .km-studio-tab {flex:1;border:1px solid #ffffff22;background:#ffffff0b;color:inherit;border-radius:10px;padding:9px;font-weight:850;cursor:pointer}
+.km-popup-studio-mount .km-studio-tab.is-active {background:linear-gradient(120deg,#e693c1,#a48def);color:#1d1932;border-color:transparent}
+.km-popup-studio-mount .km-style-controls {display:grid;gap:3px}
+.km-popup-studio-mount .km-style-field {display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 4px;border-bottom:1px solid #ffffff19;font-size:12px}
+.km-popup-studio-mount .km-style-field>span:first-child {flex:1}
+.km-popup-studio-mount .km-style-field select {width:140px;border-radius:9px;padding:8px;background:#29213c;color:#fff;border:1px solid #ffffff40}
+.km-popup-studio-mount .km-style-control-pair {display:flex;align-items:center;gap:5px}
+.km-popup-studio-mount .km-style-control-pair input[type=range] {max-width:125px;accent-color:#e49bdc}
+.km-popup-studio-mount .km-style-control-pair output {width:36px;font-size:10px;font-weight:750;text-align:right}
+.km-popup-studio-mount .km-style-control-pair input[type=color] {width:38px;height:29px;border:0;background:transparent}
+.km-popup-studio-mount input[type=checkbox] {accent-color:#e8a1df}
+.km-popup-studio-mount .km-studio-actions {display:flex;align-items:center;gap:8px;flex-direction:column;padding:12px 0}
+.km-popup-studio-mount .km-studio-reset {border:1px solid #ffffff35;color:inherit;background:#ffffff16;padding:10px 15px;border-radius:99px;cursor:pointer}
+.km-popup-studio-mount .km-studio-actions small {font-size:10px;opacity:.65}
+.km-popup-studio-mount .km-style-controls[hidden]{display:none!important}
+.km-popup-studio-mount .km-style-field{color:#f6edff!important}
+.km-popup-studio-mount .km-style-control-pair output{color:#f2c1fa!important}
+.km-popup-studio-mount .km-studio-intro,.km-popup-studio-mount .km-studio-actions small{color:#c7bcd7!important}

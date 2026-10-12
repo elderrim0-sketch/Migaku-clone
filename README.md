@@ -1,27 +1,16 @@
-# Kotoba Miner v2.3 — Familiar vocabulary + reviewed Anki sync
+# Kotoba Miner v2.4 — Transcript & Audio Polish
 
-## Update without resetting data
-1. Keep your current Kotoba extension installed and back up the extension folder.
-2. Copy all contents of `Kotoba-Miner-v2.3` into that same existing installed folder.
-3. In `opera://extensions`, click **Reload**, then refresh the video pages.
-4. Open Anki Desktop, then **Kotoba settings → Anki vocabulary sync → Sync now**. Your previous v2.2 scan included unreviewed cards; this first v2.3 sync corrects the numbers.
+This release keeps all v2.3 features and saved settings while improving subtitle-reading ergonomics.
 
-## Accurate status rules
-- **Known (green)**: explicitly marked known, or imported Anki card with a Good/Easy history and a current interval of at least 21 days.
-- **Tracked (purple)**: manually tracked, or Anki card with at least one actual Good/Easy answer and an interval below 21 days.
-- **Familiar**: total **unique Known + Tracked words**. Green words are not counted twice.
-- **Unseen (red)**: no recognized reviewed Anki card or manual override.
-- Manual Known/Track/Learning/Unknown/Ignore settings override Anki imports.
-- Learning (orange) is kept separate from Familiar; this metric means specifically green + purple.
-- Anki reviews are read using `getReviewsOfCards`, answer values **3 (Good) or 4 (Easy)**. Merely creating a card, pressing Again/Hard only, or having an unreviewed card in a deck does NOT count.
-- A card imported through Kotoba is not marked Tracked until you answer it Good or Easy and sync again.
+- **Compact transcript:** Smaller Japanese dialogue rows; long live lines are folded to three lines and have **More/Less** to expand. Original cue text remains available for Anki.
+- **Less repetitive live captions:** An expanding text overlay updates the existing subtitle line instead of creating a new row on every partial update. This cannot reconstruct a full subtitle file from a live-capture-only player.
+- **Smart context for cards:** The word's own Japanese sentence is chosen. If subtitles split a single sentence across adjacent cues, they are joined conservatively; unrelated earlier finished sentences are not added. The sentence stays editable in the card creator.
+- **Source audio:** On user-initiated Q card saves or scene captures from accessible HTML5 players, record around the chosen subtitle sentence, with light padding and a target of at least 5 seconds for very short clips. Audio may still fail on protected/embedded players.
+- **Subtitle timing:** **語 → Subtitle timing**; `−` makes subtitles 0.25 s earlier, `+` makes them 0.25 s later, and `↺` restores Auto. Auto defaults to +0.35 s for live-caption capture and 0 for timed tracks. The setting is local, persistent, and also shifts optional capture timing.
+- **Known underline:** Thick green underline, consistent with red unknown styling.
 
-## Performance and limits
-- AnkiConnect must be running with Anki Desktop. The first sync reads the review log for up to 6,000 reviewed cards in the selected decks. Review-history errors cause the sync to fail WITHOUT replacing your saved word lists.
-- Japanese vocabulary field detection is heuristic; unusual card templates or sentences may be skipped.
-- If automatic sync is enabled, the counts refresh approximately every 15 minutes while Anki Desktop is running, with an 8-minute cooldown.
-- A review can make a word *Familiar* but does not prove comprehension. Studio and Dashboard display explicit Known vs Familiar counts.
-- The separate single-deck mature-word importer also checks Good/Easy review history. It still adds those mature words to the local Known list as requested by its own button.
+## Install
+Back up your active Kotoba folder, extract the ZIP, copy **contents of Kotoba-Miner-v2.4** into your existing extension folder, replacing files. Visit `opera://extensions`, press Reload, and refresh your video site. Do **not** remove and reinstall the extension if you want to retain its storage identity.
 
-## Safety
-Local, no cloud syncing. Your Anki cards are read only, never edited. Back up your Opera profile and Anki collection separately.
+## Limitations
+Accuracy depends on subtitle cue timestamps; for live overlays the start/end times are estimates. Sentence grouping uses conservative punctuation and timing heuristics, not a full grammatical parser. Source audio requires a player with accessible media tracks and permission to use them; it does not bypass DRM. Test in Opera and check card media before relying on it.

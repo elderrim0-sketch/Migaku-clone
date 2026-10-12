@@ -5,6 +5,7 @@
   if (document.getElementById('kotoba-root')) return;
   const U = globalThis.KMTranscript;
   const Icons = globalThis.KMIcons;
+  const CueContext = globalThis.KMCueContext;
   if (!U) return;
   const isDemo = location.protocol === 'chrome-extension:' || Boolean(document.querySelector('#demo-caption'));
   const isYT = /(^|\.)youtube\.com$/i.test(location.hostname);
@@ -21,6 +22,10 @@
         <div class="km-v22-switches">
           <button class="km-menu-item km-show-rail" type="button"><span><i data-km-icon="captions"></i><span class="km-v22-menu-copy"><strong>Transcript</strong><small>Show or hide the subtitle list</small></span></span><span class="km-plain-icon" data-km-icon="arrow-right"></span></button>
           <button class="km-menu-item km-coverage-toggle" type="button" aria-pressed="false"><span><i data-km-icon="chart"></i><span class="km-v22-menu-copy"><strong>Comprehension tracker</strong><small>Vocabulary coverage estimate</small></span></span><span class="km-coverage-value km-v22-switch">OFF</span></button>
+        </div>
+        <div class="km-v24-sync" role="group" aria-label="Subtitle timing adjustment">
+          <div><strong><i data-km-icon="clock"></i> Subtitle timing</strong><small>Adjust when text appears · auto by default</small></div>
+          <div class="km-v24-sync-controls"><button type="button" class="km-offset-earlier" aria-label="Subtitles 0.25 seconds earlier" title="Show subtitles earlier">−</button><output class="km-offset-value" aria-live="polite">Auto</output><button type="button" class="km-offset-later" aria-label="Subtitles 0.25 seconds later" title="Show subtitles later">+</button><button type="button" class="km-offset-reset" title="Return to automatic timing" aria-label="Reset subtitle timing">↺</button></div>
         </div>
         <div class="km-v22-theme-section">
           <div class="km-v22-section-label"><strong>Choose a theme</strong><span class="km-theme-current">Cotton Candy</span></div>
@@ -82,7 +87,7 @@
     <aside class="km-sidebar" aria-label="Kotoba Japanese transcript sidebar" hidden>
       <header class="km-head">
         <span class="km-brand">語</span>
-        <span class="km-brand-copy"><strong>Kotoba Miner</strong><small>Japanese immersion · v2.2</small></span>
+        <span class="km-brand-copy"><strong>Kotoba Miner</strong><small>Japanese immersion · v2.4</small></span>
         <button class="km-icon-btn km-close" aria-label="Close transcript sidebar" title="Close sidebar"><i data-km-icon="x"></i></button>
       </header>
       
@@ -208,6 +213,22 @@
   let selected = '';
   let lastMiningTarget = null;
   let quickSaveBusy = false;
+  // null uses intelligent defaults (350ms later for live DOM captions, 0ms for timed tracks).
+  let subtitleOffsetMs = null;
+  const offsetForSource=()=>subtitleOffsetMs===null?(cueSource==='Live capture'?350:0):subtitleOffsetMs;
+  function offsetLabel(){return subtitleOffsetMs===null?'Auto':(subtitleOffsetMs>0?'+':'')+(subtitleOffsetMs/1000).toFixed(2)+'s';}
+  function applyOffset(){
+    $('.km-offset-value').textContent=offsetLabel();
+    syncActive(true);renderVideoSubtitle();
+  }
+  async function changeOffset(delta){
+    const base=subtitleOffsetMs===null?offsetForSource():subtitleOffsetMs;
+    subtitleOffsetMs=Math.max(-2500,Math.min(2500,base+delta));
+    applyOffset();await chrome.storage.local.set({kotobaSubtitleOffsetMs:subtitleOffsetMs});
+  }
+  $('.km-offset-earlier').addEventListener('click',()=>changeOffset(-250));
+  $('.km-offset-later').addEventListener('click',()=>changeOffset(250));
+  $('.km-offset-reset').addEventListener('click',()=>{subtitleOffsetMs=null;applyOffset();chrome.storage.local.set({kotobaSubtitleOffsetMs:null});});
   let context = null;
   let currentTrackRequest = 0;
   let lastRequestedKey = '';
@@ -1051,7 +1072,7 @@
     }
   }
   function currentCue() {
-    const idx=U.activeIndex(cues,demoSeconds()*1000);
+    const idx=U.activeIndex(cues,Math.max(0,demoSeconds()*1000-offsetForSource()));
     return idx>=0 ? cues[idx] : null;
   }
   function refreshPitchCounts(){
@@ -1170,8 +1191,8 @@
   }
   function englishAtCurrentTime(){
     if(isDemo)return demoTranslations.get(shownVideoText)||'';
-    const fromCues=subtitleModes.active(englishCues,playerMillis());
-    if(fromCues)return fromCues;
+    const fromCues=subtitleModes.active(englishCues,Math.max(0,playerMillis()-offsetForSource()));
+    if(englishCues.length)return fromCues;
     if(isGenericVideoSite && embeddedCurrent() && embeddedPlayer.englishText)return embeddedPlayer.englishText;
     const track=[...(video()?.textTracks||[])].find(t=>subtitleModes.isEnglishTrack(t));
     return track?.activeCues?.length ? U.clean([...track.activeCues].map(c=>c.text||'').join(' ')) : '';
@@ -1231,7 +1252,7 @@
   }
   function renderVideoSubtitle() {
     const cue=currentCue();
-    const text=cue?.text || (!isDemo?liveCaption():'');
+    const text=cue?.text || (cueSource==='Live capture' ? '' : (!isDemo?liveCaption():''));
     if(text!==shownVideoText) {
       shownVideoText=text;
       const line=$('.km-video-japanese');line.replaceChildren();
@@ -1285,6 +1306,12 @@
       }
       const line=document.createElement('div');line.className='km-cue-text';tokens(cue.text,cue,line);
       row.addEventListener('click',()=>seekCue(cue));row.appendChild(line);
+      if(cue.text.length>62){
+        row.classList.add('km-cue-collapsible');
+        const expand=document.createElement('button');expand.type='button';expand.className='km-cue-expand';expand.textContent='More';expand.setAttribute('aria-label','Expand long transcript line');
+        expand.addEventListener('click',e=>{e.stopPropagation();const expanded=row.classList.toggle('km-cue-expanded');expand.textContent=expanded?'Less':'More';expand.setAttribute('aria-expanded',String(expanded));});
+        row.appendChild(expand);
+      }
       if(recommendation){
         const actions=document.createElement('div');actions.className='km-recommend-actions';
         const mine=document.createElement('button');mine.type='button';mine.className='km-mine-target';mine.textContent='Mine '+recommendation.target.word+' ↗';
@@ -1339,7 +1366,7 @@
   $('.km-loop-now').addEventListener('click',toggleSentenceLoop);
   function syncActive(force = false) {
     if (!cues.length || !displayEnabled()) return;
-    const seconds = demoSeconds()*1000;
+    const seconds = Math.max(0,demoSeconds()*1000-offsetForSource());
     const idx = U.activeIndex(cues,seconds);
     if (idx !== active || force) {
       const previous = $('.km-cue.is-current');
@@ -1404,13 +1431,19 @@
       const line=liveCaption();
       if (line && line !== lastCaption) {
         lastCaption=line;
-        const start=Math.floor(demoSeconds()*1000);
-        const prev=trackedCaptions.at(-1);
-        if (!prev || prev.text !== line || Math.abs(start-prev.start)>3000) {
-          trackedCaptions.push({start,end:start+3000,text:line});
-          if (trackedCaptions.length>2500) trackedCaptions.shift();
+        const change=CueContext.appendLive(trackedCaptions,line,Math.floor(demoSeconds()*1000));
+        if(change.changed){
           setCues(trackedCaptions,'Live capture');
           status('Live capture · only lines seen so far. For all lines, import a transcript.');
+        }
+      } else if(line && cueSource==='Live capture') {
+        // A stable caption may remain on-screen for several seconds. Keep its
+        // actual active window alive without duplicating transcript rows.
+        const now=demoSeconds()*1000;
+        const last=trackedCaptions.at(-1),displayLast=cues.at(-1);
+        if(last?.text===CueContext.recentCaption(line)){
+          last.end=Math.max(last.end,now+650);
+          if(displayLast?.text===last.text)displayLast.end=Math.max(displayLast.end,last.end);
         }
       }
     }
@@ -1528,9 +1561,13 @@
   });
 
   // The mining panel keeps the selected sentence and time independent of playback.
-  function sourceSnapshot(cue) {
-    const seconds=cue ? cue.start/1000 : demoSeconds();
-    return {sentence: cue?.text || liveCaption() || '',seconds:Math.floor(seconds),cueStart:cue?.start ?? null,cueEnd:cue?.end ?? null, url:timestampUrl(seconds),title:document.title.replace(' - YouTube','') || site};
+  function miningPlan(cue,word){
+    return CueContext.choose(cues,cue||currentCue(),word||selected);
+  }
+  function sourceSnapshot(cue,word='') {
+    const plan=miningPlan(cue,word);
+    const seconds=(plan.start||cue?.start||demoSeconds()*1000)/1000;
+    return {sentence: plan.sentence || cue?.text || liveCaption() || '',seconds:Math.floor(seconds),cueStart:plan.start ?? cue?.start ?? null,cueEnd:plan.end ?? cue?.end ?? null,url:timestampUrl(seconds),title:document.title.replace(' - YouTube','') || site};
   }
   function addText(parent,cls,text,tag='div') {
     const item=document.createElement(tag); item.className=cls; item.textContent=text; parent.appendChild(item); return item;
@@ -1571,7 +1608,7 @@
   }
   async function selectWord(word, cue=null, lemma=null) {
     const q=String(word||'').trim().slice(0,80); if(!q) return;
-    selected=q; const lookupLemma=lemma||q; context=sourceSnapshot(cue);
+    selected=q; const lookupLemma=lemma||q; context=sourceSnapshot(cue,q);
     lastMiningTarget={word:q,lemma:lookupLemma,cue,entry:null,at:Date.now()};updateKnownButton();
     const v=video(); if (v && !v.paused) v.pause();
     siteEnabled=true; railOpen=true; updateDisplay();
@@ -1762,8 +1799,10 @@
   }
   // Q audio-only capture, user-triggered. Only MediaStream audio from accessible HTML5 players.
   // No tab audio interception or DRM circumvention. Keeps the screenshot separate.
-  async function captureQuickSourceAudio(cue){
-    const player=video();const start=Number(cue?.start)/1000,end=Number(cue?.end)/1000;
+  async function captureQuickSourceAudio(cue,word=''){
+    if(!cue)throw Error('A timed subtitle is required for source audio.');
+    const player=video();const span=CueContext.audioWindow(miningPlan(cue,word),offsetForSource());
+    const start=span.start/1000,end=Math.min(span.end/1000,Number.isFinite(player?.duration)?Math.max(0,player.duration-.06):Infinity);
     if(!player || !Number.isFinite(start)||!Number.isFinite(end) || !(end-start>=.35 && end-start<=18))throw Error('Timed subtitle audio unavailable.');
     if(typeof player.captureStream!=='function' || typeof MediaRecorder==='undefined')throw Error('This player does not expose recordable audio.');
     const mime=['audio/webm;codecs=opus','audio/webm'].find(m=>MediaRecorder.isTypeSupported(m));
@@ -1823,7 +1862,7 @@
       // Check deck before doing any more work, so the fast path cannot make a silent destination.
       const decks=await chrome.runtime.sendMessage({type:'ANKI_DECKS'});
       if(!decks?.ok||!decks.decks?.includes(deck))throw Error('Anki is offline or the selected deck no longer exists. Open Anki and refresh decks.');
-      const source=sourceSnapshot(target.cue || currentCue());
+      const source=sourceSnapshot(target.cue || currentCue(),word);
       if(!source.sentence)throw Error('No Japanese subtitle sentence selected. Load subtitles first.');
       const picture=await captureQuickFrame();
       let entry=target.entry;
@@ -1840,7 +1879,7 @@
       let sourceAudio=null;let audioWarning='';
       try{
         voiceStatus('♫ Recording original subtitle audio…');
-        sourceAudio=await captureQuickSourceAudio(target.cue||currentCue());
+        sourceAudio=await captureQuickSourceAudio(target.cue||currentCue(),word);
       }catch(err){audioWarning=err.message||'Original audio unavailable';}
       let wordAudio=null;
       if(autoGenerateWordAudio){
@@ -1970,7 +2009,8 @@
     if(!player || typeof player.captureStream!=='function' || typeof MediaRecorder==='undefined'){
       clipLabel.textContent='This player does not expose recordable media. Import your own video/audio instead.';$('.km-card-creator').hidden=false;return;
     }
-    const start=cue.start/1000,end=cue.end/1000;
+    const span=CueContext.audioWindow(miningPlan(cue,selected),offsetForSource());
+    const start=span.start/1000,end=Math.min(span.end/1000,Number.isFinite(player?.duration)?Math.max(0,player.duration-.06):Infinity);
     if(!(end>start && end-start<=90)) {clipLabel.textContent='Subtitle timing is missing or longer than 90 seconds. Use an imported timed track.';return;}
     const before={paused:player.paused,time:player.currentTime,rate:player.playbackRate};
     let stream=null,videoRec=null,audioRec=null,recordingError='';
@@ -2041,7 +2081,8 @@
         previewMedia('.km-source-audio',capturedAudio,'audio/webm');
         audioLabel.textContent=`✓ Original sentence audio attached · ${(blob.size/1000).toFixed(0)} KB`;
       } else audioLabel.textContent='Player provided no audio track. Upload source audio if available.';
-      if(!selected){context=sourceSnapshot(cue);}else{$('.km-field-sentence').value=cue.text;}
+      const cardSource=sourceSnapshot(cue,selected);
+      if(!selected){context=cardSource;}else{$('.km-field-sentence').value=cardSource.sentence;}
       $('.km-save-notice').textContent='✓ Subtitle-timed capture finished. Screenshot, clip and audio are separate fields; review before saving.';
     }catch(err){recordingError=err.message||'Scene recording failed';clipLabel.textContent=recordingError;
       $('.km-save-notice').textContent='Recording unavailable: '+recordingError+' — upload media instead.';
@@ -2177,8 +2218,10 @@
     renderPlayModeVisual();
     placeLauncher();
   }
-  chrome.storage.local.get({enabled:true,siteEnabledV3:{},onVideoEnabled:true,coverageEnabled:false,pitchMode:'always',sentenceTranslation:false,kotobaSubtitleMode:'ja',autoJapaneseSubtitles:true,pauseOnHover:true,kotobaLookupHoverModifier:'alt',autoGenerateWordAudio:true,kotobaHotkeys:{},kotobaDictionaryPositions:{},knownWords:[],wordStatuses:{},kotobaTheme:'cotton-candy',kotobaLauncherPositions:{},kotobaSubtitleStyle:{},kotobaHideOriginalCaptions:true,kotobaFuriganaMode:'unknown',kotobaSentenceAutoPause:false,ankiVocabularyKnown:[],ankiVocabularyLearning:[],kotobaPlayMode:'normal'}).then(settings=>{
+  chrome.storage.local.get({enabled:true,siteEnabledV3:{},onVideoEnabled:true,coverageEnabled:false,pitchMode:'always',sentenceTranslation:false,kotobaSubtitleMode:'ja',autoJapaneseSubtitles:true,pauseOnHover:true,kotobaLookupHoverModifier:'alt',autoGenerateWordAudio:true,kotobaHotkeys:{},kotobaDictionaryPositions:{},knownWords:[],wordStatuses:{},kotobaTheme:'cotton-candy',kotobaLauncherPositions:{},kotobaSubtitleStyle:{},kotobaHideOriginalCaptions:true,kotobaFuriganaMode:'unknown',kotobaSentenceAutoPause:false,ankiVocabularyKnown:[],ankiVocabularyLearning:[],kotobaPlayMode:'normal',kotobaSubtitleOffsetMs:null}).then(settings=>{
     subtitleStyle=subtitleSettings.normalize(settings.kotobaSubtitleStyle);syncStudioInputs();
+    subtitleOffsetMs=Number.isFinite(settings.kotobaSubtitleOffsetMs)?Math.max(-2500,Math.min(2500,settings.kotobaSubtitleOffsetMs)):null;
+    $('.km-offset-value').textContent=offsetLabel();
     autoGenerateWordAudio=settings.autoGenerateWordAudio!==false;
     hideOriginalCaptions=settings.kotobaHideOriginalCaptions!==false;
     hotkeys=KMKeys.validate(settings.kotobaHotkeys);redrawShortcuts();
@@ -2222,6 +2265,7 @@
     if(changes.pitchMode) {pitchMode=changes.pitchMode.newValue;updateDisplay();}
     if(changes.sentenceTranslation){sentenceTranslation=!!changes.sentenceTranslation.newValue;renderEnglishSubtitle();}
     if(changes.kotobaSubtitleMode){subtitleLanguageMode=subtitleModes.normalize(changes.kotobaSubtitleMode.newValue);renderVideoSubtitle();updateDisplay();}
+    if(changes.kotobaSubtitleOffsetMs){subtitleOffsetMs=Number.isFinite(changes.kotobaSubtitleOffsetMs.newValue)?changes.kotobaSubtitleOffsetMs.newValue:null;applyOffset();}
     if(changes.autoJapaneseSubtitles){autoJapaneseSubtitles=changes.autoJapaneseSubtitles.newValue!==false;if(autoJapaneseSubtitles){jpAutoRequestedFor='';requestTrackInfo();}updateDisplay();}
     if(changes.pauseOnHover){pauseOnHover=changes.pauseOnHover.newValue!==false;updateDisplay();}
     if(changes.wordStatuses) {wordStatuses=changes.wordStatuses.newValue||{};updateCoverage();applyPitchStyles();updateWordStatusButtons();}

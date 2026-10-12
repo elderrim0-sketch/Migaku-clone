@@ -2,8 +2,8 @@
   "manifest_version": 3,
   "name": "Kotoba Miner",
   "short_name": "Kotoba",
-  "version": "2.3.0",
-  "description": "Kotoba v2.3: accurate Good/Easy Anki review sync and Known vs Familiar vocabulary totals.",
+  "version": "2.4.0",
+  "description": "Kotoba v2.4: compact live transcripts, smarter sentence cards, audio buffers, subtitle timing adjustment.",
   "permissions": [
     "storage",
     "tts",
@@ -58,6 +58,7 @@
         "lookup-hover.js",
         "subtitle-modes.js",
         "ui-icons.js",
+        "cue-context.js",
         "content.js"
       ],
       "css": [
@@ -83,7 +84,8 @@
         "subtitle-language-v1128.css",
         "studio-video.css",
         "design-v21.css",
-        "design-v22.css"
+        "design-v22.css",
+        "design-v24.css"
       ],
       "run_at": "document_idle"
     },

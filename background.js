@@ -956,7 +956,7 @@ async function kmUpgradeHoverContentScripts(){
   const updates=[];
   for(const script of registered){
     if(script.id.startsWith('kotoba-video-') && main){
-      if(!script.js?.includes('ui-icons.js') || !script.css?.includes('design-v21.css'))updates.push({id:script.id,js:main.js,css:main.css});
+      if(!script.js?.includes('cue-context.js') || !script.css?.includes('design-v24.css'))updates.push({id:script.id,js:main.js,css:main.css});
     }else if(script.id.startsWith('kotoba-reader-')){
       if(!script.js?.includes('lookup-hover.js') || !script.css?.includes('reader-theme-v21.css'))updates.push({id:script.id,js:['word-parser.js','shortcuts.js','lookup-hover.js','reader.js'],css:['reader.css','reader-theme-v21.css']});
     }

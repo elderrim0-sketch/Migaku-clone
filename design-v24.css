@@ -1,0 +1,57 @@
+/* Kotoba 2.4 — compact fast-dialogue transcripts, readable thick known states, timing tool */
+#kotoba-root .km-list .km-cue:not(.km-recommendation) {
+  padding:9px 10px!important;
+  margin-bottom:5px!important;
+  border-radius:12px!important;
+  min-height:unset!important;
+}
+#kotoba-root .km-list .km-cue-text {
+  font-size:13px!important;
+  line-height:1.55!important;
+  letter-spacing:0!important;
+  font-weight:590!important;
+  overflow-wrap:anywhere!important;
+}
+#kotoba-root .km-list .km-cue .km-word-token{
+  font-size:inherit!important;
+  line-height:inherit!important;
+  padding:1px 1px!important;
+  margin:0!important;
+  border-radius:4px!important;
+}
+#kotoba-root .km-cue-collapsible:not(.km-cue-expanded) .km-cue-text{
+  display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:3!important;
+  line-clamp:3!important;overflow:hidden!important;
+}
+#kotoba-root .km-cue-expanded .km-cue-text{display:block!important;overflow:visible!important;}
+#kotoba-root .km-cue-expand{
+  font-family:inherit!important;font-size:11px!important;font-weight:650!important;line-height:1.3!important;padding:2px 4px!important;margin:4px 0 0!important;
+  background:transparent!important;color:var(--km-accent-deep)!important;border:0!important;
+  box-shadow:none!important;float:right;cursor:pointer;
+}
+#kotoba-root .km-word-token[data-learning='known'] {
+  text-decoration-line:underline!important;
+  text-decoration-color:#22bc93!important;
+  text-decoration-style:solid!important;
+  text-decoration-thickness:3px!important;
+  text-underline-offset:4px!important;
+}
+#kotoba-root .km-v24-sync{
+  position:relative;display:flex;gap:7px;justify-content:space-between;align-items:center;
+  padding:11px!important;border:1px solid var(--km-v22-stroke);border-radius:18px;
+  background:color-mix(in srgb,var(--km-surface) 69%,transparent);
+  color:var(--km-ink)!important;
+}
+#kotoba-root .km-v24-sync>div:first-child{display:flex;flex-direction:column;gap:3px;min-width:0}
+#kotoba-root .km-v24-sync strong{display:flex;gap:6px;align-items:center;font-size:12px;color:var(--km-ink)!important;white-space:nowrap}
+#kotoba-root .km-v24-sync strong .km-line-svg{width:16px;height:16px}
+#kotoba-root .km-v24-sync small{font-size:10px;line-height:1.35;color:var(--km-muted)!important;max-width:160px}
+#kotoba-root .km-v24-sync-controls{display:flex;align-items:center;gap:2px;flex:none}
+#kotoba-root .km-v24-sync-controls button{
+ width:25px!important;height:26px!important;min-height:26px!important;margin:0!important;padding:0!important;
+ display:grid!important;place-items:center!important;font-size:16px!important;font-weight:760!important;
+ color:var(--km-ink)!important;background:var(--km-v22-soft)!important;border:1px solid var(--km-v22-stroke)!important;
+ border-radius:9px!important;box-shadow:none!important;
+}
+#kotoba-root .km-v24-sync-controls button:hover{background:var(--km-accent-pale)!important;}
+#kotoba-root .km-offset-value{min-width:46px;text-align:center;font-size:11px;font-weight:800;color:var(--km-ink)!important;}
